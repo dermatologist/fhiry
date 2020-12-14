@@ -36,12 +36,41 @@ class Fhiry(object):
             json_in = json.loads(json_in)
             return pd.json_normalize(json_in['entry'])
 
+    def delete_unwanted_cols(self):
+        del self._df['resource.text.div']
+
+    def process_df(self):
+        if self._filename:
+            self._df = self.read_bundle_from_file(self._filename)
+            self.delete_unwanted_cols()
+            self.convert_object_to_list()
+            self.add_patient_id()
+
+    def convert_object_to_list(self):
+        for col in self._df.columns:
+            if 'coding' in col:
+                codes = self._df.apply(
+                    lambda x: self.process_list(x[col]), axis=1)
+                self._df = pd.concat(
+                    [self._df, codes.to_frame(name=col+'codes')], 1)
+                del self._df[col]
+            if 'display' in col:
+                codes = self._df.apply(
+                    lambda x: self.process_list(x[col]), axis=1)
+                self._df = pd.concat(
+                    [self._df, codes.to_frame(name=col+'display')], 1)
+                del self._df[col]
+
+    def add_patient_id(self):
+        self._df['patientId'] = self._df[(
+            self._df['resource.resourceType'] == "Patient")].iloc[0]['resource.id']
+
     def get_info(self):
         if self._df is None:
             return "Dataframe is empty"
         return self._df.info()
 
-    def process_list(myList):
+    def process_list(self, myList):
         """Extracts the codes from a list of objects
 
         Args:

@@ -8,6 +8,7 @@ authors = ["Bell Eapen <github@gulfdoctor.net>"]
 python = "^3.8"
 pandas = "^1.1.5"
 "fhir.resources" = "^5.1.1"
+numpy = "^1.19.4"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
