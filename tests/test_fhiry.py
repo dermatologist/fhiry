@@ -19,3 +19,11 @@ def test_set_file(f, capsys):
     print(f.get_info())
     captured = capsys.readouterr()
     assert 'memory usage' in captured.out
+
+
+def test_process_file(f, capsys):
+    f.filename = resource_filename('fhiry.resources.fhir', 'afhir.json')
+    f.process_df()
+    print(f.df.head(5))
+    # captured = capsys.readouterr()
+    # assert 'memory usage' in captured.out
