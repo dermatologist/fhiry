@@ -28,3 +28,5 @@ def test_process_folder(f, capsys):
     f.folder = resource_filename(__name__, 'resources')
     f.process_df()
     print(f.df.head(5))
+    captured = capsys.readouterr()
+    assert '98' in captured.out
