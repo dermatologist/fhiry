@@ -19,14 +19,16 @@ def test_set_file(f, capsys):
 def test_process_file(f, capsys):
     f.filename = resource_filename(__name__, 'resources') + '/afhir.json'
     f.process_df()
-    print(f.df.head(5))
+    # print(f.df.head(5))
+    print(f.df.info()) # 319
     captured = capsys.readouterr()
-    assert '110' in captured.out
+    assert '319' in captured.out
 
 
 def test_process_folder(f, capsys):
     f.folder = resource_filename(__name__, 'resources')
     f.process_df()
-    print(f.df.head(5))
+    # print(f.df.head(5))
+    print(f.df.info())  # 1194
     captured = capsys.readouterr()
-    assert '98' in captured.out
+    assert '1194' in captured.out
