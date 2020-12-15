@@ -1,14 +1,32 @@
 [tool.poetry]
 name = "fhiry"
-version = "0.1.0"
-description = ""
+version = "0.2.0"
+description = "FHIR to pd.Dataframe"
 authors = ["Bell Eapen <github@gulfdoctor.net>"]
 
+readme = 'README.md'  # Markdown files are supported
+
+repository = "https://github.com/dermatologist/fhiry"
+homepage = "https://github.com/dermatologist/fhiry"
+
+classifiers = [
+    "Intended Audience :: Science/Research",
+    "Development Status :: 4 - Beta",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Topic :: Scientific/Engineering :: Medical Science Apps"
+]
+
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.7"
+pandas = "1.1.4"
+
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
+autopep8 = "^1.5.4"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

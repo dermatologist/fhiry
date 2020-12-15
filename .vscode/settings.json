@@ -1,0 +1,11 @@
+{
+        "licenser.license": "MIT",
+        "licenser.author": "Bell Eapen",
+        "licenser.projectName": "fhiry",
+        "licenser.useSingleLineStyle": false,
+        "cSpell.words": [
+                "Fhiry",
+                "capsys",
+                "iloc"
+        ]
+}

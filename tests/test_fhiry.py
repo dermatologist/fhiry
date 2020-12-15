@@ -1,5 +1,34 @@
-from fhiry import __version__
+import pytest
+from pkg_resources import resource_filename
 
 
-def test_version():
-    assert __version__ == '0.1.0'
+@pytest.fixture
+def f():
+    from fhiry import Fhiry
+    _f = Fhiry()
+    return _f
+
+
+def test_set_file(f, capsys):
+    f.filename = resource_filename(__name__, 'resources') + '/afhir.json'
+    print(f.get_info())
+    captured = capsys.readouterr()
+    assert 'memory usage' in captured.out
+
+
+def test_process_file(f, capsys):
+    f.filename = resource_filename(__name__, 'resources') + '/afhir.json'
+    f.process_df()
+    # print(f.df.head(5))
+    print(f.df.info()) # 319
+    captured = capsys.readouterr()
+    assert '319' in captured.out
+
+
+def test_process_folder(f, capsys):
+    f.folder = resource_filename(__name__, 'resources')
+    f.process_df()
+    # print(f.df.head(5))
+    print(f.df.info())  # 1194
+    captured = capsys.readouterr()
+    assert '1194' in captured.out
