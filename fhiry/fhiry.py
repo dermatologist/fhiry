@@ -52,7 +52,7 @@ class Fhiry(object):
         **** ONLY COMMON FIELDS IN ALL resources will be mapped ****
         """
         if self._folder:
-            df = None
+            df = pd.DataFrame(columns=[])
             for file in os.listdir(self._folder):
                 if file.endswith(".json"):
                     self._df = self.read_bundle_from_file(
@@ -60,10 +60,10 @@ class Fhiry(object):
                     self.delete_unwanted_cols()
                     self.convert_object_to_list()
                     self.add_patient_id()
-                    try:
-                        df = pd.concat(df, self._df) # Fails if df is None
-                    except:
+                    if df.empty:
                         df = self._df
+                    else:
+                        df = pd.concat([df, self._df])
             self._df = df
         elif self._filename:
             self._df = self.read_bundle_from_file(self._filename)
