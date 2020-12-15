@@ -1,6 +1,7 @@
 
 import pandas as pd
 import json
+import os
 
 
 class Fhiry(object):
@@ -40,6 +41,20 @@ class Fhiry(object):
         del self._df['resource.text.div']
 
     def process_df(self):
+        if self._folder:
+            df = None
+            for file in os.listdir(self._folder):
+                if file.endswith(".json"):
+                    self._df = self.read_bundle_from_file(
+                        os.path.join(self._folder, file))
+                    self.delete_unwanted_cols()
+                    self.convert_object_to_list()
+                    self.add_patient_id()
+                    try:
+                        df = pd.concat(df, self._df)
+                    except:
+                        df = self._df
+            self._df = df
         if self._filename:
             self._df = self.read_bundle_from_file(self._filename)
             self.delete_unwanted_cols()
