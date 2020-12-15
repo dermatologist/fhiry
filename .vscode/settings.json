@@ -4,6 +4,8 @@
         "licenser.projectName": "fhiry",
         "licenser.useSingleLineStyle": false,
         "cSpell.words": [
-                "Fhiry"
+                "Fhiry",
+                "capsys",
+                "iloc"
         ]
 }
