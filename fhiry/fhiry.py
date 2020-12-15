@@ -1,3 +1,10 @@
+"""
+ Copyright (c) 2020 Bell Eapen
+
+ This software is released under the MIT License.
+ https://opensource.org/licenses/MIT
+"""
+
 
 import pandas as pd
 import json
@@ -41,6 +48,9 @@ class Fhiry(object):
         del self._df['resource.text.div']
 
     def process_df(self):
+        """Read a single JSON resource or a directory full of JSON resources
+        **** ONLY COMMON FIELDS IN ALL resources will be mapped ****
+        """
         if self._folder:
             df = None
             for file in os.listdir(self._folder):
@@ -51,17 +61,19 @@ class Fhiry(object):
                     self.convert_object_to_list()
                     self.add_patient_id()
                     try:
-                        df = pd.concat(df, self._df)
+                        df = pd.concat(df, self._df) # Fails if df is None
                     except:
                         df = self._df
             self._df = df
-        if self._filename:
+        elif self._filename:
             self._df = self.read_bundle_from_file(self._filename)
             self.delete_unwanted_cols()
             self.convert_object_to_list()
             self.add_patient_id()
 
     def convert_object_to_list(self):
+        """Convert object to a list of codes
+        """
         for col in self._df.columns:
             if 'coding' in col:
                 codes = self._df.apply(
@@ -77,6 +89,8 @@ class Fhiry(object):
                 del self._df[col]
 
     def add_patient_id(self):
+        """Create a patientId column with the resource.id of the first Patient resource
+        """
         self._df['patientId'] = self._df[(
             self._df['resource.resourceType'] == "Patient")].iloc[0]['resource.id']
 
