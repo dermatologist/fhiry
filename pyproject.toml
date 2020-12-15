@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fhiry"
-version = "0.2.0"
+version = "0.2.1"
 description = "FHIR to pd.Dataframe"
 authors = ["Bell Eapen <github@gulfdoctor.net>"]
 
@@ -11,12 +11,12 @@ homepage = "https://github.com/dermatologist/fhiry"
 
 classifiers = [
     "Intended Audience :: Science/Research",
-    "Development Status :: 4 - Beta",
+    "Development Status :: 3 - Alpha",
     "Operating System :: OS Independent",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
-    "Topic :: Scientific/Engineering :: Medical Science Apps"
+    "Intended Audience :: Healthcare Industry"
 ]
 
 [tool.poetry.dependencies]
