@@ -46,3 +46,4 @@ resource.gender
 
 * [Bell Eapen](https://nuchange.ca)
 * WIP, PR welcome, please see CONTRIBUTING.md
+* [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg) using CC](https://computecanada.ca)
