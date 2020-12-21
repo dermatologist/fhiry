@@ -71,6 +71,13 @@ class Fhiry(object):
             self.convert_object_to_list()
             self.add_patient_id()
 
+    def process_file(self, filename):
+        self._df = self.read_bundle_from_file(filename)
+        self.delete_unwanted_cols()
+        self.convert_object_to_list()
+        self.add_patient_id()
+        return self._df
+
     def convert_object_to_list(self):
         """Convert object to a list of codes
         """

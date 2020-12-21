@@ -32,3 +32,12 @@ def test_process_folder(f, capsys):
     print(f.df.info())  # 1194
     captured = capsys.readouterr()
     assert '1194' in captured.out
+
+
+def test_process_parallel(capsys):
+    folder = resource_filename(__name__, 'resources')
+    import fhiry.parallel as fp
+    df = fp.process(folder)
+    print(df.info())
+    captured = capsys.readouterr()
+    assert '1194' in captured.out
