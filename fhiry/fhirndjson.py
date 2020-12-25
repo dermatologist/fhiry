@@ -11,7 +11,7 @@ import json
 import os
 
 
-class FhirNdjson(object):
+class Fhirndjson(object):
     def __init__(self):
         self._df = None
         self._folder = ""
@@ -44,29 +44,24 @@ class FhirNdjson(object):
         if self._folder:
             df = pd.DataFrame(columns=[])
             for file in os.listdir(self._folder):
-                if file.endswith(".json"):
+                if file.endswith(".ndjson"):
                     self._df = self.read_bundle_from_file(
                         os.path.join(self._folder, file))
-                    self.delete_unwanted_cols()
-                    self.convert_object_to_list()
-                    self.add_patient_id()
+                    # self.delete_unwanted_cols()
+                    # self.convert_object_to_list()
+                    # self.add_patient_id()
                     if df.empty:
                         df = self._df
                     else:
                         df = pd.concat([df, self._df])
             self._df = df
-        elif self._filename:
-            self._df = self.read_bundle_from_file(self._filename)
-            self.delete_unwanted_cols()
-            self.convert_object_to_list()
-            self.add_patient_id()
 
-    def process_file(self, filename):
-        self._df = self.read_bundle_from_file(filename)
-        self.delete_unwanted_cols()
-        self.convert_object_to_list()
-        self.add_patient_id()
-        return self._df
+    # def process_file(self, filename):
+    #     self._df = self.read_bundle_from_file(filename)
+    #     self.delete_unwanted_cols()
+    #     self.convert_object_to_list()
+    #     self.add_patient_id()
+    #     return self._df
 
     def convert_object_to_list(self):
         """Convert object to a list of codes
