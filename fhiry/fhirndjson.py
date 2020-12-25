@@ -37,6 +37,9 @@ class Fhirndjson(object):
     def delete_unwanted_cols(self):
         del self._df['resource.text.div']
 
+    def read_resource_from_line(self, line):
+        return pd.json_normalize(line)
+
     def process_df(self):
         """Read a single JSON resource or a directory full of JSON resources
         **** ONLY COMMON FIELDS IN ALL resources will be mapped ****
@@ -45,16 +48,27 @@ class Fhirndjson(object):
             df = pd.DataFrame(columns=[])
             for file in os.listdir(self._folder):
                 if file.endswith(".ndjson"):
-                    self._df = self.read_bundle_from_file(
-                        os.path.join(self._folder, file))
-                    # self.delete_unwanted_cols()
-                    # self.convert_object_to_list()
-                    # self.add_patient_id()
-                    if df.empty:
-                        df = self._df
-                    else:
-                        df = pd.concat([df, self._df])
-            self._df = df
+                    with open(os.path.join(self._folder, file)) as fp:
+                        Lines = fp.readlines()
+                        for line in Lines:
+                            self._df = self.read_resource_from_line(line)
+                            if df.empty:
+                                df = self._df
+                            else:
+                                df = pd.concat([df, self._df])
+                        self._df = df
+
+            #     if file.endswith(".ndjson"):
+            #         self._df = self.read_bundle_from_file(
+            #             os.path.join(self._folder, file))
+            #         # self.delete_unwanted_cols()
+            #         # self.convert_object_to_list()
+            #         # self.add_patient_id()
+            #         if df.empty:
+            #             df = self._df
+            #         else:
+            #             df = pd.concat([df, self._df])
+            # self._df = df
 
     # def process_file(self, filename):
     #     self._df = self.read_bundle_from_file(filename)
