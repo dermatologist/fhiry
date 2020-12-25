@@ -12,9 +12,15 @@ def f():
 def test_process_folder(f, capsys):
     f.folder = resource_filename(__name__, 'resources')
     f.process_df()
-    # print(f.df.columns)
-    print(f.df['subject.reference'].head(5))
-    # print(f.df.head(5))
-    # print(f.df.info())  # 1194
-    # captured = capsys.readouterr()s
-    # assert '1194' in captured.out
+    print(f.df.info())  # 839
+    captured = capsys.readouterr()
+    assert '839' in captured.out
+
+
+def test_process_parallel(capsys):
+    folder = resource_filename(__name__, 'resources')
+    import fhiry.parallel as fp
+    df = fp.ndjson(folder)
+    print(df.info())
+    captured = capsys.readouterr()
+    assert '839' in captured.out

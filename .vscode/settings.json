@@ -4,8 +4,10 @@
         "licenser.projectName": "fhiry",
         "licenser.useSingleLineStyle": false,
         "cSpell.words": [
+                "Fhirndjson",
                 "Fhiry",
                 "capsys",
-                "iloc"
+                "iloc",
+                "ndjson"
         ]
 }
