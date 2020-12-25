@@ -14,21 +14,22 @@ pip install fhiry
 
 ## Usage
 
-```
-from fhiry import Fhiry
-f = Fhiry()
-f.folder = '/path/to/fhir/resources'
-f.process_df()
-print(f.df.head(5))
-```
-### Multiprocessing
+### Synthea
 
 ```
 import fhiry.parallel as fp
 df = fp.process('/path/to/fhir/resources')
 print(df.info())
 ```
+
+### [SMART Bulk Data Server](https://bulk-data.smarthealthit.org/) Export
+```
+import fhiry.parallel as fp
+df = fp.ndjson('/path/to/fhir/ndjson/files')
+print(df.info())
+```
 ## Columns
+* see df.columns
 
 ```
 patientId
