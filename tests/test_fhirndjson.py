@@ -12,7 +12,8 @@ def f():
 def test_process_folder(f, capsys):
     f.folder = resource_filename(__name__, 'resources')
     f.process_df()
-    print(f.df.head(5))
-    # print(f.df.info())  # 1194
+    print(f.df.columns)
+    # print(f.df.head(5))
+    print(f.df.info())  # 1194
     # captured = capsys.readouterr()
     # assert '1194' in captured.out

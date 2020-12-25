@@ -35,10 +35,11 @@ class Fhirndjson(object):
             return pd.json_normalize(json_in)
 
     def delete_unwanted_cols(self):
-        del self._df['resource.text.div']
+        if 'text.div' in self._df.columns:
+            del self._df['text.div']
 
     def read_resource_from_line(self, line):
-        return pd.json_normalize(line)
+        return pd.json_normalize(json.loads(line))
 
     def process_df(self):
         """Read a single JSON resource or a directory full of JSON resources
@@ -52,6 +53,8 @@ class Fhirndjson(object):
                         Lines = fp.readlines()
                         for line in Lines:
                             self._df = self.read_resource_from_line(line)
+                            self.delete_unwanted_cols()
+                            self.convert_object_to_list()
                             if df.empty:
                                 df = self._df
                             else:
