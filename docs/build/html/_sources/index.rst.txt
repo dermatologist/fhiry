@@ -10,7 +10,7 @@ Welcome to fhiry's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   README.md
+   modules.rst
 
 Indices and tables
 ==================

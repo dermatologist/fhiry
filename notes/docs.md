@@ -11,25 +11,24 @@ In the docs folder, create an index.html file and redirect to ./html/index.html 
 Change the Sphinx build directory to docs in your Makefile for example as follows:
 BUILDDIR  = build
 
-Create symbolic link to README
-ln -s ../README.md
 
-Add readme to index.rst
+
+Add modules.rst to index.rst
 
 ```
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-   README.md
+   modules.rst
 ```
 
 Add extensions to sphinx conf.py
 ```
-extensions = [
-    'recommonmark',
-    'sphinx.ext.autodoc'
-]
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.intersphinx', 'sphinx.ext.todo',
+              'sphinx.ext.autosummary', 'sphinx.ext.viewcode', 'sphinx.ext.coverage',
+              'sphinx.ext.doctest', 'sphinx.ext.ifconfig', 'sphinx.ext.mathjax',
+              'sphinx.ext.napoleon', 'recommonmark']
 
 ```
 
