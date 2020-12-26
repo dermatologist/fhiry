@@ -31,6 +31,11 @@ extensions = [
 
 ```
 
+sphinx-apidoc -o . ../fhiry
+
+uncomment and modify conf.py. For this example, sys.path.insert(0, os.path.abspath('mymodule'))
+re-run make html
+
 
 Run make html then add, commit and push the repo.
 
