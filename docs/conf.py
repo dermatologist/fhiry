@@ -22,7 +22,7 @@ copyright = '2020, Bell Eapen'
 author = 'Bell Eapen'
 
 # The full version, including alpha/beta/rc tags
-release = '0.3.0'
+release = '0.5.0'
 
 
 # -- General configuration ---------------------------------------------------
