@@ -1,5 +1,7 @@
 Create a folder docs in the root path.
 
+pip install sphinx recommonmark
+
 By default, Jekyll does not build any files or directories with underscore. Include an empty .nojekyll file in the docs folder to turn off Jekyll.
 
 In the docs folder, create an index.html file and redirect to ./html/index.html for example like this:
