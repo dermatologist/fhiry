@@ -37,7 +37,7 @@ class Fhirndjson(object):
 
     def process_df(self):
         """Read a single JSON resource or a directory full of JSON resources
-        **** ONLY COMMON FIELDS IN ALL resources will be mapped ****
+        ONLY COMMON FIELDS IN ALL resources will be mapped
         """
         if self._folder:
             for file in os.listdir(self._folder):

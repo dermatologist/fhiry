@@ -30,11 +30,14 @@ release = '0.3.0'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = [
-    'recommonmark',
-    'sphinx.ext.autodoc'
-]
-
+# extensions = [
+#     'recommonmark',
+#     'sphinx.ext.autodoc'
+# ]
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.intersphinx', 'sphinx.ext.todo',
+              'sphinx.ext.autosummary', 'sphinx.ext.viewcode', 'sphinx.ext.coverage',
+              'sphinx.ext.doctest', 'sphinx.ext.ifconfig', 'sphinx.ext.mathjax',
+              'sphinx.ext.napoleon', 'recommonmark']
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
