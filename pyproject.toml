@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fhiry"
-version = "0.3.0"
+version = "0.5.0"
 description = "FHIR to pd.Dataframe"
 authors = ["Bell Eapen <github@gulfdoctor.net>"]
 
