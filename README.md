@@ -1,5 +1,8 @@
 # :fire: fhiry - FHIR for AI and ML
 
+![Libraries.io SourceRank](https://img.shields.io/librariesio/sourcerank/pypi/fhiry)
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/dermatologist/fhiry)
+
 ## About
 
 [Bulk data export using FHIR](https://hl7.org/fhir/uv/bulkdata/export/index.html) may be important if you want to export a cohort for analysis or machine learning.
