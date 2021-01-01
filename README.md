@@ -1,6 +1,7 @@
 # :fire: fhiry - FHIR for AI and ML
 
 ![Libraries.io SourceRank](https://img.shields.io/librariesio/sourcerank/pypi/fhiry)
+[![PyPI download total](https://img.shields.io/pypi/dm/fhiry.svg)](https://pypi.python.org/pypi/fhiry/)
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/dermatologist/fhiry)
 
 ## About
