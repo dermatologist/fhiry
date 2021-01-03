@@ -51,6 +51,6 @@ resource.gender
 ### [Modules](https://dermatologist.github.io/fhiry/build/html/modules.html)
 ## Contributors
 
-* [Bell Eapen](https://nuchange.ca)
+* [Bell Eapen](https://nuchange.ca) | [![Twitter Follow](https://img.shields.io/twitter/follow/beapen?style=social)](https://twitter.com/beapen)
 * WIP, PR welcome, please see CONTRIBUTING.md
 * [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg) using CC](https://computecanada.ca)
