@@ -4,7 +4,7 @@ from pkg_resources import resource_filename
 
 @pytest.fixture
 def f():
-    from fhiry import Fhiry
+    from src.fhiry import Fhiry
     _f = Fhiry()
     return _f
 

@@ -184,7 +184,7 @@ html_theme_options = {
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
 try:
-    from fhiry import __version__ as version
+    from src.fhiry import __version__ as version
 except ImportError:
     pass
 else:
