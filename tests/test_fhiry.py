@@ -36,7 +36,7 @@ def test_process_folder(f, capsys):
 
 def test_process_parallel(capsys):
     folder = resource_filename(__name__, 'resources')
-    import fhiry.parallel as fp
+    import src.fhiry.parallel as fp
     df = fp.process(folder)
     print(df.info())
     captured = capsys.readouterr()
