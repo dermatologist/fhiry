@@ -4,7 +4,7 @@ from pkg_resources import resource_filename
 
 @pytest.fixture
 def f():
-    from fhiry import Fhiry
+    from src.fhiry import Fhiry
     _f = Fhiry()
     return _f
 
@@ -36,7 +36,7 @@ def test_process_folder(f, capsys):
 
 def test_process_parallel(capsys):
     folder = resource_filename(__name__, 'resources')
-    import fhiry.parallel as fp
+    import src.fhiry.parallel as fp
     df = fp.process(folder)
     print(df.info())
     captured = capsys.readouterr()
