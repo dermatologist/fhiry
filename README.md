@@ -48,7 +48,7 @@ resource.gender
 ...
 ```
 
-### [Modules](https://dermatologist.github.io/fhiry/build/html/modules.html)
+### [Documentation](https://dermatologist.github.io/fhiry/)
 ## Contributors
 
 * [Bell Eapen](https://nuchange.ca) | [![Twitter Follow](https://img.shields.io/twitter/follow/beapen?style=social)](https://twitter.com/beapen)
