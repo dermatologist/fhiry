@@ -60,7 +60,7 @@ pygments==2.10.0
     # via sphinx
 pyparsing==2.4.7
     # via packaging
-pytest==6.2.5
+pytest==7.0.0
     # via
     #   -r dev-requirements.in
     #   pytest-cov
@@ -102,10 +102,11 @@ sphinxcontrib-serializinghtml==1.1.5
 toml==0.10.2
     # via
     #   coverage
-    #   pytest
     #   tox
 tomli==1.2.1
-    # via setuptools-scm
+    # via
+    #   pytest
+    #   setuptools-scm
 tox==3.24.5
     # via -r dev-requirements.in
 urllib3==1.26.6
