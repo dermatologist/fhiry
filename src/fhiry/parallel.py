@@ -1,4 +1,4 @@
-from src.fhiry import Fhiry, Fhirndjson
+from . import Fhiry, Fhirndjson
 import os
 import multiprocessing as mp
 import pandas as pd
