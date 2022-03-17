@@ -1,5 +1,27 @@
 # Changelog
 
+## [Unreleased](https://github.com/dermatologist/fhiry/tree/HEAD)
+
+[Full Changelog](https://github.com/dermatologist/fhiry/compare/1.0.0...HEAD)
+
+**Closed issues:**
+
+- Import directly \(no need for conditional\) when `python_requires = >= 3.8` [\#10](https://github.com/dermatologist/fhiry/issues/10)
+- ", [\#9](https://github.com/dermatologist/fhiry/issues/9)
+
+## [1.0.0](https://github.com/dermatologist/fhiry/tree/1.0.0) (2021-09-17)
+
+[Full Changelog](https://github.com/dermatologist/fhiry/compare/0.5.0...1.0.0)
+
+**Merged pull requests:**
+
+- Feature/pyscaffold-1 [\#8](https://github.com/dermatologist/fhiry/pull/8) ([dermatologist](https://github.com/dermatologist))
+- Bump pytest from 6.2.4 to 6.2.5 [\#7](https://github.com/dermatologist/fhiry/pull/7) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump pytest from 5.4.3 to 6.2.4 [\#6](https://github.com/dermatologist/fhiry/pull/6) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump pandas from 1.1.4 to 1.1.5 [\#5](https://github.com/dermatologist/fhiry/pull/5) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump autopep8 from 1.5.4 to 1.5.7 [\#4](https://github.com/dermatologist/fhiry/pull/4) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump abatilo/actions-poetry from 2.0.0 to 2.1.2 [\#3](https://github.com/dermatologist/fhiry/pull/3) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [0.5.0](https://github.com/dermatologist/fhiry/tree/0.5.0) (2020-12-26)
 
 [Full Changelog](https://github.com/dermatologist/fhiry/compare/0.3.0...0.5.0)
