@@ -45,7 +45,8 @@ class Fhiry(object):
             return pd.json_normalize(json_in['entry'])
 
     def delete_unwanted_cols(self):
-        del self._df['resource.text.div']
+        if 'resource.text.div' in self._df.columns:
+            del self._df['resource.text.div']
 
     def process_df(self):
         """Read a single JSON resource or a directory full of JSON resources
