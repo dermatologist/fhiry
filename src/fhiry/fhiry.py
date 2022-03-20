@@ -17,6 +17,19 @@ class Fhiry(object):
         self._filename = ""
         self._folder = ""
 
+        # Codes from the FHIR datatype "coding"
+        # (f.e. element resource.code.coding or element resource.clinicalStatus.coding)
+        # are extracted to a col "codingcodes"
+        # (f.e. col resource.code.codingcodes or col resource.clinicalStatus.codingcodes)
+        # without other for analysis often not needed metadata like f.e. codesystem URI
+        # or FHIR extensions for coding entries.
+        # The full / raw object in col "coding" is deleted after this extraction.
+        # If you want to analyze more than the content of code and display from codings
+        # (like f.e. different codesystem URIs or further codes in extensions
+        # in the raw data/object), you can disable deletion of the raw source object "coding"
+        # (f.e. col "resource.code.coding") by setting property delete_col_raw_coding to False
+        self._delete_col_raw_coding = True
+
     @property
     def df(self):
         return self._df
@@ -29,6 +42,10 @@ class Fhiry(object):
     def folder(self):
         return self._folder
 
+    @property
+    def delete_col_raw_coding(self):
+        return self._delete_col_raw_coding
+
     @filename.setter
     def filename(self, filename):
         self._filename = filename
@@ -37,6 +54,10 @@ class Fhiry(object):
     @folder.setter
     def folder(self, folder):
         self._folder = folder
+
+    @delete_col_raw_coding.setter
+    def delete_col_raw_coding(self, delete_col_raw_coding):
+        self._delete_col_raw_coding = delete_col_raw_coding
 
     def read_bundle_from_file(self, filename):
         with open(filename, 'r') as f:
@@ -88,7 +109,8 @@ class Fhiry(object):
                     lambda x: self.process_list(x[col]), axis=1)
                 self._df = pd.concat(
                     [self._df, codes.to_frame(name=col+'codes')], 1)
-                del self._df[col]
+                if self._delete_col_raw_coding:
+                    del self._df[col]
             if 'display' in col:
                 codes = self._df.apply(
                     lambda x: self.process_list(x[col]), axis=1)
