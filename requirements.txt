@@ -6,7 +6,7 @@
 #
 numpy==1.22.4
     # via pandas
-pandas==1.4.2
+pandas==1.4.3
     # via fhiry (setup.py)
 python-dateutil==2.8.2
     # via pandas
