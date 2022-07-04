@@ -107,7 +107,7 @@ tomli==1.2.1
     # via
     #   pytest
     #   setuptools-scm
-tox==3.25.0
+tox==3.25.1
     # via -r dev-requirements.in
 urllib3==1.26.6
     # via requests
