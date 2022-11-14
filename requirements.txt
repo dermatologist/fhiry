@@ -4,7 +4,7 @@
 #
 #    pip-compile
 #
-numpy==1.23.3
+numpy==1.23.4
     # via pandas
 pandas==1.4.3
     # via fhiry (setup.py)
