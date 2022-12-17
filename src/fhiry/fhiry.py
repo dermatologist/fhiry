@@ -119,10 +119,16 @@ class Fhiry(object):
                 del self._df[col]
 
     def add_patient_id(self):
-        """Create a patientId column with the resource.id of the first Patient resource
+        """Create a patientId column with the resource.id if a Patient resource or with the resource.subject.reference if other resource type
         """
-        self._df['patientId'] = self._df[(
-            self._df['resource.resourceType'] == "Patient")].iloc[0]['resource.id']
+        self._df['patientId'] = self._df.apply(lambda x: x['resource.id'] if x['resource.resourceType']
+                                               == 'Patient' else self.check_subject_reference(x), axis=1)
+
+    def check_subject_reference(self, row):
+        try:
+            return row['resource.subject.reference'].replace('Patient/', '')
+        except:
+            return ""
 
     def get_info(self):
         if self._df is None:
