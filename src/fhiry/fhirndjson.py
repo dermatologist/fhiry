@@ -75,7 +75,7 @@ class Fhirndjson(object):
                 del self._df[col]
 
     def add_patient_id(self):
-        """Create a patientId column with the resource.id of the first Patient resource
+        """Create a patientId column with the id if a Patient resource or with the subject.reference if other resource type
         """
         self._df['patientId'] = self._df.apply(lambda x: x['id'] if x['resourceType']
                                                == 'Patient' else self.check_subject_reference(x), axis=1)
