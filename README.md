@@ -42,6 +42,45 @@ Example source data set: [SMART Bulk Data Server](https://bulk-data.smarthealthi
 
 Jupyter notebook example: [`notebooks/ndjson.ipynb`](notebooks/ndjson.ipynb)
 
+### Import FHIR Search results to pandas dataframe
+
+*Warning: Import from FHIR Search API is under development and not well tested yet!*
+
+Import resources from [FHIR Search API](https://www.hl7.org/fhir/search.html) results to pandas dataframe:
+
+For using filter options by `search_parameters` see [FHIR search common parameters for all resource types](https://www.hl7.org/fhir/search.html#standard) and additional FHIR search parameters for certain resource types like [Patient](https://www.hl7.org/fhir/patient.html#search), [Condition](https://www.hl7.org/fhir/condition.html#search), [Observation](https://www.hl7.org/fhir/observation.html#search), ... 
+
+#### Example: Import all Observations
+
+Import all resources (since empty search parameters / no filter) of type Observation
+```
+from fhiry.fhirsearch import Fhirsearch
+
+fs = Fhirsearch()
+fs.fhir_base_url = "http://fhir-server:8080/fhir"
+df = fs.search(type = "Observation", search_parameters = {})
+
+print(df.info())
+```
+#### Example: Import all conditions with a certain code
+
+Import all condition resources with Snomed (Codesystem `http://snomed.info/sct`) Code `39065001` in the FHIR element Condition.code:
+
+```
+from fhiry.fhirsearch import Fhirsearch
+fs = Fhirsearch()
+
+fs.fhir_base_url = "http://fhir-server:8080/fhir"
+
+my_fhir_search_parameters = {
+    "code": "http://snomed.info/sct|39065001",
+}
+
+df = fs.search(type = "Condition", search_parameters = my_fhir_search_parameters)
+
+print(df.info())
+```
+
 ## Columns
 * see df.columns
 
