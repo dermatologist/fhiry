@@ -28,6 +28,7 @@ class Fhirsearch(object):
 
         search_url = f'{self.fhir_base_url}/{type}'
         r = requests.get(search_url, params=search_parameters, headers=headers, **self.requests_kwargs)
+        r.raise_for_status()
         bundle_dict = r.json()
 
         if 'entry' in bundle_dict:
@@ -37,6 +38,7 @@ class Fhirsearch(object):
 
             while next_page_url:
                 r = requests.get(next_page_url, headers=headers, **self.requests_kwargs)
+                r.raise_for_status()
                 bundle_dict = r.json()
                 df_page = process_bundle(bundle_dict)
                 df = pd.concat([df, df_page])
