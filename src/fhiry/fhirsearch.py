@@ -12,8 +12,12 @@ class Fhirsearch(object):
         # Batch size (entries per page)
         self.page_size = 500
 
-        # todo: Parameters for HTTP(s) requests (f.e. for auth)
-        self.requests_kwargs = None
+        # Keyword arguments for HTTP(s) requests (f.e. for auth)
+        # Example parameters:
+        # Authentication: https://requests.readthedocs.io/en/latest/user/authentication/#basic-authentication
+        # Proxies: https://requests.readthedocs.io/en/latest/user/advanced/#proxies
+        # SSL Certificates: https://requests.readthedocs.io/en/latest/user/advanced/#ssl-cert-verification
+        self.requests_kwargs = {}
 
     def search(self, type="Patient", search_parameters={}):
 
@@ -23,7 +27,7 @@ class Fhirsearch(object):
             search_parameters['_count'] = self.page_size
 
         search_url = f'{self.fhir_base_url}/{type}'
-        r = requests.get(search_url, params=search_parameters, headers=headers)
+        r = requests.get(search_url, params=search_parameters, headers=headers, **self.requests_kwargs)
         bundle_dict = r.json()
 
         if 'entry' in bundle_dict:
@@ -32,7 +36,7 @@ class Fhirsearch(object):
             next_page_url = get_next_page_url(bundle_dict)
 
             while next_page_url:
-                r = requests.get(next_page_url, headers=headers)
+                r = requests.get(next_page_url, headers=headers, **self.requests_kwargs)
                 bundle_dict = r.json()
                 df_page = process_bundle(bundle_dict)
                 df = pd.concat([df, df_page])

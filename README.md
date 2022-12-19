@@ -81,6 +81,39 @@ df = fs.search(type = "Condition", search_parameters = my_fhir_search_parameters
 print(df.info())
 ```
 
+#### Connection settings
+
+To set connection parameters like authentication, SSL certificates, proxies and so on, set or add standard [Python requests](https://requests.readthedocs.io/en/latest/) keyword arguments to the property `requests_kwargs`.
+
+##### Authentication
+
+Authentication is set by [requests parameter `auth`](https://requests.readthedocs.io/en/latest/user/authentication/).
+
+Example using [HTTP Basic Auth](https://requests.readthedocs.io/en/latest/user/authentication/#basic-authentication):
+```
+from fhiry.fhirsearch import Fhirsearch
+
+fs = Fhirsearch()
+fs.fhir_base_url = "http://fhir-server:8080/fhir"
+
+# Set basic auth credentials (https://requests.readthedocs.io/en/latest/user/authentication/#basic-authentication)
+fs.requests_kwargs["auth"] = ('myUser', 'myPassword')
+```
+
+##### Proxy settings
+
+You can set a HTTP(S)-Proxies by [requests parameter `proxies`](https://requests.readthedocs.io/en/latest/user/advanced/#proxies).
+
+Example:
+
+```
+fs.requests_kwargs["proxies"] = {
+    'http': 'http://10.10.1.10:3128',
+    'https': 'http://10.10.1.10:1080',
+}
+```
+
+
 ## Columns
 * see df.columns
 
