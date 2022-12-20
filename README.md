@@ -44,8 +44,6 @@ Jupyter notebook example: [`notebooks/ndjson.ipynb`](notebooks/ndjson.ipynb)
 
 ### Import FHIR Search results to pandas dataframe
 
-*Warning: Import from FHIR Search API is under development and not well tested yet!*
-
 Import resources from [FHIR Search API](https://www.hl7.org/fhir/search.html) results to pandas dataframe.
 
 Documentation: [`fhir-search.md`](fhir-search.md)

@@ -41,36 +41,6 @@ print(df.info())
 ## Columns
 * see [`df.columns`](README.md#columns)
 
-
-## Decrease RAM usage
-
-If you want to analyze only certain elements, you can decrease RAM usage and network overhead by defining the elements you need for your data analysis by the [FHIR search option `_elements`](https://www.hl7.org/fhir/search.html#elements).
-
-Example:
-
-```
-from fhiry.fhirsearch import Fhirsearch
-fs = Fhirsearch()
-
-fs.fhir_base_url = "http://fhir-server:8080/fhir"
-
-my_fhir_search_parameters = {
-```
-... Other FHIR search parameters / filters ...
-
-```
-
-    "_elements": "code,verification-status,recorded-date",
-}
-
-df = fs.search(type = "Condition", search_parameters = my_fhir_search_parameters)
-
-print(df.info())
-```
-
-
-
-
 ## Connection settings
 
 To set connection parameters like authentication, SSL certificates, proxies and so on, set or add standard [Python requests](https://requests.readthedocs.io/en/latest/) keyword arguments to the property `requests_kwargs`.
@@ -102,4 +72,36 @@ fs.requests_kwargs["proxies"] = {
     'http': 'http://10.10.1.10:3128',
     'https': 'http://10.10.1.10:1080',
 }
+```
+
+## Performance
+
+### Fetching all found resources from FHIR server
+
+Since such search calls are fetching all found resources of the searched resource type matching the fhir search parameters (if none, fetching all resources of the resource type) from the FHIR server, dependent on the performance of the FHIR Server for example fetching one million resources by FHIR search (page thorough all the search results pages) can take an hour to load the resources into the resulting pandas dataframe which for this example has a RAM usage of few hundred MB RAM.
+
+### Decrease RAM usage
+
+If you want to analyze only certain elements, you can decrease RAM usage and network overhead by defining the elements you need for your data analysis by the [FHIR search option `_elements`](https://www.hl7.org/fhir/search.html#elements).
+
+Example:
+
+```
+from fhiry.fhirsearch import Fhirsearch
+fs = Fhirsearch()
+
+fs.fhir_base_url = "http://fhir-server:8080/fhir"
+
+my_fhir_search_parameters = {
+```
+... Other FHIR search parameters / filters ...
+
+```
+
+    "_elements": "code,verification-status,recorded-date",
+}
+
+df = fs.search(type = "Condition", search_parameters = my_fhir_search_parameters)
+
+print(df.info())
 ```
