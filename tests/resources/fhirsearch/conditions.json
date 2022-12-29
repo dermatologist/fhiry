@@ -1,0 +1,110 @@
+{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "entry": [ {
+    "fullUrl": "Condition/cond-id-1",
+    "resource": {
+      "resourceType": "Condition",
+      "id": "cond-id-1",
+      "code": {
+        "coding": [
+        {
+          "system": "http://fhir.de/CodeSystem/bfarm/icd-10-gm",
+          "version": "2010",
+          "code": "A00.0"
+        } ]
+      },
+      "subject": {
+        "reference": "Patient/pat-id-1"
+      }
+    },
+    "request": {
+      "method": "PUT",
+      "url": "Condition/cond-id-1"
+    }
+  }, {
+    "fullUrl": "Condition/cond-id-2",
+    "resource": {
+      "resourceType": "Condition",
+      "id": "cond-id-2",
+      "code": {
+        "coding": [
+          {
+            "system": "http://fhir.de/CodeSystem/bfarm/icd-10-gm",
+            "version": "2010",
+            "code": "A01.0"
+          } ]
+      },
+      "subject": {
+        "reference": "Patient/pat-id-2"
+      }
+    },
+    "request": {
+      "method": "PUT",
+      "url": "Condition/cond-id-2"
+    }
+  }, {
+    "fullUrl": "Condition/cond-id-3",
+    "resource": {
+      "resourceType": "Condition",
+      "id": "cond-id-3",
+      "code": {
+        "coding": [
+          {
+            "system": "http://fhir.de/CodeSystem/bfarm/icd-10-gm",
+            "version": "2010",
+            "code": "A02.0"
+          } ]
+      },
+      "subject": {
+        "reference": "Patient/pat-id-2"
+      }
+    },
+    "request": {
+      "method": "PUT",
+      "url": "Condition/cond-id-3"
+    }
+  }, {
+    "fullUrl": "Condition/cond-id-4",
+    "resource": {
+      "resourceType": "Condition",
+      "id": "cond-id-4",
+      "code": {
+        "coding": [
+          {
+            "system": "http://fhir.de/CodeSystem/bfarm/icd-10-gm",
+            "version": "2010",
+            "code": "A03.0"
+          } ]
+      },
+      "subject": {
+        "reference": "Patient/pat-id-2"
+      }
+    },
+    "request": {
+      "method": "PUT",
+      "url": "Condition/cond-id-4"
+    }
+  }, {
+    "fullUrl": "Condition/cond-id-5",
+    "resource": {
+      "resourceType": "Condition",
+      "id": "cond-id-5",
+      "code": {
+        "coding": [
+        {
+          "system": "http://fhir.de/CodeSystem/bfarm/icd-10-gm",
+          "version": "2010",
+          "code": "A04.0"
+        } ]
+      },
+      "subject": {
+        "reference": "Patient/pat-id-2"
+      }
+    },
+    "request": {
+      "method": "PUT",
+      "url": "Condition/cond-id-5"
+    }
+  } ]
+}

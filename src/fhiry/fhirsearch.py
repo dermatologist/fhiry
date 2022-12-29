@@ -58,10 +58,10 @@ def process_bundle(bundle_dict):
 
 def get_next_page_url(bundle_dict):
     links = bundle_dict.get('link')
-
-    for link in links:
-        relation = link.get('relation')
-        if relation == 'next':
-            return link.get('url')
+    if links:
+       for link in links:
+            relation = link.get('relation')
+            if relation == 'next':
+                return link.get('url')
 
     return None
