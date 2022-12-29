@@ -4,6 +4,10 @@
 #
 #    pip-compile
 #
+antlr4-python3-runtime==4.8
+    # via fhirpathpy
+fhirpathpy==0.1.1
+    # via fhiry (setup.py)
 numpy==1.23.5
     # via pandas
 pandas==1.5.2

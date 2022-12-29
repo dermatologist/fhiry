@@ -9,13 +9,15 @@
 import pandas as pd
 import json
 import os
-
+import fhirpathpy
 
 class Fhiry(object):
     def __init__(self):
         self._df = None
         self._filename = ""
         self._folder = ""
+
+        self._mappings_fhirpath_to_column = {}
 
         # Codes from the FHIR datatype "coding"
         # (f.e. element resource.code.coding or element resource.clinicalStatus.coding)
@@ -43,6 +45,10 @@ class Fhiry(object):
         return self._folder
 
     @property
+    def mappings_fhirpath_to_column(self):
+        return self._mappings_fhirpath_to_column
+
+    @property
     def delete_col_raw_coding(self):
         return self._delete_col_raw_coding
 
@@ -59,11 +65,28 @@ class Fhiry(object):
     def delete_col_raw_coding(self, delete_col_raw_coding):
         self._delete_col_raw_coding = delete_col_raw_coding
 
+    @mappings_fhirpath_to_column.setter
+    def mappings_fhirpath_to_column(self, mappings_fhirpath_to_column):
+        self._mappings_fhirpath_to_column = mappings_fhirpath_to_column
+
     def read_bundle_from_file(self, filename):
         with open(filename, 'r') as f:
             json_in = f.read()
             json_in = json.loads(json_in)
-            return pd.json_normalize(json_in['entry'])
+
+            # Flatten nested object structure to flat table structure
+            df = pd.json_normalize(json_in['entry'])
+
+            # if (optional/additional) Fhirpath to dataframe column mappings,
+            # add values from FHIR paths to mapped columns
+            for fhirpath, col in self._mappings_fhirpath_to_column.items():
+                df[col] = None
+                i = 0
+                for entry in json_in['entry']:
+                    df.at[i, col] = fhirpathpy.evaluate(entry['resource'], path=fhirpath)
+                    i += 1
+
+        return df
 
     def delete_unwanted_cols(self):
         if 'resource.text.div' in self._df.columns:
