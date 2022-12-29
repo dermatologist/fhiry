@@ -75,7 +75,11 @@ pytz==2022.6
 recommonmark==0.7.1
     # via -r dev-requirements.in
 requests==2.26.0
-    # via sphinx
+    # via
+    #   responses
+    #   sphinx
+responses==0.22.0
+    # via -r dev-requirements.in
 setuptools-scm==6.4.2
     # via -r dev-requirements.in
 six==1.16.0
@@ -104,6 +108,7 @@ sphinxcontrib-serializinghtml==1.1.5
 toml==0.10.2
     # via
     #   coverage
+    #   responses
     #   tox
 tomli==1.2.1
     # via
@@ -111,8 +116,12 @@ tomli==1.2.1
     #   setuptools-scm
 tox==3.25.0
     # via -r dev-requirements.in
+types-toml==0.10.8.1
+    # via responses
 urllib3==1.26.6
-    # via requests
+    # via
+    #   requests
+    #   responses
 virtualenv==20.8.0
     # via tox
 wheel==0.37.1
