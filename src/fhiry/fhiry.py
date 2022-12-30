@@ -149,6 +149,6 @@ class Fhiry(object):
             for entry in myList:
                 if 'code' in entry:
                     myCodes.append(entry['code'])
-                else:
+                elif 'display' in entry:
                     myCodes.append(entry['display'])
         return myCodes
