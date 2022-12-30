@@ -12,7 +12,7 @@ into ML packages such as Tensorflow and PyTorch. Test it with the [synthea sampl
 
 ## Installation
 
-```
+```shell
 pip install fhiry
 ```
 
@@ -20,7 +20,7 @@ pip install fhiry
 
 ### Import FHIR bundles (JSON) from folder to pandas dataframe
 
-```
+```python
 import fhiry.parallel as fp
 df = fp.process('/path/to/fhir/resources')
 print(df.info())
@@ -32,7 +32,7 @@ Jupyter notebook example: [`notebooks/synthea.ipynb`](notebooks/synthea.ipynb)
 
 ### Import NDJSON from folder to pandas dataframe
 
-```
+```python
 import fhiry.parallel as fp
 df = fp.ndjson('/path/to/fhir/ndjson/files')
 print(df.info())
@@ -50,9 +50,9 @@ Documentation: [`fhir-search.md`](fhir-search.md)
 
 #### Example: Import all conditions with a certain code
 
-Import all [Condition](https://www.hl7.org/fhir/condition.html#search) resources with Snomed (Codesystem `http://snomed.info/sct`) Code `39065001` in the FHIR element Condition.code:
+Import all condition resources with Snomed (Codesystem `http://snomed.info/sct`) Code `39065001` in the FHIR element `Condition.code` ([resource type specific FHIR search parameter `code`](https://www.hl7.org/fhir/condition.html#search)):
 
-```
+```python
 from fhiry.fhirsearch import Fhirsearch
 fs = Fhirsearch()
 

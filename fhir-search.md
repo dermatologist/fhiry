@@ -2,14 +2,15 @@
 
 Import resources from [FHIR Search API](https://www.hl7.org/fhir/search.html) results to [pandas](https://pandas.pydata.org/docs/user_guide/index.html)  dataframe by [fhiry](README.md):
 
-## FHIR search parameters
+## FHIR search query parameters
 
 For filter options you can set by `search_parameters` see [FHIR search common parameters for all resource types](https://www.hl7.org/fhir/search.html#standard) and additional FHIR search parameters for certain resource types like [Patient](https://www.hl7.org/fhir/patient.html#search), [Condition](https://www.hl7.org/fhir/condition.html#search), [Observation](https://www.hl7.org/fhir/observation.html#search), ...
 
-## Example: Import all Observations
+## Example: Import all observations
 
 Import all resources (since empty search parameters / no filter) of type Observation
-```
+
+```python
 from fhiry.fhirsearch import Fhirsearch
 
 fs = Fhirsearch()
@@ -21,9 +22,9 @@ print(df.info())
 
 ## Example: Import all conditions with a certain code
 
-Import all condition resources with Snomed (Codesystem `http://snomed.info/sct`) Code `39065001` in the FHIR element Condition.code:
+Import all condition resources with Snomed (Codesystem `http://snomed.info/sct`) Code `39065001` in the FHIR element `Condition.code` ([resource type specific FHIR search parameter `code`](https://www.hl7.org/fhir/condition.html#search)):
 
-```
+```python
 from fhiry.fhirsearch import Fhirsearch
 fs = Fhirsearch()
 
@@ -51,7 +52,7 @@ Authentication is set by [requests parameter `auth`](https://requests.readthedoc
 
 Example using [HTTP Basic Auth](https://requests.readthedocs.io/en/latest/user/authentication/#basic-authentication):
 
-```
+```python
 from fhiry.fhirsearch import Fhirsearch
 
 fs = Fhirsearch()
@@ -67,7 +68,7 @@ You can set a HTTP(S)-Proxies by [requests parameter `proxies`](https://requests
 
 Example:
 
-```
+```python
 fs.requests_kwargs["proxies"] = {
     'http': 'http://10.10.1.10:3128',
     'https': 'http://10.10.1.10:1080',
@@ -86,7 +87,7 @@ If you want to analyze only certain elements, you can decrease RAM usage and net
 
 Example:
 
-```
+```python
 from fhiry.fhirsearch import Fhirsearch
 fs = Fhirsearch()
 
@@ -96,7 +97,7 @@ my_fhir_search_parameters = {
 ```
 ... Other FHIR search parameters / filters ...
 
-```
+```python
 
     "_elements": "code,verification-status,recorded-date",
 }
