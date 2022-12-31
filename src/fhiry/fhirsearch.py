@@ -6,8 +6,9 @@ from . import Fhiry
 
 class Fhirsearch(object):
 
-    def __init__(self):
-        self.fhir_base_url = "http://fhir-server/fhir"
+    def __init__(self, fhir_base_url):
+
+        self.fhir_base_url = fhir_base_url
 
         # Batch size (entries per page)
         self.page_size = 500

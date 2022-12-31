@@ -1,6 +1,6 @@
 # Import FHIR search results to pandas dataframe
 
-Import resources from [FHIR Search API](https://www.hl7.org/fhir/search.html) results to [pandas](https://pandas.pydata.org/docs/user_guide/index.html)  dataframe by [fhiry](README.md):
+Import resources from [FHIR Search API](https://www.hl7.org/fhir/search.html) results to [pandas](https://pandas.pydata.org/docs/user_guide/index.html) dataframe by [fhiry](README.md):
 
 ## FHIR search query parameters
 
@@ -8,13 +8,13 @@ For filter options you can set by `search_parameters` see [FHIR search common pa
 
 ## Example: Import all observations
 
-Import all resources (since empty search parameters / no filter) of type Observation
+Fetch and import all resources (since empty search parameters / no filter) of type Observation to a pandas dataframe:
 
 ```python
 from fhiry.fhirsearch import Fhirsearch
 
-fs = Fhirsearch()
-fs.fhir_base_url = "http://fhir-server:8080/fhir"
+fs = Fhirsearch(fhir_base_url = "http://fhir-server:8080/fhir")
+
 df = fs.search(type = "Observation", search_parameters = {})
 
 print(df.info())
@@ -22,13 +22,12 @@ print(df.info())
 
 ## Example: Import all conditions with a certain code
 
-Import all condition resources with Snomed (Codesystem `http://snomed.info/sct`) Code `39065001` in the FHIR element `Condition.code` ([resource type specific FHIR search parameter `code`](https://www.hl7.org/fhir/condition.html#search)):
+Fetch and import all condition resources with Snomed (Codesystem `http://snomed.info/sct`) Code `39065001` in the FHIR element `Condition.code` ([resource type specific FHIR search parameter `code`](https://www.hl7.org/fhir/condition.html#search)) to a pandas dataframe:
 
 ```python
 from fhiry.fhirsearch import Fhirsearch
-fs = Fhirsearch()
 
-fs.fhir_base_url = "http://fhir-server:8080/fhir"
+fs = Fhirsearch(fhir_base_url = "http://fhir-server:8080/fhir")
 
 my_fhir_search_parameters = {
     "code": "http://snomed.info/sct|39065001",
@@ -46,6 +45,8 @@ print(df.info())
 
 To set connection parameters like authentication, SSL certificates, proxies and so on, set or add standard [Python requests](https://requests.readthedocs.io/en/latest/) keyword arguments to the property `requests_kwargs`.
 
+Examples:
+
 ### Authentication
 
 Authentication is set by [requests parameter `auth`](https://requests.readthedocs.io/en/latest/user/authentication/).
@@ -55,8 +56,7 @@ Example using [HTTP Basic Auth](https://requests.readthedocs.io/en/latest/user/a
 ```python
 from fhiry.fhirsearch import Fhirsearch
 
-fs = Fhirsearch()
-fs.fhir_base_url = "http://fhir-server:8080/fhir"
+fs = Fhirsearch(fhir_base_url = "http://fhir-server:8080/fhir")
 
 # Set basic auth credentials (https://requests.readthedocs.io/en/latest/user/authentication/#basic-authentication)
 fs.requests_kwargs["auth"] = ('myUser', 'myPassword')
@@ -64,7 +64,7 @@ fs.requests_kwargs["auth"] = ('myUser', 'myPassword')
 
 ### Proxy settings
 
-You can set a HTTP(S)-Proxies by [requests parameter `proxies`](https://requests.readthedocs.io/en/latest/user/advanced/#proxies).
+You can set HTTP(S)-Proxies by [requests parameter `proxies`](https://requests.readthedocs.io/en/latest/user/advanced/#proxies).
 
 Example:
 
@@ -89,9 +89,8 @@ Example:
 
 ```python
 from fhiry.fhirsearch import Fhirsearch
-fs = Fhirsearch()
 
-fs.fhir_base_url = "http://fhir-server:8080/fhir"
+fs = Fhirsearch(fhir_base_url = "http://fhir-server:8080/fhir")
 
 my_fhir_search_parameters = {
 ```

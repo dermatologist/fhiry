@@ -44,19 +44,18 @@ Jupyter notebook example: [`notebooks/ndjson.ipynb`](notebooks/ndjson.ipynb)
 
 ### Import FHIR Search results to pandas dataframe
 
-Import resources from [FHIR Search API](https://www.hl7.org/fhir/search.html) results to pandas dataframe.
+Fetch and import resources from [FHIR Search API](https://www.hl7.org/fhir/search.html) results to pandas dataframe.
 
 Documentation: [`fhir-search.md`](fhir-search.md)
 
 #### Example: Import all conditions with a certain code
 
-Import all condition resources with Snomed (Codesystem `http://snomed.info/sct`) Code `39065001` in the FHIR element `Condition.code` ([resource type specific FHIR search parameter `code`](https://www.hl7.org/fhir/condition.html#search)):
+Fetch and import all condition resources with Snomed (Codesystem `http://snomed.info/sct`) Code `39065001` in the FHIR element `Condition.code` ([resource type specific FHIR search parameter `code`](https://www.hl7.org/fhir/condition.html#search)) to a pandas dataframe:
 
 ```python
 from fhiry.fhirsearch import Fhirsearch
-fs = Fhirsearch()
 
-fs.fhir_base_url = "http://fhir-server:8080/fhir"
+fs = Fhirsearch(fhir_base_url = "http://fhir-server:8080/fhir")
 
 my_fhir_search_parameters = {
     "code": "http://snomed.info/sct|39065001",

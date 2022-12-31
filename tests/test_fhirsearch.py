@@ -39,8 +39,7 @@ def test_fhirsearch():
 
     # Start a FHIR search on/with the mocked FHIR Server URLs
     # which should process all 5 Condition resources (separated on three FHIR search results pages)
-    fs = Fhirsearch()
-    fs.fhir_base_url = "http://fhir-server/fhir"
+    fs = Fhirsearch(fhir_base_url="http://fhir-server/fhir")
     fs.page_size = 2
 
     df = fs.search(type="Condition", search_parameters={})
