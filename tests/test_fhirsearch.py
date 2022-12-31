@@ -42,17 +42,17 @@ def test_fhirsearch():
     fs = Fhirsearch(fhir_base_url="http://fhir-server/fhir")
     fs.page_size = 2
 
-    df = fs.search(type="Condition", search_parameters={})
+    df = fs.search(resource_type="Condition", search_parameters={})
 
     # resulting df must include all 5 condition resources (processed from all three mocked search results pages)
     assert len(df) == 5
 
     # Are all the different Condition codes there (exactly once)?
-    assert len(df[df['resource.code.codingcodes'].astype('string') == "[\'A00.0\']"]) == 1
-    assert len(df[df['resource.code.codingcodes'].astype('string') == "[\'A01.0\']"]) == 1
-    assert len(df[df['resource.code.codingcodes'].astype('string') == "[\'A02.0\']"]) == 1
-    assert len(df[df['resource.code.codingcodes'].astype('string') == "[\'A03.0\']"]) == 1
-    assert len(df[df['resource.code.codingcodes'].astype('string') == "[\'A04.0\']"]) == 1
+    assert len(df[df['resource.code.codingcodes'].astype('string') == "['A00.0']"]) == 1
+    assert len(df[df['resource.code.codingcodes'].astype('string') == "['A01.0']"]) == 1
+    assert len(df[df['resource.code.codingcodes'].astype('string') == "['A02.0']"]) == 1
+    assert len(df[df['resource.code.codingcodes'].astype('string') == "['A03.0']"]) == 1
+    assert len(df[df['resource.code.codingcodes'].astype('string') == "['A04.0']"]) == 1
 
     # There is no resource with code A05.0 in the FHIR search results
-    assert len(df[df['resource.code.codingcodes'].astype('string') == "[\'A05.0\']"]) == 0
+    assert len(df[df['resource.code.codingcodes'].astype('string') == "['A05.0']"]) == 0

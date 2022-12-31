@@ -6,7 +6,7 @@ Import resources from [FHIR Search API](https://www.hl7.org/fhir/search.html) re
 
 For filter options you can set by `search_parameters` see [FHIR search common parameters for all resource types](https://www.hl7.org/fhir/search.html#standard) and additional FHIR search parameters for certain resource types like [Patient](https://www.hl7.org/fhir/patient.html#search), [Condition](https://www.hl7.org/fhir/condition.html#search), [Observation](https://www.hl7.org/fhir/observation.html#search), ...
 
-## Example: Import all observations
+## Example: Import all observations from FHIR server
 
 Fetch and import all resources (since empty search parameters / no filter) of type Observation to a pandas dataframe:
 
@@ -15,12 +15,12 @@ from fhiry.fhirsearch import Fhirsearch
 
 fs = Fhirsearch(fhir_base_url = "http://fhir-server:8080/fhir")
 
-df = fs.search(type = "Observation", search_parameters = {})
+df = fs.search(resource_type = "Observation", search_parameters = {})
 
 print(df.info())
 ```
 
-## Example: Import all conditions with a certain code
+## Example: Import all conditions with a certain code from FHIR server
 
 Fetch and import all condition resources with Snomed (Codesystem `http://snomed.info/sct`) Code `39065001` in the FHIR element `Condition.code` ([resource type specific FHIR search parameter `code`](https://www.hl7.org/fhir/condition.html#search)) to a pandas dataframe:
 
@@ -33,7 +33,7 @@ my_fhir_search_parameters = {
     "code": "http://snomed.info/sct|39065001",
 }
 
-df = fs.search(type = "Condition", search_parameters = my_fhir_search_parameters)
+df = fs.search(resource_type = "Condition", search_parameters = my_fhir_search_parameters)
 
 print(df.info())
 ```
@@ -101,7 +101,7 @@ my_fhir_search_parameters = {
     "_elements": "code,verification-status,recorded-date",
 }
 
-df = fs.search(type = "Condition", search_parameters = my_fhir_search_parameters)
+df = fs.search(resource_type = "Condition", search_parameters = my_fhir_search_parameters)
 
 print(df.info())
 ```

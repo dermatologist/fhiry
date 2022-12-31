@@ -48,7 +48,7 @@ Fetch and import resources from [FHIR Search API](https://www.hl7.org/fhir/searc
 
 Documentation: [`fhir-search.md`](fhir-search.md)
 
-#### Example: Import all conditions with a certain code
+#### Example: Import all conditions with a certain code from FHIR Server
 
 Fetch and import all condition resources with Snomed (Codesystem `http://snomed.info/sct`) Code `39065001` in the FHIR element `Condition.code` ([resource type specific FHIR search parameter `code`](https://www.hl7.org/fhir/condition.html#search)) to a pandas dataframe:
 
@@ -61,7 +61,7 @@ my_fhir_search_parameters = {
     "code": "http://snomed.info/sct|39065001",
 }
 
-df = fs.search(type = "Condition", search_parameters = my_fhir_search_parameters)
+df = fs.search(resource_type = "Condition", search_parameters = my_fhir_search_parameters)
 
 print(df.info())
 ```

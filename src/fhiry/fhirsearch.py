@@ -20,14 +20,14 @@ class Fhirsearch(object):
         # SSL Certificates: https://requests.readthedocs.io/en/latest/user/advanced/#ssl-cert-verification
         self.requests_kwargs = {}
 
-    def search(self, type="Patient", search_parameters={}):
+    def search(self, resource_type="Patient", search_parameters={}):
 
         headers = {"Content-Type": "application/fhir+json"}
 
         if '_count' not in search_parameters:
             search_parameters['_count'] = self.page_size
 
-        search_url = f'{self.fhir_base_url}/{type}'
+        search_url = f'{self.fhir_base_url}/{resource_type}'
         r = requests.get(search_url, params=search_parameters, headers=headers, **self.requests_kwargs)
         r.raise_for_status()
         bundle_dict = r.json()
