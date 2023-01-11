@@ -34,8 +34,6 @@ idna==3.2
     # via requests
 imagesize==1.2.0
     # via sphinx
-importlib-metadata==5.1.0
-    # via sphinx
 iniconfig==1.1.1
     # via pytest
 jinja2==3.0.1
@@ -109,12 +107,11 @@ toml==0.10.2
     # via
     #   coverage
     #   responses
-    #   tox
 tomli==1.2.1
     # via
     #   pytest
     #   setuptools-scm
-tox==3.25.0
+tox==3.28.0
     # via -r dev-requirements.in
 types-toml==0.10.8.1
     # via responses
@@ -126,8 +123,6 @@ virtualenv==20.8.0
     # via tox
 wheel==0.37.1
     # via -r dev-requirements.in
-zipp==3.11.0
-    # via importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
