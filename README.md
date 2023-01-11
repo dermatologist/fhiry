@@ -12,7 +12,7 @@ into ML packages such as Tensorflow and PyTorch. Test it with the [synthea sampl
 
 ## Installation
 
-```
+```shell
 pip install fhiry
 ```
 
@@ -20,7 +20,7 @@ pip install fhiry
 
 ### Import FHIR bundles (JSON) from folder to pandas dataframe
 
-```
+```python
 import fhiry.parallel as fp
 df = fp.process('/path/to/fhir/resources')
 print(df.info())
@@ -32,7 +32,7 @@ Jupyter notebook example: [`notebooks/synthea.ipynb`](notebooks/synthea.ipynb)
 
 ### Import NDJSON from folder to pandas dataframe
 
-```
+```python
 import fhiry.parallel as fp
 df = fp.ndjson('/path/to/fhir/ndjson/files')
 print(df.info())
@@ -41,6 +41,30 @@ print(df.info())
 Example source data set: [SMART Bulk Data Server](https://bulk-data.smarthealthit.org/) Export
 
 Jupyter notebook example: [`notebooks/ndjson.ipynb`](notebooks/ndjson.ipynb)
+
+### Import FHIR Search results to pandas dataframe
+
+Fetch and import resources from [FHIR Search API](https://www.hl7.org/fhir/search.html) results to pandas dataframe.
+
+Documentation: [`fhir-search.md`](fhir-search.md)
+
+#### Example: Import all conditions with a certain code from FHIR Server
+
+Fetch and import all condition resources with Snomed (Codesystem `http://snomed.info/sct`) Code `39065001` in the FHIR element `Condition.code` ([resource type specific FHIR search parameter `code`](https://www.hl7.org/fhir/condition.html#search)) to a pandas dataframe:
+
+```python
+from fhiry.fhirsearch import Fhirsearch
+
+fs = Fhirsearch(fhir_base_url = "http://fhir-server:8080/fhir")
+
+my_fhir_search_parameters = {
+    "code": "http://snomed.info/sct|39065001",
+}
+
+df = fs.search(resource_type = "Condition", search_parameters = my_fhir_search_parameters)
+
+print(df.info())
+```
 
 ## Columns
 * see df.columns
