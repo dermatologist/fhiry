@@ -1,0 +1,41 @@
+{
+  "resourceType": "Bundle",
+  "id": "b5f2b2b3-6372-4159-969a-49cbd243e154",
+  "meta": {
+    "lastUpdated": "2022-12-29T12:39:38.158+00:00"
+  },
+  "type": "searchset",
+  "total": 5,
+  "link": [ {
+    "relation": "self",
+    "url": "http://fhir-server/fhir?_getpages=b5f2b2b3-6372-4159-969a-49cbd243e154&_getpagesoffset=4&_count=2&_bundletype=searchset"
+  }, {
+    "relation": "previous",
+    "url": "http://fhir-server/fhir?_getpages=b5f2b2b3-6372-4159-969a-49cbd243e154&_getpagesoffset=2&_count=2&_bundletype=searchset"
+  } ],
+  "entry": [ {
+    "fullUrl": "http://fhir-server/fhir/Condition/cond-id-5",
+    "resource": {
+      "resourceType": "Condition",
+      "id": "cond-id-5",
+      "meta": {
+        "versionId": "1",
+        "lastUpdated": "2022-12-29T12:39:14.443+00:00",
+        "source": "#VJFR5ZXtH6s2PLWu"
+      },
+      "code": {
+        "coding": [ {
+          "system": "http://fhir.de/CodeSystem/bfarm/icd-10-gm",
+          "version": "2010",
+          "code": "A04.0"
+        } ]
+      },
+      "subject": {
+        "reference": "Patient/pat-id-2"
+      }
+    },
+    "search": {
+      "mode": "match"
+    }
+  } ]
+}

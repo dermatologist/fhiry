@@ -88,6 +88,9 @@ class Fhiry(object):
 
         return df
 
+    def read_bundle_from_bundle_dict(self, bundle_dict):
+        return pd.json_normalize(bundle_dict['entry'])
+
     def delete_unwanted_cols(self):
         if 'resource.text.div' in self._df.columns:
             del self._df['resource.text.div']
@@ -118,6 +121,13 @@ class Fhiry(object):
 
     def process_file(self, filename):
         self._df = self.read_bundle_from_file(filename)
+        self.delete_unwanted_cols()
+        self.convert_object_to_list()
+        self.add_patient_id()
+        return self._df
+
+    def process_bundle_dict(self, bundle_dict):
+        self._df = self.read_bundle_from_bundle_dict(bundle_dict)
         self.delete_unwanted_cols()
         self.convert_object_to_list()
         self.add_patient_id()
@@ -172,6 +182,6 @@ class Fhiry(object):
             for entry in myList:
                 if 'code' in entry:
                     myCodes.append(entry['code'])
-                else:
+                elif 'display' in entry:
                     myCodes.append(entry['display'])
         return myCodes
