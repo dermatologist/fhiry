@@ -17,7 +17,7 @@ class Fhiry(object):
         self._filename = ""
         self._folder = ""
 
-        self._mappings_fhirpath_to_column = {}
+        self._columns_by_fhirpaths = {}
 
         # Codes from the FHIR datatype "coding"
         # (f.e. element resource.code.coding or element resource.clinicalStatus.coding)
@@ -45,8 +45,8 @@ class Fhiry(object):
         return self._folder
 
     @property
-    def mappings_fhirpath_to_column(self):
-        return self._mappings_fhirpath_to_column
+    def columns_by_fhirpaths(self):
+        return self._columns_by_fhirpaths
 
     @property
     def delete_col_raw_coding(self):
@@ -65,9 +65,9 @@ class Fhiry(object):
     def delete_col_raw_coding(self, delete_col_raw_coding):
         self._delete_col_raw_coding = delete_col_raw_coding
 
-    @mappings_fhirpath_to_column.setter
-    def mappings_fhirpath_to_column(self, mappings_fhirpath_to_column):
-        self._mappings_fhirpath_to_column = mappings_fhirpath_to_column
+    @columns_by_fhirpaths.setter
+    def columns_by_fhirpaths(self, columns_by_fhirpaths):
+        self._columns_by_fhirpaths = columns_by_fhirpaths
 
     def read_bundle_from_file(self, filename):
         with open(filename, 'r') as f:
@@ -79,7 +79,7 @@ class Fhiry(object):
 
             # if (optional/additional) Fhirpath to dataframe column mappings,
             # add values from FHIR paths to mapped columns
-            for fhirpath, col in self._mappings_fhirpath_to_column.items():
+            for col, fhirpath in self._columns_by_fhirpaths.items():
                 df[col] = None
                 i = 0
                 for entry in json_in['entry']:

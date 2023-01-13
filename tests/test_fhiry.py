@@ -43,11 +43,11 @@ def test_process_parallel(capsys):
     assert '1194' in captured.out
 
 
-def test_mappings_fhirpath_to_column(f, capsys):
+def test_columns_by_fhirpaths(f, capsys):
 
     # set a mapping to extract the Snomed Code (of a condition) by Fhir path to a new column "code_snomed"
-    f.mappings_fhirpath_to_column = {
-      "code.coding.where(system = 'http://snomed.info/sct').code": 'code_snomed',
+    f.columns_by_fhirpaths = {
+        "code_snomed": "code.coding.where(system = 'http://snomed.info/sct').code",
     }
 
     f.filename = resource_filename(__name__, 'resources') + '/afhir.json'
