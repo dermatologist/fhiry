@@ -71,25 +71,27 @@ class Fhiry(object):
 
     def read_bundle_from_file(self, filename):
         with open(filename, 'r') as f:
-            json_in = f.read()
-            json_in = json.loads(json_in)
+            bundle_dict = json.load(f)
 
-            # Flatten nested object structure to flat table structure
-            df = pd.json_normalize(json_in['entry'])
-
-            # if (optional/additional) Fhirpath to dataframe column mappings,
-            # add values from FHIR paths to mapped columns
-            for col, fhirpath in self._columns_by_fhirpaths.items():
-                df[col] = None
-                i = 0
-                for entry in json_in['entry']:
-                    df.at[i, col] = fhirpathpy.evaluate(entry['resource'], path=fhirpath)
-                    i += 1
+        df = self.read_bundle_from_bundle_dict(bundle_dict)
 
         return df
 
     def read_bundle_from_bundle_dict(self, bundle_dict):
-        return pd.json_normalize(bundle_dict['entry'])
+
+        # Flatten nested object structure to flat table structure
+        df = pd.json_normalize(bundle_dict['entry'])
+
+        # if (optional/additional) Fhirpath to dataframe column mappings,
+        # add values from FHIR paths to mapped columns
+        for col, fhirpath in self._columns_by_fhirpaths.items():
+            df[col] = None
+            i = 0
+            for entry in bundle_dict['entry']:
+                df.at[i, col] = fhirpathpy.evaluate(entry['resource'], path=fhirpath)
+                i += 1
+
+        return df
 
     def delete_unwanted_cols(self):
         if 'resource.text.div' in self._df.columns:
