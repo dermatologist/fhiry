@@ -67,7 +67,10 @@ print(df.info())
 ```
 
 ## Columns
-* see df.columns
+
+Since automatically prepopulated in most cases you have not manually to define mappings from FHIR Elements to dataframe columns to analyse your FHIR resources:
+
+See `df.columns`:
 
 ```
 patientId
@@ -80,6 +83,26 @@ resource.gender
 ...
 ...
 ...
+```
+
+### Add columns by filtering FHIR elements or values by FHIRPath (optional)
+
+To add additional pandas dataframe columns by [FHIRPath](http://hl7.org/fhir/fhirpath.html) for example for filtering FHIR elements like codings by certain codesystem(s) you can map FHIR path expressions to (custom) column names by the parameter `columns_by_fhirpaths` (implemented for import of FHIR bundle files and FHIR search results, but not yet for import of ndjson format) with FHIR path expressions which are supported by the [FHIRPath implementation `fhirpath.py`](https://github.com/beda-software/fhirpath-py).
+
+#### Example: Additional column with exclusive the Snomed coding
+
+Example to add an additional dataframe column named `code_snomed` with exclusive the Snomed coding from the FHIR element `code` (even if FHIR resources contain multiple values with different codesystems in the element `code`):
+
+```python
+import fhiry.parallel as fp
+
+mappings_columns_by_fhirpaths = {
+    "code_snomed": "code.coding.where(system = 'http://snomed.info/sct').code",
+}
+
+df = fp.process('/path/to/fhir/resources', columns_by_fhirpaths = mappings_columns_by_fhirpaths)
+
+print(df.info())
 ```
 
 ### [Documentation](https://dermatologist.github.io/fhiry/)

@@ -4,7 +4,7 @@ Import resources from [FHIR Search API](https://www.hl7.org/fhir/search.html) re
 
 ## FHIR search query parameters
 
-For filter options you can set by `search_parameters` see [FHIR search common parameters for all resource types](https://www.hl7.org/fhir/search.html#standard) and additional FHIR search parameters for certain resource types like [Patient](https://www.hl7.org/fhir/patient.html#search), [Condition](https://www.hl7.org/fhir/condition.html#search), [Observation](https://www.hl7.org/fhir/observation.html#search), ...
+For filter options you can set by `search_parameters` see the [standard FHIR search](https://www.hl7.org/fhir/search.html) parameters like [FHIR search common parameters for all resource types](https://www.hl7.org/fhir/search.html#standard) and additional FHIR search parameters for certain resource types like [Patient](https://www.hl7.org/fhir/patient.html#search), [Condition](https://www.hl7.org/fhir/condition.html#search), [Observation](https://www.hl7.org/fhir/observation.html#search), ...
 
 ## Example: Import all observations from FHIR server
 
@@ -39,7 +39,36 @@ print(df.info())
 ```
 
 ## Columns
-* see [`df.columns`](README.md#columns)
+
+Since automatically prepopulated in most cases you have not manually to define mappings from FHIR Elements to dataframe columns to analyse your FHIR resources:
+
+See [`df.columns`](README.md#columns)
+
+### Add columns by filtering FHIR elements or values by FHIRPath (optional)
+
+To add additional pandas dataframe columns by [FHIRPath](http://hl7.org/fhir/fhirpath.html) for example for filtering FHIR elements like codings by certain codesystem(s) you can map FHIR path expressions to (custom) column names by the parameter `columns_by_fhirpaths` with FHIR path expressions which are supported by the [FHIRPath implementation `fhirpath.py`](https://github.com/beda-software/fhirpath-py).
+
+#### Example: Additional column with exclusive the Snomed coding
+
+Example to add an additional dataframe column named `code_snomed` with exclusive the Snomed coding from the FHIR element `code` (even if FHIR resources contain multiple values with different codesystems in the element `code`):
+
+```python
+from fhiry.fhirsearch import Fhirsearch
+
+fs = Fhirsearch(fhir_base_url = "http://fhir-server:8080/fhir")
+
+my_fhir_search_parameters = {
+}
+
+mappings_columns_by_fhirpaths = {
+    "code_snomed": "code.coding.where(system = 'http://snomed.info/sct').code",
+}
+
+df = fs.search(resource_type = "Condition", search_parameters = my_fhir_search_parameters, columns_by_fhirpaths = mappings_columns_by_fhirpaths)
+
+print(df.info())
+```
+
 
 ## Connection settings
 
