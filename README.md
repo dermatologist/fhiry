@@ -12,10 +12,16 @@ into ML packages such as Tensorflow and PyTorch. Test it with the [synthea sampl
 
 ## Installation
 
+### Stable
 ```shell
 pip install fhiry
 ```
 
+### Latest dev version
+
+```
+pip install git+https://github.com/dermatologist/fhiry.git
+```
 ## Usage
 
 ### Import FHIR bundles (JSON) from folder to pandas dataframe
