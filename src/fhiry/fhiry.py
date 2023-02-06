@@ -118,14 +118,14 @@ class Fhiry(object):
                 codes = self._df.apply(
                     lambda x: self.process_list(x[col]), axis=1)
                 self._df = pd.concat(
-                    [self._df, codes.to_frame(name=col+'codes')], 1)
+                    [self._df, codes.to_frame(name=col+'codes')], axis=1)
                 if self._delete_col_raw_coding:
                     del self._df[col]
             if 'display' in col:
                 codes = self._df.apply(
                     lambda x: self.process_list(x[col]), axis=1)
                 self._df = pd.concat(
-                    [self._df, codes.to_frame(name=col+'display')], 1)
+                    [self._df, codes.to_frame(name=col+'display')], axis=1)
                 del self._df[col]
 
     def add_patient_id(self):
