@@ -49,7 +49,7 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="fhiry.fhirndjson.Fhirndjson.add_patient_id">
 <span class="sig-name descname"><span class="pre">add_patient_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fhiry/fhirndjson.html#Fhirndjson.add_patient_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhirndjson.Fhirndjson.add_patient_id" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a patientId column with the resource.id of the first Patient resource</p>
+<dd><p>Create a patientId column with the id if a Patient resource or with the subject.reference if other resource type</p>
 </dd></dl>
 
 <dl class="py method">
@@ -132,14 +132,24 @@ ONLY COMMON FIELDS IN ALL resources will be mapped</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="fhiry.fhiry.Fhiry.add_patient_id">
 <span class="sig-name descname"><span class="pre">add_patient_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fhiry/fhiry.html#Fhiry.add_patient_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhiry.Fhiry.add_patient_id" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a patientId column with the resource.id of the first Patient resource</p>
+<dd><p>Create a patientId column with the resource.id if a Patient resource or with the resource.subject.reference if other resource type</p>
 </dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fhiry.fhiry.Fhiry.check_subject_reference">
+<span class="sig-name descname"><span class="pre">check_subject_reference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fhiry/fhiry.html#Fhiry.check_subject_reference"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhiry.Fhiry.check_subject_reference" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="fhiry.fhiry.Fhiry.convert_object_to_list">
 <span class="sig-name descname"><span class="pre">convert_object_to_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fhiry/fhiry.html#Fhiry.convert_object_to_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhiry.Fhiry.convert_object_to_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert object to a list of codes</p>
 </dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="fhiry.fhiry.Fhiry.delete_col_raw_coding">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete_col_raw_coding</span></span><a class="headerlink" href="#fhiry.fhiry.Fhiry.delete_col_raw_coding" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="fhiry.fhiry.Fhiry.delete_unwanted_cols">
@@ -164,6 +174,11 @@ ONLY COMMON FIELDS IN ALL resources will be mapped</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="fhiry.fhiry.Fhiry.get_info">
 <span class="sig-name descname"><span class="pre">get_info</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fhiry/fhiry.html#Fhiry.get_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhiry.Fhiry.get_info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fhiry.fhiry.Fhiry.process_bundle_dict">
+<span class="sig-name descname"><span class="pre">process_bundle_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bundle_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fhiry/fhiry.html#Fhiry.process_bundle_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhiry.Fhiry.process_bundle_dict" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -196,6 +211,11 @@ ONLY COMMON FIELDS IN ALL resources will be mapped</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="fhiry.fhiry.Fhiry.read_bundle_from_bundle_dict">
+<span class="sig-name descname"><span class="pre">read_bundle_from_bundle_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bundle_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fhiry/fhiry.html#Fhiry.read_bundle_from_bundle_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhiry.Fhiry.read_bundle_from_bundle_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="fhiry.fhiry.Fhiry.read_bundle_from_file">
 <span class="sig-name descname"><span class="pre">read_bundle_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fhiry/fhiry.html#Fhiry.read_bundle_from_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhiry.Fhiry.read_bundle_from_file" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -216,8 +236,8 @@ ONLY COMMON FIELDS IN ALL resources will be mapped</p>
 <dd></dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="fhiry.parallel.process_files">
-<span class="sig-prename descclassname"><span class="pre">fhiry.parallel.</span></span><span class="sig-name descname"><span class="pre">process_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fhiry/parallel.html#process_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.parallel.process_files" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="fhiry.parallel.process_file">
+<span class="sig-prename descclassname"><span class="pre">fhiry.parallel.</span></span><span class="sig-name descname"><span class="pre">process_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fhiry/parallel.html#process_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.parallel.process_file" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">

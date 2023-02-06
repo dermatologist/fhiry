@@ -50,6 +50,19 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_filename</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_folder</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 
+        <span class="c1"># Codes from the FHIR datatype &quot;coding&quot;</span>
+        <span class="c1"># (f.e. element resource.code.coding or element resource.clinicalStatus.coding)</span>
+        <span class="c1"># are extracted to a col &quot;codingcodes&quot;</span>
+        <span class="c1"># (f.e. col resource.code.codingcodes or col resource.clinicalStatus.codingcodes)</span>
+        <span class="c1"># without other for analysis often not needed metadata like f.e. codesystem URI</span>
+        <span class="c1"># or FHIR extensions for coding entries.</span>
+        <span class="c1"># The full / raw object in col &quot;coding&quot; is deleted after this extraction.</span>
+        <span class="c1"># If you want to analyze more than the content of code and display from codings</span>
+        <span class="c1"># (like f.e. different codesystem URIs or further codes in extensions</span>
+        <span class="c1"># in the raw data/object), you can disable deletion of the raw source object &quot;coding&quot;</span>
+        <span class="c1"># (f.e. col &quot;resource.code.coding&quot;) by setting property delete_col_raw_coding to False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_delete_col_raw_coding</span> <span class="o">=</span> <span class="kc">True</span>
+
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">df</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_df</span>
@@ -62,6 +75,10 @@
     <span class="k">def</span> <span class="nf">folder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_folder</span>
 
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">delete_col_raw_coding</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_delete_col_raw_coding</span>
+
     <span class="nd">@filename</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">filename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_filename</span> <span class="o">=</span> <span class="n">filename</span>
@@ -71,11 +88,18 @@
     <span class="k">def</span> <span class="nf">folder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_folder</span> <span class="o">=</span> <span class="n">folder</span>
 
+    <span class="nd">@delete_col_raw_coding</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">delete_col_raw_coding</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delete_col_raw_coding</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_delete_col_raw_coding</span> <span class="o">=</span> <span class="n">delete_col_raw_coding</span>
+
 <div class="viewcode-block" id="Fhiry.read_bundle_from_file"><a class="viewcode-back" href="../../fhiry.html#fhiry.fhiry.Fhiry.read_bundle_from_file">[docs]</a>    <span class="k">def</span> <span class="nf">read_bundle_from_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">json_in</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
             <span class="n">json_in</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json_in</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">json_normalize</span><span class="p">(</span><span class="n">json_in</span><span class="p">[</span><span class="s1">&#39;entry&#39;</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="Fhiry.read_bundle_from_bundle_dict"><a class="viewcode-back" href="../../fhiry.html#fhiry.fhiry.Fhiry.read_bundle_from_bundle_dict">[docs]</a>    <span class="k">def</span> <span class="nf">read_bundle_from_bundle_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bundle_dict</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">json_normalize</span><span class="p">(</span><span class="n">bundle_dict</span><span class="p">[</span><span class="s1">&#39;entry&#39;</span><span class="p">])</span></div>
 
 <div class="viewcode-block" id="Fhiry.delete_unwanted_cols"><a class="viewcode-back" href="../../fhiry.html#fhiry.fhiry.Fhiry.delete_unwanted_cols">[docs]</a>    <span class="k">def</span> <span class="nf">delete_unwanted_cols</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="s1">&#39;resource.text.div&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
@@ -112,6 +136,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">add_patient_id</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_df</span></div>
 
+<div class="viewcode-block" id="Fhiry.process_bundle_dict"><a class="viewcode-back" href="../../fhiry.html#fhiry.fhiry.Fhiry.process_bundle_dict">[docs]</a>    <span class="k">def</span> <span class="nf">process_bundle_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bundle_dict</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_bundle_from_bundle_dict</span><span class="p">(</span><span class="n">bundle_dict</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delete_unwanted_cols</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convert_object_to_list</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_patient_id</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_df</span></div>
+
 <div class="viewcode-block" id="Fhiry.convert_object_to_list"><a class="viewcode-back" href="../../fhiry.html#fhiry.fhiry.Fhiry.convert_object_to_list">[docs]</a>    <span class="k">def</span> <span class="nf">convert_object_to_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Convert object to a list of codes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -121,7 +152,8 @@
                     <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_list</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">col</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
                     <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="p">,</span> <span class="n">codes</span><span class="o">.</span><span class="n">to_frame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">col</span><span class="o">+</span><span class="s1">&#39;codes&#39;</span><span class="p">)],</span> <span class="mi">1</span><span class="p">)</span>
-                <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_delete_col_raw_coding</span><span class="p">:</span>
+                    <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
             <span class="k">if</span> <span class="s1">&#39;display&#39;</span> <span class="ow">in</span> <span class="n">col</span><span class="p">:</span>
                 <span class="n">codes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
                     <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_list</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">col</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -130,10 +162,16 @@
                 <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="Fhiry.add_patient_id"><a class="viewcode-back" href="../../fhiry.html#fhiry.fhiry.Fhiry.add_patient_id">[docs]</a>    <span class="k">def</span> <span class="nf">add_patient_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Create a patientId column with the resource.id of the first Patient resource</span>
+        <span class="sd">&quot;&quot;&quot;Create a patientId column with the resource.id if a Patient resource or with the resource.subject.reference if other resource type</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="p">[</span><span class="s1">&#39;patientId&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="p">[(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="p">[</span><span class="s1">&#39;resource.resourceType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Patient&quot;</span><span class="p">)]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;resource.id&#39;</span><span class="p">]</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="p">[</span><span class="s1">&#39;patientId&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;resource.id&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;resource.resourceType&#39;</span><span class="p">]</span>
+                                               <span class="o">==</span> <span class="s1">&#39;Patient&#39;</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_subject_reference</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Fhiry.check_subject_reference"><a class="viewcode-back" href="../../fhiry.html#fhiry.fhiry.Fhiry.check_subject_reference">[docs]</a>    <span class="k">def</span> <span class="nf">check_subject_reference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;resource.subject.reference&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Patient/&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
 
 <div class="viewcode-block" id="Fhiry.get_info"><a class="viewcode-back" href="../../fhiry.html#fhiry.fhiry.Fhiry.get_info">[docs]</a>    <span class="k">def</span> <span class="nf">get_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_df</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -154,7 +192,7 @@
             <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">myList</span><span class="p">:</span>
                 <span class="k">if</span> <span class="s1">&#39;code&#39;</span> <span class="ow">in</span> <span class="n">entry</span><span class="p">:</span>
                     <span class="n">myCodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">])</span>
-                <span class="k">else</span><span class="p">:</span>
+                <span class="k">elif</span> <span class="s1">&#39;display&#39;</span> <span class="ow">in</span> <span class="n">entry</span><span class="p">:</span>
                     <span class="n">myCodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s1">&#39;display&#39;</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">myCodes</span></div></div>
 </pre></div>

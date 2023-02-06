@@ -12,6 +12,14 @@ fhiry.fhirndjson module
    :undoc-members:
    :show-inheritance:
 
+fhiry.fhirsearch module
+-----------------------
+
+.. automodule:: fhiry.fhirsearch
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 fhiry.fhiry module
 ------------------
 
