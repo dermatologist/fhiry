@@ -42,7 +42,11 @@ def test_fhirsearch():
     fs = Fhirsearch(fhir_base_url="http://fhir-server/fhir")
     fs.page_size = 2
 
-    df = fs.search(resource_type="Condition", search_parameters={})
+    my_columns_by_fhirpaths = {
+        "snomed_code": "code.coding.where(system = 'http://snomed.info/sct').code",
+        "icd10gm_code": "code.coding.where(system = 'http://fhir.de/CodeSystem/bfarm/icd-10-gm').code",
+    }
+    df = fs.search(resource_type="Condition", search_parameters={}, columns_by_fhirpaths=my_columns_by_fhirpaths)
 
     # resulting df must include all 5 condition resources (processed from all three mocked search results pages)
     assert len(df) == 5
@@ -56,3 +60,6 @@ def test_fhirsearch():
 
     # There is no resource with code A05.0 in the FHIR search results
     assert len(df[df['resource.code.codingcodes'].astype('string') == "['A05.0']"]) == 0
+
+    # Test if additional column "icd10gm_code" extracted by the mapped FHIR Path
+    assert len(df[df['icd10gm_code'].astype('string') == "['A04.0']"]) == 1

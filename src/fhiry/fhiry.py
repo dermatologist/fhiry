@@ -9,13 +9,15 @@
 import pandas as pd
 import json
 import os
-
+import fhirpathpy
 
 class Fhiry(object):
     def __init__(self):
         self._df = None
         self._filename = ""
         self._folder = ""
+
+        self._columns_by_fhirpaths = {}
 
         # Codes from the FHIR datatype "coding"
         # (f.e. element resource.code.coding or element resource.clinicalStatus.coding)
@@ -43,6 +45,10 @@ class Fhiry(object):
         return self._folder
 
     @property
+    def columns_by_fhirpaths(self):
+        return self._columns_by_fhirpaths
+
+    @property
     def delete_col_raw_coding(self):
         return self._delete_col_raw_coding
 
@@ -59,14 +65,33 @@ class Fhiry(object):
     def delete_col_raw_coding(self, delete_col_raw_coding):
         self._delete_col_raw_coding = delete_col_raw_coding
 
+    @columns_by_fhirpaths.setter
+    def columns_by_fhirpaths(self, columns_by_fhirpaths):
+        self._columns_by_fhirpaths = columns_by_fhirpaths
+
     def read_bundle_from_file(self, filename):
         with open(filename, 'r') as f:
-            json_in = f.read()
-            json_in = json.loads(json_in)
-            return pd.json_normalize(json_in['entry'])
+            bundle_dict = json.load(f)
+
+        df = self.read_bundle_from_bundle_dict(bundle_dict)
+
+        return df
 
     def read_bundle_from_bundle_dict(self, bundle_dict):
-        return pd.json_normalize(bundle_dict['entry'])
+
+        # Flatten nested object structure to flat table structure
+        df = pd.json_normalize(bundle_dict['entry'])
+
+        # if (optional/additional) Fhirpath to dataframe column mappings,
+        # add values from FHIR paths to mapped columns
+        for col, fhirpath in self._columns_by_fhirpaths.items():
+            df[col] = None
+            i = 0
+            for entry in bundle_dict['entry']:
+                df.at[i, col] = fhirpathpy.evaluate(entry['resource'], path=fhirpath)
+                i += 1
+
+        return df
 
     def delete_unwanted_cols(self):
         if 'resource.text.div' in self._df.columns:

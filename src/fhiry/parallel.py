@@ -4,8 +4,9 @@ import multiprocessing as mp
 import pandas as pd
 
 
-def process_file(file):
+def process_file(file, columns_by_fhirpaths={}):
     f = Fhiry()
+    f.columns_by_fhirpaths = columns_by_fhirpaths
     return f.process_file(file)
 
 
@@ -14,16 +15,19 @@ def process_ndjson(file):
     return f.process_file(file)
 
 
-def process(folder):
+def process(folder, columns_by_fhirpaths={}):
 
     pool = mp.Pool(mp.cpu_count())
 
     filenames = []
     for filename in os.listdir(folder):
         if filename.endswith(".json"):
-            filenames.append(folder + '/' + filename)
+            # tuple with both arguments of function process_file(file, columns_by_fhirpaths)
+            process_file_args = (folder + '/' + filename, columns_by_fhirpaths)
+            # append to list of this tuples for starmap
+            filenames.append(process_file_args)
 
-    list_of_dataframes = pool.map(process_file, filenames)
+    list_of_dataframes = pool.starmap(process_file, filenames)
     pool.close()
     return pd.concat(list_of_dataframes)
 
