@@ -68,9 +68,6 @@ class Fhiry(BaseFhiry):
     def read_bundle_from_bundle_dict(self, bundle_dict):
         return pd.json_normalize(bundle_dict['entry'])
 
-    def delete_unwanted_cols(self):
-        if 'resource.text.div' in self._df.columns:
-            del self._df['resource.text.div']
 
     def process_source(self):
         """Read a single JSON resource or a directory full of JSON resources
