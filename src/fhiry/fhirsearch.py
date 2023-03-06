@@ -2,9 +2,9 @@ import pandas as pd
 import requests
 
 from . import Fhiry
+from .base_fhiry import BaseFhiry
 
-
-class Fhirsearch(object):
+class Fhirsearch(BaseFhiry):
 
     def __init__(self, fhir_base_url):
 
@@ -19,6 +19,7 @@ class Fhirsearch(object):
         # Proxies: https://requests.readthedocs.io/en/latest/user/advanced/#proxies
         # SSL Certificates: https://requests.readthedocs.io/en/latest/user/advanced/#ssl-cert-verification
         self.requests_kwargs = {}
+        self._delete_col_raw_coding = True
 
     def search(self, resource_type="Patient", search_parameters={}):
 
@@ -33,7 +34,7 @@ class Fhirsearch(object):
         bundle_dict = r.json()
 
         if 'entry' in bundle_dict:
-            df = process_bundle(bundle_dict)
+            df = super().process_bundle_dict(bundle_dict)
 
             next_page_url = get_next_page_url(bundle_dict)
 
@@ -41,7 +42,7 @@ class Fhirsearch(object):
                 r = requests.get(next_page_url, headers=headers, **self.requests_kwargs)
                 r.raise_for_status()
                 bundle_dict = r.json()
-                df_page = process_bundle(bundle_dict)
+                df_page = super().process_bundle_dict(bundle_dict)
                 df = pd.concat([df, df_page])
 
                 next_page_url = get_next_page_url(bundle_dict)
@@ -50,11 +51,6 @@ class Fhirsearch(object):
 
         return df
 
-
-def process_bundle(bundle_dict):
-    f = Fhiry()
-    f.process_bundle_dict(bundle_dict)
-    return f.df
 
 
 def get_next_page_url(bundle_dict):
