@@ -11,10 +11,10 @@ import os
 from .base_fhiry import BaseFhiry
 
 class Fhiry(BaseFhiry):
-    def __init__(self):
+    def __init__(self, config_json=None):
         self._filename = ""
         self._folder = ""
-        super().__init__()
+        super().__init__(config_json=config_json)
 
     @property
     def df(self):

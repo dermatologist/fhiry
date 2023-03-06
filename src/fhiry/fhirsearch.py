@@ -4,7 +4,7 @@ from .base_fhiry import BaseFhiry
 
 class Fhirsearch(BaseFhiry):
 
-    def __init__(self, fhir_base_url):
+    def __init__(self, fhir_base_url, config_json=None):
 
         self.fhir_base_url = fhir_base_url
 
@@ -17,7 +17,7 @@ class Fhirsearch(BaseFhiry):
         # Proxies: https://requests.readthedocs.io/en/latest/user/advanced/#proxies
         # SSL Certificates: https://requests.readthedocs.io/en/latest/user/advanced/#ssl-cert-verification
         self.requests_kwargs = {}
-        super().__init__()
+        super().__init__(config_json=config_json)
 
     def search(self, resource_type="Patient", search_parameters={}):
 

@@ -4,13 +4,13 @@ import multiprocessing as mp
 import pandas as pd
 
 
-def process_file(file):
-    f = Fhiry()
+def process_file(file, config_json=None):
+    f = Fhiry(config_json=config_json)
     return f.process_file(file)
 
 
-def process_ndjson(file):
-    f = Fhirndjson()
+def process_ndjson(file, config_json=None):
+    f = Fhirndjson(config_json=config_json)
     return f.process_file(file)
 
 

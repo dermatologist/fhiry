@@ -5,7 +5,8 @@ from pkg_resources import resource_filename
 @pytest.fixture
 def f():
     from src.fhiry import Fhiry
-    _f = Fhiry()
+    _f = Fhiry(
+        '{ "REMOVE": ["resource.text.div"], "RENAME": { "resource.id": "id" }  }')
     return _f
 
 
