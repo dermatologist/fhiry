@@ -1,7 +1,5 @@
 import pandas as pd
 import requests
-
-from . import Fhiry
 from .base_fhiry import BaseFhiry
 
 class Fhirsearch(BaseFhiry):

@@ -1,8 +1,8 @@
 
+from .base_fhiry import BaseFhiry
 from google.cloud import bigquery
 
-# Construct a BigQuery client object.
-client = bigquery.Client()
+
 
 query = """
     SELECT *
@@ -10,6 +10,15 @@ query = """
     LIMIT 20
 """
 
-df = client.query(query).to_dataframe()
+class BQsearch(BaseFhiry):
 
-print(df)
+    def __init__(self):
+        # Construct a BigQuery client object.
+        self._client = bigquery.Client()
+        self._delete_col_raw_coding = True
+
+    def search(self, query):
+        self._df = self._client.query(query).to_dataframe()
+        super().process_df()
+        return self._df
+
