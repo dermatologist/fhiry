@@ -16,7 +16,7 @@ class BQsearch(BaseFhiry):
     def __init__(self):
         # Construct a BigQuery client object.
         self._client = bigquery.Client()
-        self._delete_col_raw_coding = True
+        super().__init__()
 
     def search(self, query = None):
         if query is None:

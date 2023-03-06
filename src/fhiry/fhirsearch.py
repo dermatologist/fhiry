@@ -17,7 +17,7 @@ class Fhirsearch(BaseFhiry):
         # Proxies: https://requests.readthedocs.io/en/latest/user/advanced/#proxies
         # SSL Certificates: https://requests.readthedocs.io/en/latest/user/advanced/#ssl-cert-verification
         self.requests_kwargs = {}
-        self._delete_col_raw_coding = True
+        super().__init__()
 
     def search(self, resource_type="Patient", search_parameters={}):
 

@@ -12,22 +12,9 @@ from .base_fhiry import BaseFhiry
 
 class Fhiry(BaseFhiry):
     def __init__(self):
-        self._df = None
         self._filename = ""
         self._folder = ""
-
-        # Codes from the FHIR datatype "coding"
-        # (f.e. element resource.code.coding or element resource.clinicalStatus.coding)
-        # are extracted to a col "codingcodes"
-        # (f.e. col resource.code.codingcodes or col resource.clinicalStatus.codingcodes)
-        # without other for analysis often not needed metadata like f.e. codesystem URI
-        # or FHIR extensions for coding entries.
-        # The full / raw object in col "coding" is deleted after this extraction.
-        # If you want to analyze more than the content of code and display from codings
-        # (like f.e. different codesystem URIs or further codes in extensions
-        # in the raw data/object), you can disable deletion of the raw source object "coding"
-        # (f.e. col "resource.code.coding") by setting property delete_col_raw_coding to False
-        self._delete_col_raw_coding = True
+        super().__init__()
 
     @property
     def df(self):

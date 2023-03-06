@@ -6,12 +6,12 @@
 """
 
 import pandas as pd
-
+import json
 
 class BaseFhiry(object):
-    def __init__(self):
+    def __init__(self, config_json_file=None):
         self._df = None
-
+        
         # Codes from the FHIR datatype "coding"
         # (f.e. element resource.code.coding or element resource.clinicalStatus.coding)
         # are extracted to a col "codingcodes"
@@ -24,6 +24,11 @@ class BaseFhiry(object):
         # in the raw data/object), you can disable deletion of the raw source object "coding"
         # (f.e. col "resource.code.coding") by setting property delete_col_raw_coding to False
         self._delete_col_raw_coding = True
+        if config_json_file is not None:
+            with open(config_json_file, 'r') as f:
+                self.config = json.load(f)
+        else:
+            self.config = json.loads('{ "REMOVE": ["resource.text.div"], "RENAME": { "resource.id": "id" }  }')
 
     @property
     def df(self):
@@ -41,8 +46,10 @@ class BaseFhiry(object):
         return pd.json_normalize(bundle_dict['entry'])
 
     def delete_unwanted_cols(self):
-        if 'resource.text.div' in self._df.columns:
-            del self._df['resource.text.div']
+        for col in self.config['REMOVE']:
+            if col in self._df.columns:
+                del self._df[col]
+
 
     def process_df(self):
         self.delete_unwanted_cols()
@@ -87,7 +94,7 @@ class BaseFhiry(object):
                                                     == 'Patient' else self.check_subject_reference(x), axis=1)
             except:
                 pass
-            
+
     def check_subject_reference(self, row):
         try:
             return row['resource.subject.reference'].replace('Patient/', '')

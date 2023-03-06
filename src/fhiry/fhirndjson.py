@@ -13,9 +13,8 @@ from .base_fhiry import BaseFhiry
 
 class Fhirndjson(BaseFhiry):
     def __init__(self):
-        self._df = pd.DataFrame(columns=[])
         self._folder = ""
-        self._delete_col_raw_coding = True
+        super().__init__()
 
     @property
     def df(self):
