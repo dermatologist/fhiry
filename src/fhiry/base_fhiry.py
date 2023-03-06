@@ -11,7 +11,7 @@ import json
 class BaseFhiry(object):
     def __init__(self, config_json_file=None):
         self._df = None
-        
+
         # Codes from the FHIR datatype "coding"
         # (f.e. element resource.code.coding or element resource.clinicalStatus.coding)
         # are extracted to a col "codingcodes"
@@ -50,11 +50,14 @@ class BaseFhiry(object):
             if col in self._df.columns:
                 del self._df[col]
 
+    def rename_cols(self):
+        self._df.rename(columns=self.config['RENAME'], inplace=True)
 
     def process_df(self):
         self.delete_unwanted_cols()
         self.convert_object_to_list()
         self.add_patient_id()
+        self.rename_cols()
 
 
     def process_bundle_dict(self, bundle_dict):
