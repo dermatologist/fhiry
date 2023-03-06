@@ -3,7 +3,6 @@
 pytest-cov
 pytest
 recommonmark
-responses
 sphinx>=3.2.1
 setuptools
 setuptools_scm
