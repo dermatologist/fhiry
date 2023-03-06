@@ -9,7 +9,7 @@ import pandas as pd
 import json
 
 class BaseFhiry(object):
-    def __init__(self, config_json_file=None):
+    def __init__(self, config_json=None):
         self._df = None
 
         # Codes from the FHIR datatype "coding"
@@ -24,9 +24,12 @@ class BaseFhiry(object):
         # in the raw data/object), you can disable deletion of the raw source object "coding"
         # (f.e. col "resource.code.coding") by setting property delete_col_raw_coding to False
         self._delete_col_raw_coding = True
-        if config_json_file is not None:
-            with open(config_json_file, 'r') as f:
-                self.config = json.load(f)
+        if config_json is not None:
+            try:
+                with open(config_json, 'r') as f: # config_json is a file path
+                    self.config = json.load(f)
+            except:
+                self.config = json.loads(config_json)   # config_json is a json string
         else:
             self.config = json.loads('{ "REMOVE": ["resource.text.div"], "RENAME": { "resource.id": "id" }  }')
 
