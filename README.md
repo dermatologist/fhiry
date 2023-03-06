@@ -24,7 +24,7 @@ pip install git+https://github.com/dermatologist/fhiry.git
 ```
 ## Usage
 
-### Import FHIR bundles (JSON) from folder to pandas dataframe
+### 1. Import FHIR bundles (JSON) from folder to pandas dataframe
 
 ```python
 import fhiry.parallel as fp
@@ -36,7 +36,7 @@ Example source data set: [Synthea](https://synthea.mitre.org/downloads)
 
 Jupyter notebook example: [`notebooks/synthea.ipynb`](notebooks/synthea.ipynb)
 
-### Import NDJSON from folder to pandas dataframe
+### 2. Import NDJSON from folder to pandas dataframe
 
 ```python
 import fhiry.parallel as fp
@@ -48,7 +48,7 @@ Example source data set: [SMART Bulk Data Server](https://bulk-data.smarthealthi
 
 Jupyter notebook example: [`notebooks/ndjson.ipynb`](notebooks/ndjson.ipynb)
 
-### Import FHIR Search results to pandas dataframe
+### 3. Import FHIR Search results to pandas dataframe
 
 Fetch and import resources from [FHIR Search API](https://www.hl7.org/fhir/search.html) results to pandas dataframe.
 
@@ -72,7 +72,7 @@ df = fs.search(resource_type = "Condition", search_parameters = my_fhir_search_p
 print(df.info())
 ```
 
-### Import [Google BigQuery](https://cloud.google.com/bigquery) [FHIR dataset](https://console.cloud.google.com/marketplace/details/mitre/synthea-fhir?q=synthea)
+### 4. Import [Google BigQuery](https://cloud.google.com/bigquery) [FHIR dataset](https://console.cloud.google.com/marketplace/details/mitre/synthea-fhir?q=synthea)
 
 ```python
 from fhiry.bqsearch import BQsearch
@@ -81,6 +81,19 @@ bqs = BQsearch()
 df = bqs.search("SELECT * FROM `bigquery-public-data.fhir_synthea.patient` LIMIT 20") # can be a path to .sql file
 
 ```
+
+## Filters
+
+Pass a config json to any of the constructors:
+* config_json can be a path to a json file.
+```
+df = fp.process('/path/to/fhir/resources', config_json='{ "REMOVE": ["resource.text.div"], "RENAME": { "resource.id": "id" }  }')
+
+fs = Fhirsearch(fhir_base_url = "http://fhir-server:8080/fhir", config_json = '{ "REMOVE": ["resource.text.div"], "RENAME": { "resource.id": "id" }  }')
+
+bqs = BQsearch('{ "REMOVE": ["resource.text.div"], "RENAME": { "resource.id": "id" }  }')
+```
+
 ## Columns
 * see df.columns
 
@@ -95,14 +108,6 @@ resource.gender
 ...
 ...
 ...
-```
-
-## Filters
-
-Pass a config json to any of the constructors:
-* config_json can be a path to a json file.
-```
-df = fp.process('/path/to/fhir/resources', config_json='{ "REMOVE": ["resource.text.div"], "RENAME": { "resource.id": "id" }  }')
 ```
 
 
