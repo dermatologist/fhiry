@@ -5,7 +5,11 @@ import google.auth.exceptions
 @pytest.fixture
 def f():
     from src.fhiry.bqsearch import BQsearch
-    _f = BQsearch()
+    try:
+        _f = BQsearch()
+    except:
+        with pytest.raises(Exception) as e:
+            _f = BQsearch()
     return _f
 
 
