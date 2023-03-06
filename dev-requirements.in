@@ -2,6 +2,7 @@
 -c requirements.txt
 pytest-cov
 pytest
+responses
 recommonmark
 sphinx>=3.2.1
 setuptools
