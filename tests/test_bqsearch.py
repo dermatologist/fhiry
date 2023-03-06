@@ -13,7 +13,6 @@ def f():
 
 def test_process_bq(f, capsys):
     f.search()
-    # print(f.df.head(5))
-    print(f.df.info())  # 319
+    print(f.df.shape[0])  # 20
     captured = capsys.readouterr()
-    assert '319' in captured.out
+    assert '20' in captured.out

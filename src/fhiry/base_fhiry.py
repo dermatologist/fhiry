@@ -78,9 +78,16 @@ class BaseFhiry(object):
     def add_patient_id(self):
         """Create a patientId column with the resource.id if a Patient resource or with the resource.subject.reference if other resource type
         """
-        self._df['patientId'] = self._df.apply(lambda x: x['resource.id'] if x['resource.resourceType']
+        try:
+            self._df['patientId'] = self._df.apply(lambda x: x['resource.id'] if x['resource.resourceType']
                                                == 'Patient' else self.check_subject_reference(x), axis=1)
-
+        except:
+            try:
+                self._df['patientId'] = self._df.apply(lambda x: x['id'] if x['resourceType']
+                                                    == 'Patient' else self.check_subject_reference(x), axis=1)
+            except:
+                pass
+            
     def check_subject_reference(self, row):
         try:
             return row['resource.subject.reference'].replace('Patient/', '')
