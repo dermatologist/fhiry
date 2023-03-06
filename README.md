@@ -72,6 +72,15 @@ df = fs.search(resource_type = "Condition", search_parameters = my_fhir_search_p
 print(df.info())
 ```
 
+### Import [Google BigQuery](https://cloud.google.com/bigquery) [FHIR dataset](https://console.cloud.google.com/marketplace/details/mitre/synthea-fhir?q=synthea)
+
+```python
+from fhiry.bqsearch import BQsearch
+bqs = BQsearch()
+
+df = bqs.search("SELECT * FROM `bigquery-public-data.fhir_synthea.patient` LIMIT 20") # can be a path to .sql file
+
+```
 ## Columns
 * see df.columns
 
@@ -87,6 +96,15 @@ resource.gender
 ...
 ...
 ```
+
+## Filters
+
+Pass a config json to any of the constructors:
+* config_json can be a path to a json file.
+```
+df = fp.process('/path/to/fhir/resources', config_json='{ "REMOVE": ["resource.text.div"], "RENAME": { "resource.id": "id" }  }')
+```
+
 
 ### [Documentation](https://dermatologist.github.io/fhiry/)
 
