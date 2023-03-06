@@ -72,7 +72,7 @@ class Fhiry(BaseFhiry):
         if 'resource.text.div' in self._df.columns:
             del self._df['resource.text.div']
 
-    def process_df(self):
+    def process_source(self):
         """Read a single JSON resource or a directory full of JSON resources
         ONLY COMMON FIELDS IN ALL resources will be mapped
         """
@@ -92,9 +92,7 @@ class Fhiry(BaseFhiry):
             self._df = df
         elif self._filename:
             self._df = self.read_bundle_from_file(self._filename)
-            self.delete_unwanted_cols()
-            self.convert_object_to_list()
-            self.add_patient_id()
+        super().process_df()
 
     def process_file(self, filename):
         self._df = self.read_bundle_from_file(filename)

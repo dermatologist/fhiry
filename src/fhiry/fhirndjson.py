@@ -35,7 +35,7 @@ class Fhirndjson(object):
     def read_resource_from_line(self, line):
         return pd.json_normalize(json.loads(line))
 
-    def process_df(self):
+    def process_source(self):
         """Read a single JSON resource or a directory full of JSON resources
         ONLY COMMON FIELDS IN ALL resources will be mapped
         """
