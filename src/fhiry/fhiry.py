@@ -65,10 +65,6 @@ class Fhiry(BaseFhiry):
             json_in = json.loads(json_in)
             return pd.json_normalize(json_in['entry'])
 
-    def read_bundle_from_bundle_dict(self, bundle_dict):
-        return pd.json_normalize(bundle_dict['entry'])
-
-
     def process_source(self):
         """Read a single JSON resource or a directory full of JSON resources
         ONLY COMMON FIELDS IN ALL resources will be mapped
