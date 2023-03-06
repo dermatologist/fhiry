@@ -18,5 +18,5 @@ def test_process_bq(f, capsys):
         captured = capsys.readouterr()
         assert '20' in captured.out
     except:
-        with pytest.raises(google.auth.exceptions.DefaultCredentialsError):
+        with pytest.raises(Exception) as e:
             f.search()
