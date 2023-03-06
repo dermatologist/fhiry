@@ -9,12 +9,13 @@
 import pandas as pd
 import json
 import os
+from .base_fhiry import BaseFhiry
 
-
-class Fhirndjson(object):
+class Fhirndjson(BaseFhiry):
     def __init__(self):
         self._df = pd.DataFrame(columns=[])
         self._folder = ""
+        self._delete_col_raw_coding = True
 
     @property
     def df(self):
@@ -28,9 +29,6 @@ class Fhirndjson(object):
     def folder(self, folder):
         self._folder = folder
 
-    def delete_unwanted_cols(self):
-        if 'text.div' in self._df.columns:
-            del self._df['text.div']
 
     def read_resource_from_line(self, line):
         return pd.json_normalize(json.loads(line))
@@ -57,54 +55,10 @@ class Fhirndjson(object):
         self._df = df
         return self._df
 
-    def convert_object_to_list(self):
-        """Convert object to a list of codes
-        """
-        for col in self._df.columns:
-            if 'coding' in col:
-                codes = self._df.apply(
-                    lambda x: self.process_list(x[col]), axis=1)
-                self._df = pd.concat(
-                    [self._df, codes.to_frame(name=col+'codes')], axis=1)
-                del self._df[col]
-            if 'display' in col:
-                codes = self._df.apply(
-                    lambda x: self.process_list(x[col]), axis=1)
-                self._df = pd.concat(
-                    [self._df, codes.to_frame(name=col+'display')], 1)
-                del self._df[col]
-
+    #@overrides
     def add_patient_id(self):
         """Create a patientId column with the id if a Patient resource or with the subject.reference if other resource type
         """
         self._df['patientId'] = self._df.apply(lambda x: x['id'] if x['resourceType']
                                                == 'Patient' else self.check_subject_reference(x), axis=1)
 
-    def check_subject_reference(self, row):
-        try:
-            return row['subject.reference'].replace('Patient/', '')
-        except:
-            return ""
-
-    def get_info(self):
-        if self._df is None:
-            return "Dataframe is empty"
-        return self._df.info()
-
-    def process_list(self, myList):
-        """Extracts the codes from a list of objects
-
-        Args:
-            myList (list): A list of objects
-
-        Returns:
-            list: A list of codes
-        """
-        myCodes = []
-        if isinstance(myList, list):
-            for entry in myList:
-                if 'code' in entry:
-                    myCodes.append(entry['code'])
-                else:
-                    myCodes.append(entry['display'])
-        return myCodes
