@@ -68,6 +68,7 @@ class BaseFhiry(object):
         self.delete_unwanted_cols()
         self.convert_object_to_list()
         self.add_patient_id()
+        self.rename_cols()
         return self._df
 
     def convert_object_to_list(self):

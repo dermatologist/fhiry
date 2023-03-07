@@ -1,7 +1,17 @@
-from . import Fhiry, Fhirndjson
-import os
+"""
+ Copyright (c) 2023 Bell Eapen
+
+ This software is released under the MIT License.
+ https://opensource.org/licenses/MIT
+"""
+
+
 import multiprocessing as mp
+import os
+
 import pandas as pd
+
+from . import Fhirndjson, Fhiry
 
 
 def process_file(file, config_json=None):
