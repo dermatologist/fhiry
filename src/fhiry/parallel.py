@@ -29,10 +29,13 @@ def process(folder):
     pool = mp.Pool(mp.cpu_count())
 
     filenames = []
-    for filename in os.listdir(folder):
-        if filename.endswith(".json"):
-            filenames.append(folder + '/' + filename)
-
+    if os.path.isdir(folder):
+        for filename in os.listdir(folder):
+            if filename.endswith(".json"):
+                filenames.append(folder + '/' + filename)
+    else:
+        filenames.append(folder)
+        
     list_of_dataframes = pool.map(process_file, filenames)
     pool.close()
     return pd.concat(list_of_dataframes)
@@ -42,9 +45,13 @@ def ndjson(folder):
     pool = mp.Pool(mp.cpu_count())
 
     filenames = []
-    for filename in os.listdir(folder):
-        if filename.endswith(".ndjson"):
-            filenames.append(folder + '/' + filename)
+
+    if os.path.isdir(folder):
+        for filename in os.listdir(folder):
+            if filename.endswith(".ndjson"):
+                filenames.append(folder + '/' + filename)
+    else:
+        filenames.append(folder)
 
     list_of_dataframes = pool.map(process_ndjson, filenames)
     pool.close()
