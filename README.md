@@ -1,4 +1,5 @@
-# :fire: fhiry - FHIR to pandas dataframe for data analysis, AI and ML
+# :fire: fhiry - FHIR to pandas dataframe for data analytics, AI and ML
+Virtual flattened view of *FHIR Bundle / ndjson / FHIR server / BigQuery!*
 
 ![Libraries.io SourceRank](https://img.shields.io/librariesio/sourcerank/pypi/fhiry)
 [![PyPI download total](https://img.shields.io/pypi/dm/fhiry.svg)](https://pypi.python.org/pypi/fhiry/)
@@ -6,9 +7,11 @@
 
 ## Open Source Python library for import of FHIR resources to pandas dataframe
 
-[Bulk data export using FHIR](https://hl7.org/fhir/uv/bulkdata/export/index.html) may be important if you want to export a cohort for analysis or machine learning.
+[Bulk data export using FHIR](https://hl7.org/fhir/uv/bulkdata/export/index.html) is needed to export a cohort for data analytics or machine learning.
 :fire: **Fhiry** is a [python](https://www.python.org/) package to facilitate this by converting a folder of [FHIR bundles](https://www.hl7.org/fhir/bundle.html)/ndjson into a [pandas](https://pandas.pydata.org/docs/user_guide/index.html) data frame for analysis and importing
-into ML packages such as Tensorflow and PyTorch. Test it with the [synthea sample](https://synthea.mitre.org/downloads) or the downloaded ndjson from the [SMART Bulk data server](https://bulk-data.smarthealthit.org/). Use the 'Discussions' tab above for feature requests.
+into ML packages such as Tensorflow and PyTorch. Fhiry also supports FHIR server search and FHIR tables on BigQuery.
+
+Test this with the [synthea sample](https://synthea.mitre.org/downloads) or the downloaded ndjson from the [SMART Bulk data server](https://bulk-data.smarthealthit.org/). Use the 'Discussions' tab above for feature requests.
 
 ## Installation
 
