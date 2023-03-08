@@ -31,7 +31,7 @@ class BaseFhiry(object):
             except:
                 self.config = json.loads(config_json)   # config_json is a json string
         else:
-            self.config = json.loads('{ "REMOVE": ["resource.text.div"], "RENAME": { "resource.id": "id" }  }')
+            self.config = json.loads('{ "REMOVE": ["resource.text.div"], "RENAME": { "resource.id": "id" } }')
 
     @property
     def df(self):
