@@ -47,9 +47,7 @@ class Fhirndjson(BaseFhiry):
                 Lines = fp.readlines()
                 for line in Lines:
                     self._df = self.read_resource_from_line(line)
-                    self.delete_unwanted_cols()
-                    self.convert_object_to_list()
-                    self.add_patient_id()
+                    self.process_df()
                     df = pd.concat([df, self._df])
         self._df = df
         return self._df

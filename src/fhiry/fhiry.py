@@ -61,9 +61,7 @@ class Fhiry(BaseFhiry):
                 if file.endswith(".json"):
                     self._df = self.read_bundle_from_file(
                         os.path.join(self._folder, file))
-                    self.delete_unwanted_cols()
-                    self.convert_object_to_list()
-                    self.add_patient_id()
+                    self.process_df()
                     if df.empty:
                         df = self._df
                     else:
@@ -75,16 +73,12 @@ class Fhiry(BaseFhiry):
 
     def process_file(self, filename):
         self._df = self.read_bundle_from_file(filename)
-        self.delete_unwanted_cols()
-        self.convert_object_to_list()
-        self.add_patient_id()
+        self.process_df()
         return self._df
 
     def process_bundle_dict(self, bundle_dict):
         self._df = self.read_bundle_from_bundle_dict(bundle_dict)
-        self.delete_unwanted_cols()
-        self.convert_object_to_list()
-        self.add_patient_id()
+        self.process_df()
         return self._df
 
 
