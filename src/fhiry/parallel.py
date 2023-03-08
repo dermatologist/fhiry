@@ -5,29 +5,15 @@
  https://opensource.org/licenses/MIT
 """
 
-
 import multiprocessing as mp
 import os
-
 import pandas as pd
-
 from . import Fhirndjson, Fhiry
-
-
-def process_file(file, config_json=None):
-    f = Fhiry(config_json=config_json)
-    return f.process_file(file)
-
-
-def process_ndjson(file, config_json=None):
-    f = Fhirndjson(config_json=config_json)
-    return f.process_file(file)
-
 
 def process(folder, config_json=None):
 
     pool = mp.Pool(mp.cpu_count())
-
+    f = Fhiry(config_json=config_json)
     filenames = []
     if os.path.isdir(folder):
         for filename in os.listdir(folder):
@@ -36,14 +22,14 @@ def process(folder, config_json=None):
     else:
         filenames.append(folder)
 
-    list_of_dataframes = pool.map(process_file(config_json=config_json), filenames)
+    list_of_dataframes = pool.map(f.process_file, filenames)
     pool.close()
     return pd.concat(list_of_dataframes)
 
 
 def ndjson(folder, config_json=None):
     pool = mp.Pool(mp.cpu_count())
-
+    f = Fhirndjson(config_json=config_json)
     filenames = []
 
     if os.path.isdir(folder):
@@ -53,6 +39,6 @@ def ndjson(folder, config_json=None):
     else:
         filenames.append(folder)
 
-    list_of_dataframes = pool.map(process_ndjson(config_json=config_json), filenames)
+    list_of_dataframes = pool.map(f.process_file, filenames)
     pool.close()
     return pd.concat(list_of_dataframes)
