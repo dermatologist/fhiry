@@ -24,7 +24,7 @@ def process_ndjson(file, config_json=None):
     return f.process_file(file)
 
 
-def process(folder):
+def process(folder, config_json=None):
 
     pool = mp.Pool(mp.cpu_count())
 
@@ -35,13 +35,13 @@ def process(folder):
                 filenames.append(folder + '/' + filename)
     else:
         filenames.append(folder)
-        
-    list_of_dataframes = pool.map(process_file, filenames)
+
+    list_of_dataframes = pool.map(process_file(config_json=config_json), filenames)
     pool.close()
     return pd.concat(list_of_dataframes)
 
 
-def ndjson(folder):
+def ndjson(folder, config_json=None):
     pool = mp.Pool(mp.cpu_count())
 
     filenames = []
@@ -53,6 +53,6 @@ def ndjson(folder):
     else:
         filenames.append(folder)
 
-    list_of_dataframes = pool.map(process_ndjson, filenames)
+    list_of_dataframes = pool.map(process_ndjson(config_json=config_json), filenames)
     pool.close()
     return pd.concat(list_of_dataframes)
