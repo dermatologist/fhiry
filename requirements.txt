@@ -41,7 +41,7 @@ grpcio-status==1.51.3
     # via google-api-core
 idna==3.4
     # via requests
-numpy==1.23.5
+numpy==1.24.2
     # via
     #   db-dtypes
     #   pandas
@@ -50,13 +50,13 @@ packaging==23.0
     # via
     #   db-dtypes
     #   google-cloud-bigquery
-pandas==1.5.2
+pandas==1.5.3
     # via
     #   db-dtypes
     #   fhiry (setup.py)
 proto-plus==1.22.2
     # via google-cloud-bigquery
-protobuf==4.22.0
+protobuf==4.22.1
     # via
     #   google-api-core
     #   google-cloud-bigquery
@@ -75,7 +75,7 @@ python-dateutil==2.8.2
     # via
     #   google-cloud-bigquery
     #   pandas
-pytz==2022.6
+pytz==2022.7.1
     # via pandas
 requests==2.28.2
     # via
@@ -87,5 +87,7 @@ six==1.16.0
     # via
     #   google-auth
     #   python-dateutil
+tqdm==4.65.0
+    # via fhiry (setup.py)
 urllib3==1.26.14
     # via requests
