@@ -123,5 +123,5 @@ If you find this project useful, give us a star. It helps others discover the pr
 
 * [Bell Eapen](https://nuchange.ca) | [![Twitter Follow](https://img.shields.io/twitter/follow/beapen?style=social)](https://twitter.com/beapen)
 * [Markus Mandalka](https://github.com/Mandalka)
-* WIP, PR welcome, please see CONTRIBUTING.md
-* [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg) using CC](https://computecanada.ca)
+* PR welcome, please see [CONTRIBUTING.md](/CONTRIBUTING.md)
+* [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg) using CC](https://alliancecan.ca/en/services/advanced-research-computing)
