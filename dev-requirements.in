@@ -2,8 +2,8 @@
 -c requirements.txt
 pytest-cov
 pytest
-recommonmark
 responses
+recommonmark
 sphinx>=3.2.1
 setuptools
 setuptools_scm
