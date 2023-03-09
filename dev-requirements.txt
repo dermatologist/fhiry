@@ -40,8 +40,6 @@ idna==3.4
     #   requests
 imagesize==1.2.0
     # via sphinx
-importlib-metadata==5.1.0
-    # via sphinx
 iniconfig==1.1.1
     # via pytest
 jinja2==3.0.1
@@ -71,7 +69,7 @@ pytest==7.1.2
     # via
     #   -r dev-requirements.in
     #   pytest-cov
-pytest-cov==3.0.0
+pytest-cov==4.0.0
     # via -r dev-requirements.in
 pytz==2022.7.1
     # via
@@ -133,8 +131,6 @@ virtualenv==20.8.0
     # via tox
 wheel==0.37.1
     # via -r dev-requirements.in
-zipp==3.11.0
-    # via importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
