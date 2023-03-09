@@ -13,6 +13,8 @@ into ML packages such as Tensorflow and PyTorch. Fhiry also supports FHIR server
 
 Test this with the [synthea sample](https://synthea.mitre.org/downloads) or the downloaded ndjson from the [SMART Bulk data server](https://bulk-data.smarthealthit.org/). Use the 'Discussions' tab above for feature requests.
 
+:sparkles: Checkout [this template](https://github.com/dermatologist/kedro-multimodal) for Multimodal machine learning in healthcare!
+
 ## Installation
 
 ### Stable
