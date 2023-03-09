@@ -11,7 +11,7 @@ def f():
 
 def test_process_folder(f, capsys):
     f.folder = resource_filename(__name__, 'resources')
-    f.process_df()
+    f.process_source()
     print(f.df.info())  # 839
     captured = capsys.readouterr()
     assert '839' in captured.out
