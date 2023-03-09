@@ -46,7 +46,7 @@ class Fhirndjson(BaseFhiry):
         if file.endswith(".ndjson"):
             with open(os.path.join(self._folder, file)) as fp:
                 Lines = fp.readlines()
-                for line in Lines:
+                for line in tqdm(Lines):
                     self._df = self.read_resource_from_line(line)
                     self.process_df()
                     df = pd.concat([df, self._df])
