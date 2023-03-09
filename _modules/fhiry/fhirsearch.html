@@ -33,13 +33,11 @@
   <h1>Source code for fhiry.fhirsearch</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">.base_fhiry</span> <span class="kn">import</span> <span class="n">BaseFhiry</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">Fhiry</span>
+<div class="viewcode-block" id="Fhirsearch"><a class="viewcode-back" href="../../api/fhiry.html#fhiry.fhirsearch.Fhirsearch">[docs]</a><span class="k">class</span> <span class="nc">Fhirsearch</span><span class="p">(</span><span class="n">BaseFhiry</span><span class="p">):</span>
 
-
-<div class="viewcode-block" id="Fhirsearch"><a class="viewcode-back" href="../../api/fhiry.html#fhiry.fhirsearch.Fhirsearch">[docs]</a><span class="k">class</span> <span class="nc">Fhirsearch</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fhir_base_url</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fhir_base_url</span><span class="p">,</span> <span class="n">config_json</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">fhir_base_url</span> <span class="o">=</span> <span class="n">fhir_base_url</span>
 
@@ -52,6 +50,7 @@
         <span class="c1"># Proxies: https://requests.readthedocs.io/en/latest/user/advanced/#proxies</span>
         <span class="c1"># SSL Certificates: https://requests.readthedocs.io/en/latest/user/advanced/#ssl-cert-verification</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">requests_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">config_json</span><span class="o">=</span><span class="n">config_json</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Fhirsearch.search"><a class="viewcode-back" href="../../api/fhiry.html#fhiry.fhirsearch.Fhirsearch.search">[docs]</a>    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource_type</span><span class="o">=</span><span class="s2">&quot;Patient&quot;</span><span class="p">,</span> <span class="n">search_parameters</span><span class="o">=</span><span class="p">{}):</span>
 
@@ -66,7 +65,7 @@
         <span class="n">bundle_dict</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="s1">&#39;entry&#39;</span> <span class="ow">in</span> <span class="n">bundle_dict</span><span class="p">:</span>
-            <span class="n">df</span> <span class="o">=</span> <span class="n">process_bundle</span><span class="p">(</span><span class="n">bundle_dict</span><span class="p">)</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">process_bundle_dict</span><span class="p">(</span><span class="n">bundle_dict</span><span class="p">)</span>
 
             <span class="n">next_page_url</span> <span class="o">=</span> <span class="n">get_next_page_url</span><span class="p">(</span><span class="n">bundle_dict</span><span class="p">)</span>
 
@@ -74,7 +73,7 @@
                 <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">next_page_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">requests_kwargs</span><span class="p">)</span>
                 <span class="n">r</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
                 <span class="n">bundle_dict</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-                <span class="n">df_page</span> <span class="o">=</span> <span class="n">process_bundle</span><span class="p">(</span><span class="n">bundle_dict</span><span class="p">)</span>
+                <span class="n">df_page</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">process_bundle_dict</span><span class="p">(</span><span class="n">bundle_dict</span><span class="p">)</span>
                 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span> <span class="n">df_page</span><span class="p">])</span>
 
                 <span class="n">next_page_url</span> <span class="o">=</span> <span class="n">get_next_page_url</span><span class="p">(</span><span class="n">bundle_dict</span><span class="p">)</span>
@@ -83,11 +82,6 @@
 
         <span class="k">return</span> <span class="n">df</span></div></div>
 
-
-<div class="viewcode-block" id="process_bundle"><a class="viewcode-back" href="../../api/fhiry.html#fhiry.fhirsearch.process_bundle">[docs]</a><span class="k">def</span> <span class="nf">process_bundle</span><span class="p">(</span><span class="n">bundle_dict</span><span class="p">):</span>
-    <span class="n">f</span> <span class="o">=</span> <span class="n">Fhiry</span><span class="p">()</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">process_bundle_dict</span><span class="p">(</span><span class="n">bundle_dict</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">df</span></div>
 
 
 <div class="viewcode-block" id="get_next_page_url"><a class="viewcode-back" href="../../api/fhiry.html#fhiry.fhirsearch.get_next_page_url">[docs]</a><span class="k">def</span> <span class="nf">get_next_page_url</span><span class="p">(</span><span class="n">bundle_dict</span><span class="p">):</span>

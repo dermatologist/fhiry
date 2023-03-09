@@ -36,67 +36,65 @@
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </section>
-<section id="module-fhiry.fhirndjson">
-<span id="fhiry-fhirndjson-module"></span><h2>fhiry.fhirndjson module<a class="headerlink" href="#module-fhiry.fhirndjson" title="Permalink to this headline">¶</a></h2>
+<section id="module-fhiry.base_fhiry">
+<span id="fhiry-base-fhiry-module"></span><h2>fhiry.base_fhiry module<a class="headerlink" href="#module-fhiry.base_fhiry" title="Permalink to this headline">¶</a></h2>
 <p>Copyright (c) 2020 Bell Eapen</p>
 <p>This software is released under the MIT License.
 <a class="reference external" href="https://opensource.org/licenses/MIT">https://opensource.org/licenses/MIT</a></p>
 <dl class="py class">
-<dt class="sig sig-object py" id="fhiry.fhirndjson.Fhirndjson">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fhiry.fhirndjson.</span></span><span class="sig-name descname"><span class="pre">Fhirndjson</span></span><a class="reference internal" href="../_modules/fhiry/fhirndjson.html#Fhirndjson"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhirndjson.Fhirndjson" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="fhiry.base_fhiry.BaseFhiry">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fhiry.base_fhiry.</span></span><span class="sig-name descname"><span class="pre">BaseFhiry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_json</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/base_fhiry.html#BaseFhiry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.base_fhiry.BaseFhiry" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.8/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <dl class="py method">
-<dt class="sig sig-object py" id="fhiry.fhirndjson.Fhirndjson.add_patient_id">
-<span class="sig-name descname"><span class="pre">add_patient_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/fhirndjson.html#Fhirndjson.add_patient_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhirndjson.Fhirndjson.add_patient_id" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a patientId column with the id if a Patient resource or with the subject.reference if other resource type</p>
+<dt class="sig sig-object py" id="fhiry.base_fhiry.BaseFhiry.add_patient_id">
+<span class="sig-name descname"><span class="pre">add_patient_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/base_fhiry.html#BaseFhiry.add_patient_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.base_fhiry.BaseFhiry.add_patient_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a patientId column with the resource.id if a Patient resource or with the resource.subject.reference if other resource type</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="fhiry.fhirndjson.Fhirndjson.check_subject_reference">
-<span class="sig-name descname"><span class="pre">check_subject_reference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/fhirndjson.html#Fhirndjson.check_subject_reference"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhirndjson.Fhirndjson.check_subject_reference" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="fhiry.base_fhiry.BaseFhiry.check_subject_reference">
+<span class="sig-name descname"><span class="pre">check_subject_reference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/base_fhiry.html#BaseFhiry.check_subject_reference"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.base_fhiry.BaseFhiry.check_subject_reference" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="fhiry.fhirndjson.Fhirndjson.convert_object_to_list">
-<span class="sig-name descname"><span class="pre">convert_object_to_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/fhirndjson.html#Fhirndjson.convert_object_to_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhirndjson.Fhirndjson.convert_object_to_list" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="fhiry.base_fhiry.BaseFhiry.convert_object_to_list">
+<span class="sig-name descname"><span class="pre">convert_object_to_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/base_fhiry.html#BaseFhiry.convert_object_to_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.base_fhiry.BaseFhiry.convert_object_to_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert object to a list of codes</p>
 </dd></dl>
 
+<dl class="py property">
+<dt class="sig sig-object py" id="fhiry.base_fhiry.BaseFhiry.delete_col_raw_coding">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete_col_raw_coding</span></span><a class="headerlink" href="#fhiry.base_fhiry.BaseFhiry.delete_col_raw_coding" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
-<dt class="sig sig-object py" id="fhiry.fhirndjson.Fhirndjson.delete_unwanted_cols">
-<span class="sig-name descname"><span class="pre">delete_unwanted_cols</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/fhirndjson.html#Fhirndjson.delete_unwanted_cols"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhirndjson.Fhirndjson.delete_unwanted_cols" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="fhiry.base_fhiry.BaseFhiry.delete_unwanted_cols">
+<span class="sig-name descname"><span class="pre">delete_unwanted_cols</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/base_fhiry.html#BaseFhiry.delete_unwanted_cols"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.base_fhiry.BaseFhiry.delete_unwanted_cols" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="fhiry.fhirndjson.Fhirndjson.df">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">df</span></span><a class="headerlink" href="#fhiry.fhirndjson.Fhirndjson.df" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="fhiry.fhirndjson.Fhirndjson.folder">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">folder</span></span><a class="headerlink" href="#fhiry.fhirndjson.Fhirndjson.folder" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="fhiry.base_fhiry.BaseFhiry.df">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">df</span></span><a class="headerlink" href="#fhiry.base_fhiry.BaseFhiry.df" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="fhiry.fhirndjson.Fhirndjson.get_info">
-<span class="sig-name descname"><span class="pre">get_info</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/fhirndjson.html#Fhirndjson.get_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhirndjson.Fhirndjson.get_info" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="fhiry.base_fhiry.BaseFhiry.get_info">
+<span class="sig-name descname"><span class="pre">get_info</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/base_fhiry.html#BaseFhiry.get_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.base_fhiry.BaseFhiry.get_info" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="fhiry.fhirndjson.Fhirndjson.process_df">
-<span class="sig-name descname"><span class="pre">process_df</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/fhirndjson.html#Fhirndjson.process_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhirndjson.Fhirndjson.process_df" title="Permalink to this definition">¶</a></dt>
-<dd><p>Read a single JSON resource or a directory full of JSON resources
-ONLY COMMON FIELDS IN ALL resources will be mapped</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="fhiry.fhirndjson.Fhirndjson.process_file">
-<span class="sig-name descname"><span class="pre">process_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/fhirndjson.html#Fhirndjson.process_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhirndjson.Fhirndjson.process_file" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="fhiry.base_fhiry.BaseFhiry.process_bundle_dict">
+<span class="sig-name descname"><span class="pre">process_bundle_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bundle_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/base_fhiry.html#BaseFhiry.process_bundle_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.base_fhiry.BaseFhiry.process_bundle_dict" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="fhiry.fhirndjson.Fhirndjson.process_list">
-<span class="sig-name descname"><span class="pre">process_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">myList</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/fhirndjson.html#Fhirndjson.process_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhirndjson.Fhirndjson.process_list" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="fhiry.base_fhiry.BaseFhiry.process_df">
+<span class="sig-name descname"><span class="pre">process_df</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/base_fhiry.html#BaseFhiry.process_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.base_fhiry.BaseFhiry.process_df" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fhiry.base_fhiry.BaseFhiry.process_list">
+<span class="sig-name descname"><span class="pre">process_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">myList</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/base_fhiry.html#BaseFhiry.process_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.base_fhiry.BaseFhiry.process_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extracts the codes from a list of objects</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -112,6 +110,67 @@ ONLY COMMON FIELDS IN ALL resources will be mapped</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="fhiry.base_fhiry.BaseFhiry.read_bundle_from_bundle_dict">
+<span class="sig-name descname"><span class="pre">read_bundle_from_bundle_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bundle_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/base_fhiry.html#BaseFhiry.read_bundle_from_bundle_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.base_fhiry.BaseFhiry.read_bundle_from_bundle_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fhiry.base_fhiry.BaseFhiry.rename_cols">
+<span class="sig-name descname"><span class="pre">rename_cols</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/base_fhiry.html#BaseFhiry.rename_cols"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.base_fhiry.BaseFhiry.rename_cols" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-fhiry.bqsearch">
+<span id="fhiry-bqsearch-module"></span><h2>fhiry.bqsearch module<a class="headerlink" href="#module-fhiry.bqsearch" title="Permalink to this headline">¶</a></h2>
+<p>Copyright (c) 2023 Bell Eapen</p>
+<p>This software is released under the MIT License.
+<a class="reference external" href="https://opensource.org/licenses/MIT">https://opensource.org/licenses/MIT</a></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="fhiry.bqsearch.BQsearch">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fhiry.bqsearch.</span></span><span class="sig-name descname"><span class="pre">BQsearch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_json</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/bqsearch.html#BQsearch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.bqsearch.BQsearch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#fhiry.base_fhiry.BaseFhiry" title="fhiry.base_fhiry.BaseFhiry"><code class="xref py py-class docutils literal notranslate"><span class="pre">fhiry.base_fhiry.BaseFhiry</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="fhiry.bqsearch.BQsearch.search">
+<span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/bqsearch.html#BQsearch.search"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.bqsearch.BQsearch.search" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-fhiry.fhirndjson">
+<span id="fhiry-fhirndjson-module"></span><h2>fhiry.fhirndjson module<a class="headerlink" href="#module-fhiry.fhirndjson" title="Permalink to this headline">¶</a></h2>
+<p>Copyright (c) 2020 Bell Eapen</p>
+<p>This software is released under the MIT License.
+<a class="reference external" href="https://opensource.org/licenses/MIT">https://opensource.org/licenses/MIT</a></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="fhiry.fhirndjson.Fhirndjson">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fhiry.fhirndjson.</span></span><span class="sig-name descname"><span class="pre">Fhirndjson</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_json</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/fhirndjson.html#Fhirndjson"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhirndjson.Fhirndjson" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#fhiry.base_fhiry.BaseFhiry" title="fhiry.base_fhiry.BaseFhiry"><code class="xref py py-class docutils literal notranslate"><span class="pre">fhiry.base_fhiry.BaseFhiry</span></code></a></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="fhiry.fhirndjson.Fhirndjson.df">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">df</span></span><a class="headerlink" href="#fhiry.fhirndjson.Fhirndjson.df" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="fhiry.fhirndjson.Fhirndjson.folder">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">folder</span></span><a class="headerlink" href="#fhiry.fhirndjson.Fhirndjson.folder" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fhiry.fhirndjson.Fhirndjson.process_file">
+<span class="sig-name descname"><span class="pre">process_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/fhirndjson.html#Fhirndjson.process_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhirndjson.Fhirndjson.process_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fhiry.fhirndjson.Fhirndjson.process_source">
+<span class="sig-name descname"><span class="pre">process_source</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/fhirndjson.html#Fhirndjson.process_source"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhirndjson.Fhirndjson.process_source" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a single JSON resource or a directory full of JSON resources
+ONLY COMMON FIELDS IN ALL resources will be mapped</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="fhiry.fhirndjson.Fhirndjson.read_resource_from_line">
 <span class="sig-name descname"><span class="pre">read_resource_from_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/fhirndjson.html#Fhirndjson.read_resource_from_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhirndjson.Fhirndjson.read_resource_from_line" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -123,8 +182,8 @@ ONLY COMMON FIELDS IN ALL resources will be mapped</p>
 <span id="fhiry-fhirsearch-module"></span><h2>fhiry.fhirsearch module<a class="headerlink" href="#module-fhiry.fhirsearch" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="fhiry.fhirsearch.Fhirsearch">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fhiry.fhirsearch.</span></span><span class="sig-name descname"><span class="pre">Fhirsearch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fhir_base_url</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/fhirsearch.html#Fhirsearch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhirsearch.Fhirsearch" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.8/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fhiry.fhirsearch.</span></span><span class="sig-name descname"><span class="pre">Fhirsearch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fhir_base_url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_json</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/fhirsearch.html#Fhirsearch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhirsearch.Fhirsearch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#fhiry.base_fhiry.BaseFhiry" title="fhiry.base_fhiry.BaseFhiry"><code class="xref py py-class docutils literal notranslate"><span class="pre">fhiry.base_fhiry.BaseFhiry</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="fhiry.fhirsearch.Fhirsearch.search">
 <span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Patient'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/fhirsearch.html#Fhirsearch.search"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhirsearch.Fhirsearch.search" title="Permalink to this definition">¶</a></dt>
@@ -137,11 +196,6 @@ ONLY COMMON FIELDS IN ALL resources will be mapped</p>
 <span class="sig-prename descclassname"><span class="pre">fhiry.fhirsearch.</span></span><span class="sig-name descname"><span class="pre">get_next_page_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bundle_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/fhirsearch.html#get_next_page_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhirsearch.get_next_page_url" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="fhiry.fhirsearch.process_bundle">
-<span class="sig-prename descclassname"><span class="pre">fhiry.fhirsearch.</span></span><span class="sig-name descname"><span class="pre">process_bundle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bundle_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/fhirsearch.html#process_bundle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhirsearch.process_bundle" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 </section>
 <section id="module-fhiry.fhiry">
 <span id="fhiry-fhiry-module"></span><h2>fhiry.fhiry module<a class="headerlink" href="#module-fhiry.fhiry" title="Permalink to this headline">¶</a></h2>
@@ -150,33 +204,11 @@ ONLY COMMON FIELDS IN ALL resources will be mapped</p>
 <a class="reference external" href="https://opensource.org/licenses/MIT">https://opensource.org/licenses/MIT</a></p>
 <dl class="py class">
 <dt class="sig sig-object py" id="fhiry.fhiry.Fhiry">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fhiry.fhiry.</span></span><span class="sig-name descname"><span class="pre">Fhiry</span></span><a class="reference internal" href="../_modules/fhiry/fhiry.html#Fhiry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhiry.Fhiry" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.8/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="fhiry.fhiry.Fhiry.add_patient_id">
-<span class="sig-name descname"><span class="pre">add_patient_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/fhiry.html#Fhiry.add_patient_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhiry.Fhiry.add_patient_id" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a patientId column with the resource.id if a Patient resource or with the resource.subject.reference if other resource type</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="fhiry.fhiry.Fhiry.check_subject_reference">
-<span class="sig-name descname"><span class="pre">check_subject_reference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/fhiry.html#Fhiry.check_subject_reference"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhiry.Fhiry.check_subject_reference" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="fhiry.fhiry.Fhiry.convert_object_to_list">
-<span class="sig-name descname"><span class="pre">convert_object_to_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/fhiry.html#Fhiry.convert_object_to_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhiry.Fhiry.convert_object_to_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert object to a list of codes</p>
-</dd></dl>
-
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fhiry.fhiry.</span></span><span class="sig-name descname"><span class="pre">Fhiry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_json</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/fhiry.html#Fhiry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhiry.Fhiry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#fhiry.base_fhiry.BaseFhiry" title="fhiry.base_fhiry.BaseFhiry"><code class="xref py py-class docutils literal notranslate"><span class="pre">fhiry.base_fhiry.BaseFhiry</span></code></a></p>
 <dl class="py property">
 <dt class="sig sig-object py" id="fhiry.fhiry.Fhiry.delete_col_raw_coding">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete_col_raw_coding</span></span><a class="headerlink" href="#fhiry.fhiry.Fhiry.delete_col_raw_coding" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="fhiry.fhiry.Fhiry.delete_unwanted_cols">
-<span class="sig-name descname"><span class="pre">delete_unwanted_cols</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/fhiry.html#Fhiry.delete_unwanted_cols"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhiry.Fhiry.delete_unwanted_cols" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
@@ -195,21 +227,9 @@ ONLY COMMON FIELDS IN ALL resources will be mapped</p>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="fhiry.fhiry.Fhiry.get_info">
-<span class="sig-name descname"><span class="pre">get_info</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/fhiry.html#Fhiry.get_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhiry.Fhiry.get_info" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="fhiry.fhiry.Fhiry.process_bundle_dict">
 <span class="sig-name descname"><span class="pre">process_bundle_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bundle_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/fhiry.html#Fhiry.process_bundle_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhiry.Fhiry.process_bundle_dict" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="fhiry.fhiry.Fhiry.process_df">
-<span class="sig-name descname"><span class="pre">process_df</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/fhiry.html#Fhiry.process_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhiry.Fhiry.process_df" title="Permalink to this definition">¶</a></dt>
-<dd><p>Read a single JSON resource or a directory full of JSON resources
-ONLY COMMON FIELDS IN ALL resources will be mapped</p>
-</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="fhiry.fhiry.Fhiry.process_file">
@@ -217,26 +237,11 @@ ONLY COMMON FIELDS IN ALL resources will be mapped</p>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="fhiry.fhiry.Fhiry.process_list">
-<span class="sig-name descname"><span class="pre">process_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">myList</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/fhiry.html#Fhiry.process_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhiry.Fhiry.process_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Extracts the codes from a list of objects</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>myList</strong> (<a class="reference external" href="https://docs.python.org/3.8/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a>) – A list of objects</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A list of codes</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.8/library/stdtypes.html#list" title="(in Python v3.8)">list</a></p>
-</dd>
-</dl>
+<dt class="sig sig-object py" id="fhiry.fhiry.Fhiry.process_source">
+<span class="sig-name descname"><span class="pre">process_source</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/fhiry.html#Fhiry.process_source"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhiry.Fhiry.process_source" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a single JSON resource or a directory full of JSON resources
+ONLY COMMON FIELDS IN ALL resources will be mapped</p>
 </dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="fhiry.fhiry.Fhiry.read_bundle_from_bundle_dict">
-<span class="sig-name descname"><span class="pre">read_bundle_from_bundle_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bundle_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/fhiry.html#Fhiry.read_bundle_from_bundle_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhiry.Fhiry.read_bundle_from_bundle_dict" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="fhiry.fhiry.Fhiry.read_bundle_from_file">
@@ -248,24 +253,17 @@ ONLY COMMON FIELDS IN ALL resources will be mapped</p>
 </section>
 <section id="module-fhiry.parallel">
 <span id="fhiry-parallel-module"></span><h2>fhiry.parallel module<a class="headerlink" href="#module-fhiry.parallel" title="Permalink to this headline">¶</a></h2>
+<p>Copyright (c) 2023 Bell Eapen</p>
+<p>This software is released under the MIT License.
+<a class="reference external" href="https://opensource.org/licenses/MIT">https://opensource.org/licenses/MIT</a></p>
 <dl class="py function">
 <dt class="sig sig-object py" id="fhiry.parallel.ndjson">
-<span class="sig-prename descclassname"><span class="pre">fhiry.parallel.</span></span><span class="sig-name descname"><span class="pre">ndjson</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/parallel.html#ndjson"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.parallel.ndjson" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">fhiry.parallel.</span></span><span class="sig-name descname"><span class="pre">ndjson</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_json</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/parallel.html#ndjson"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.parallel.ndjson" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="fhiry.parallel.process">
-<span class="sig-prename descclassname"><span class="pre">fhiry.parallel.</span></span><span class="sig-name descname"><span class="pre">process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/parallel.html#process"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.parallel.process" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="fhiry.parallel.process_file">
-<span class="sig-prename descclassname"><span class="pre">fhiry.parallel.</span></span><span class="sig-name descname"><span class="pre">process_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/parallel.html#process_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.parallel.process_file" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="fhiry.parallel.process_ndjson">
-<span class="sig-prename descclassname"><span class="pre">fhiry.parallel.</span></span><span class="sig-name descname"><span class="pre">process_ndjson</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/parallel.html#process_ndjson"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.parallel.process_ndjson" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">fhiry.parallel.</span></span><span class="sig-name descname"><span class="pre">process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_json</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/parallel.html#process"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.parallel.process" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </section>

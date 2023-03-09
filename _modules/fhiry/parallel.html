@@ -31,45 +31,52 @@
           <div class="body" role="main">
             
   <h1>Source code for fhiry.parallel</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">Fhiry</span><span class="p">,</span> <span class="n">Fhirndjson</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd"> Copyright (c) 2023 Bell Eapen</span>
+
+<span class="sd"> This software is released under the MIT License.</span>
+<span class="sd"> https://opensource.org/licenses/MIT</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
 <span class="kn">import</span> <span class="nn">multiprocessing</span> <span class="k">as</span> <span class="nn">mp</span>
+<span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">Fhirndjson</span><span class="p">,</span> <span class="n">Fhiry</span>
+<span class="kn">import</span> <span class="nn">logging</span>
 
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
-<div class="viewcode-block" id="process_file"><a class="viewcode-back" href="../../fhiry.html#fhiry.parallel.process_file">[docs]</a><span class="k">def</span> <span class="nf">process_file</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
-    <span class="n">f</span> <span class="o">=</span> <span class="n">Fhiry</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">process_file</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="process_ndjson"><a class="viewcode-back" href="../../fhiry.html#fhiry.parallel.process_ndjson">[docs]</a><span class="k">def</span> <span class="nf">process_ndjson</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
-    <span class="n">f</span> <span class="o">=</span> <span class="n">Fhirndjson</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">process_file</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="process"><a class="viewcode-back" href="../../fhiry.html#fhiry.parallel.process">[docs]</a><span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">folder</span><span class="p">):</span>
-
+<div class="viewcode-block" id="process"><a class="viewcode-back" href="../../fhiry.html#fhiry.parallel.process">[docs]</a><span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">config_json</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;CPU count: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mp</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()))</span>
     <span class="n">pool</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">Pool</span><span class="p">(</span><span class="n">mp</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">())</span>
-
+    <span class="n">f</span> <span class="o">=</span> <span class="n">Fhiry</span><span class="p">(</span><span class="n">config_json</span><span class="o">=</span><span class="n">config_json</span><span class="p">)</span>
     <span class="n">filenames</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">folder</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.json&quot;</span><span class="p">):</span>
-            <span class="n">filenames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">folder</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">folder</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">folder</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.json&quot;</span><span class="p">):</span>
+                <span class="n">filenames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">folder</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">filenames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
 
-    <span class="n">list_of_dataframes</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">process_file</span><span class="p">,</span> <span class="n">filenames</span><span class="p">)</span>
+    <span class="n">list_of_dataframes</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">process_file</span><span class="p">,</span> <span class="n">filenames</span><span class="p">)</span>
     <span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">list_of_dataframes</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="ndjson"><a class="viewcode-back" href="../../fhiry.html#fhiry.parallel.ndjson">[docs]</a><span class="k">def</span> <span class="nf">ndjson</span><span class="p">(</span><span class="n">folder</span><span class="p">):</span>
+<div class="viewcode-block" id="ndjson"><a class="viewcode-back" href="../../fhiry.html#fhiry.parallel.ndjson">[docs]</a><span class="k">def</span> <span class="nf">ndjson</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">config_json</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;CPU count: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mp</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()))</span>
     <span class="n">pool</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">Pool</span><span class="p">(</span><span class="n">mp</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">())</span>
-
+    <span class="n">f</span> <span class="o">=</span> <span class="n">Fhirndjson</span><span class="p">(</span><span class="n">config_json</span><span class="o">=</span><span class="n">config_json</span><span class="p">)</span>
     <span class="n">filenames</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">folder</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.ndjson&quot;</span><span class="p">):</span>
-            <span class="n">filenames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">folder</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
 
-    <span class="n">list_of_dataframes</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">process_ndjson</span><span class="p">,</span> <span class="n">filenames</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">folder</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">folder</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.ndjson&quot;</span><span class="p">):</span>
+                <span class="n">filenames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">folder</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">filenames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
+
+    <span class="n">list_of_dataframes</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">process_file</span><span class="p">,</span> <span class="n">filenames</span><span class="p">)</span>
     <span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">list_of_dataframes</span><span class="p">)</span></div>
 </pre></div>

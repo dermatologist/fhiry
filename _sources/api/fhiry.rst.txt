@@ -4,6 +4,22 @@ fhiry package
 Submodules
 ----------
 
+fhiry.base\_fhiry module
+------------------------
+
+.. automodule:: fhiry.base_fhiry
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+fhiry.bqsearch module
+---------------------
+
+.. automodule:: fhiry.bqsearch
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 fhiry.fhirndjson module
 -----------------------
 

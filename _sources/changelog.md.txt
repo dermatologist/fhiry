@@ -1,5 +1,17 @@
 # Changelog
 
+## [Unreleased](https://github.com/dermatologist/fhiry/tree/HEAD)
+
+[Full Changelog](https://github.com/dermatologist/fhiry/compare/2.1.0...HEAD)
+
+**Implemented enhancements:**
+
+- import from BigQuery FHIR tables [\#106](https://github.com/dermatologist/fhiry/issues/106)
+
+## [2.1.0](https://github.com/dermatologist/fhiry/tree/2.1.0) (2023-02-06)
+
+[Full Changelog](https://github.com/dermatologist/fhiry/compare/2.0.0...2.1.0)
+
 ## [2.0.0](https://github.com/dermatologist/fhiry/tree/2.0.0) (2022-03-17)
 
 [Full Changelog](https://github.com/dermatologist/fhiry/compare/1.0.0...2.0.0)
