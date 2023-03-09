@@ -9,6 +9,10 @@ import pandas as pd
 import json
 import os
 from .base_fhiry import BaseFhiry
+import logging
+from tqdm import tqdm
+
+logger = logging.getLogger(__name__)
 
 class Fhiry(BaseFhiry):
     def __init__(self, config_json=None):
@@ -57,7 +61,7 @@ class Fhiry(BaseFhiry):
         """
         if self._folder:
             df = pd.DataFrame(columns=[])
-            for file in os.listdir(self._folder):
+            for file in tqdm(os.listdir(self._folder)):
                 if file.endswith(".json"):
                     self._df = self.read_bundle_from_file(
                         os.path.join(self._folder, file))

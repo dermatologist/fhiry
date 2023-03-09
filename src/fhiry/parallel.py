@@ -9,9 +9,12 @@ import multiprocessing as mp
 import os
 import pandas as pd
 from . import Fhirndjson, Fhiry
+import logging
+
+logger = logging.getLogger(__name__)
 
 def process(folder, config_json=None):
-
+    logger.info("CPU count: {}".format(mp.cpu_count()))
     pool = mp.Pool(mp.cpu_count())
     f = Fhiry(config_json=config_json)
     filenames = []
@@ -28,6 +31,7 @@ def process(folder, config_json=None):
 
 
 def ndjson(folder, config_json=None):
+    logger.info("CPU count: {}".format(mp.cpu_count()))
     pool = mp.Pool(mp.cpu_count())
     f = Fhirndjson(config_json=config_json)
     filenames = []

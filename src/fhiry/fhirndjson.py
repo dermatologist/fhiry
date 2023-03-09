@@ -10,6 +10,7 @@ import pandas as pd
 import json
 import os
 from .base_fhiry import BaseFhiry
+from tqdm import tqdm
 
 class Fhirndjson(BaseFhiry):
     def __init__(self, config_json=None):
@@ -37,7 +38,7 @@ class Fhirndjson(BaseFhiry):
         ONLY COMMON FIELDS IN ALL resources will be mapped
         """
         if self._folder:
-            for file in os.listdir(self._folder):
+            for file in tqdm(os.listdir(self._folder)):
                 self.process_file(file)
 
     def process_file(self, file):
