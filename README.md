@@ -12,6 +12,9 @@ Test this with the [synthea sample](https://synthea.mitre.org/downloads) or the 
 
 :sparkles: Checkout [this template](https://github.com/dermatologist/kedro-multimodal) for Multimodal machine learning in healthcare!
 
+:fire: Checkout [MedPrompt](https://github.com/dermatologist/medprompt) for Medical LLM prompts, including FHIR related prompts, such as text-to-FHIRQuery mapper!
+
+
 ## Installation
 
 ### Stable
