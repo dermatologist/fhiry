@@ -91,7 +91,7 @@ tqdm==4.66.1
     # via fhiry (setup.py)
 tzdata==2023.3
     # via pandas
-urllib3==1.26.16
+urllib3==2.1.0
     # via
     #   google-auth
     #   requests
