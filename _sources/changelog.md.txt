@@ -2,7 +2,20 @@
 
 ## [Unreleased](https://github.com/dermatologist/fhiry/tree/HEAD)
 
-[Full Changelog](https://github.com/dermatologist/fhiry/compare/2.1.0...HEAD)
+[Full Changelog](https://github.com/dermatologist/fhiry/compare/3.0.0...HEAD)
+
+**Implemented enhancements:**
+
+- Flattening FHIR resources / bundle for LLMs [\#144](https://github.com/dermatologist/fhiry/issues/144)
+
+**Closed issues:**
+
+- Performance warning: DataFrame is highly fragmented [\#135](https://github.com/dermatologist/fhiry/issues/135)
+- 'charmap' codec can't decode byte 0x81 in position 1603 [\#133](https://github.com/dermatologist/fhiry/issues/133)
+
+## [3.0.0](https://github.com/dermatologist/fhiry/tree/3.0.0) (2023-03-09)
+
+[Full Changelog](https://github.com/dermatologist/fhiry/compare/2.1.0...3.0.0)
 
 **Implemented enhancements:**
 
