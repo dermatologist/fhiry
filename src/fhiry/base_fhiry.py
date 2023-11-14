@@ -93,12 +93,17 @@ class BaseFhiry(object):
         """Create a patientId column with the resource.id if a Patient resource or with the resource.subject.reference if other resource type
         """
         try:
-            self._df['patientId'] = self._df.apply(lambda x: x['resource.id'] if x['resource.resourceType']
+            # PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+            newframe = self._df.copy()
+            newframe['patientId'] = self._df.apply(lambda x: x['resource.id'] if x['resource.resourceType']
                                                == 'Patient' else self.check_subject_reference(x), axis=1)
+            self._df = newframe
         except:
             try:
-                self._df['patientId'] = self._df.apply(lambda x: x['id'] if x['resourceType']
+                newframe = self._df.copy()
+                newframe['patientId'] = self._df.apply(lambda x: x['id'] if x['resourceType']
                                                     == 'Patient' else self.check_subject_reference(x), axis=1)
+                self._df = newframe
             except:
                 pass
 

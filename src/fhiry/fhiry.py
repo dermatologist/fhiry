@@ -50,7 +50,7 @@ class Fhiry(BaseFhiry):
         self._delete_col_raw_coding = delete_col_raw_coding
 
     def read_bundle_from_file(self, filename):
-        with open(filename, 'r') as f:
+        with open(filename, encoding='utf8', mode='r') as f:
             json_in = f.read()
             json_in = json.loads(json_in)
             return pd.json_normalize(json_in['entry'])
