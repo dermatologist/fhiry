@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/dermatologist/fhiry/tree/HEAD)
+## [3.1.0](https://github.com/dermatologist/fhiry/tree/3.1.0) (2023-11-14)
 
-[Full Changelog](https://github.com/dermatologist/fhiry/compare/3.0.0...HEAD)
+[Full Changelog](https://github.com/dermatologist/fhiry/compare/3.0.0...3.1.0)
 
 **Implemented enhancements:**
 
