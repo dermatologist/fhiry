@@ -1,3 +1,4 @@
-# Contributors
-
-* Bell Eapen <github_public@gulfdoctor.net>
+```{include} ../AUTHORS.md
+:relative-docs: docs/
+:relative-images:
+```
