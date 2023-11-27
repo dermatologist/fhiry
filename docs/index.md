@@ -2,6 +2,8 @@
 
 FHIR to pandas.dataframe for AI and ML
 
+[by Bell Eapen](https://nuchange.ca)
+
 
 ## Contents
 
@@ -18,14 +20,11 @@ Changelog <changelog>
 
 ## Indices and tables
 
-```eval_rst
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-```
+* {ref}`genindex`
+* {ref}`modindex`
+* {ref}`search`
 
 [Sphinx]: http://www.sphinx-doc.org/
 [Markdown]: https://daringfireball.net/projects/markdown/
 [reStructuredText]: http://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html
-[recommonmark]: https://recommonmark.readthedocs.io/en/latest
-[autostructify]: https://recommonmark.readthedocs.io/en/latest/auto_structify.html
+[MyST]: https://myst-parser.readthedocs.io/en/latest/
