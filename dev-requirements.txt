@@ -30,13 +30,14 @@ distlib==0.3.2
     # via virtualenv
 docutils==0.17.1
     # via
+    #   myst-parser
     #   recommonmark
     #   sphinx
 filelock==3.0.12
     # via
     #   tox
     #   virtualenv
-idna==3.4
+idna==3.6
     # via
     #   -c requirements.txt
     #   requests
@@ -45,9 +46,23 @@ imagesize==1.2.0
 iniconfig==1.1.1
     # via pytest
 jinja2==3.0.1
-    # via sphinx
+    # via
+    #   myst-parser
+    #   sphinx
+linkify-it-py==1.0.3
+    # via myst-parser
+markdown-it-py==2.2.0
+    # via
+    #   mdit-py-plugins
+    #   myst-parser
 markupsafe==2.0.1
     # via jinja2
+mdit-py-plugins==0.3.5
+    # via myst-parser
+mdurl==0.1.2
+    # via markdown-it-py
+myst-parser[linkify]==0.18.1
+    # via -r dev-requirements.in
 packaging==23.2
     # via
     #   -c requirements.txt
@@ -77,6 +92,8 @@ pytz==2023.3.post1
     # via
     #   -c requirements.txt
     #   babel
+pyyaml==6.0.1
+    # via myst-parser
 recommonmark==0.7.1
     # via -r dev-requirements.in
 requests==2.31.0
@@ -98,6 +115,7 @@ snowballstemmer==2.1.0
 sphinx==4.4.0
     # via
     #   -r dev-requirements.in
+    #   myst-parser
     #   recommonmark
 sphinxcontrib-applehelp==1.0.2
     # via sphinx
@@ -124,6 +142,10 @@ tox==3.25.0
     # via -r dev-requirements.in
 types-toml==0.10.8.1
     # via responses
+typing-extensions==4.8.0
+    # via myst-parser
+uc-micro-py==1.0.2
+    # via linkify-it-py
 urllib3==2.1.0
     # via
     #   -c requirements.txt

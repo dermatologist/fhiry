@@ -5,6 +5,7 @@ pytest
 responses
 recommonmark
 sphinx>=3.2.1
+myst-parser[linkify]
 setuptools
 setuptools_scm
 wheel
