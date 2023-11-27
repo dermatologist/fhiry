@@ -1,5 +1,9 @@
 # Changelog
 
+## [3.2.0](https://github.com/dermatologist/fhiry/tree/3.2.0) (2023-11-20)
+
+[Full Changelog](https://github.com/dermatologist/fhiry/compare/3.1.0...3.2.0)
+
 ## [3.1.0](https://github.com/dermatologist/fhiry/tree/3.1.0) (2023-11-14)
 
 [Full Changelog](https://github.com/dermatologist/fhiry/compare/3.0.0...3.1.0)
