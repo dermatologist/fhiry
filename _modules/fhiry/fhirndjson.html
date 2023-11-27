@@ -45,7 +45,7 @@
 <span class="kn">from</span> <span class="nn">.base_fhiry</span> <span class="kn">import</span> <span class="n">BaseFhiry</span>
 <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
 
-<div class="viewcode-block" id="Fhirndjson"><a class="viewcode-back" href="../../fhiry.html#fhiry.fhirndjson.Fhirndjson">[docs]</a><span class="k">class</span> <span class="nc">Fhirndjson</span><span class="p">(</span><span class="n">BaseFhiry</span><span class="p">):</span>
+<div class="viewcode-block" id="Fhirndjson"><a class="viewcode-back" href="../../api/fhiry.html#fhiry.fhirndjson.Fhirndjson">[docs]</a><span class="k">class</span> <span class="nc">Fhirndjson</span><span class="p">(</span><span class="n">BaseFhiry</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_json</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_folder</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">config_json</span><span class="o">=</span><span class="n">config_json</span><span class="p">)</span>
@@ -63,10 +63,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_folder</span> <span class="o">=</span> <span class="n">folder</span>
 
 
-<div class="viewcode-block" id="Fhirndjson.read_resource_from_line"><a class="viewcode-back" href="../../fhiry.html#fhiry.fhirndjson.Fhirndjson.read_resource_from_line">[docs]</a>    <span class="k">def</span> <span class="nf">read_resource_from_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+<div class="viewcode-block" id="Fhirndjson.read_resource_from_line"><a class="viewcode-back" href="../../api/fhiry.html#fhiry.fhirndjson.Fhirndjson.read_resource_from_line">[docs]</a>    <span class="k">def</span> <span class="nf">read_resource_from_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">json_normalize</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Fhirndjson.process_source"><a class="viewcode-back" href="../../fhiry.html#fhiry.fhirndjson.Fhirndjson.process_source">[docs]</a>    <span class="k">def</span> <span class="nf">process_source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Fhirndjson.process_source"><a class="viewcode-back" href="../../api/fhiry.html#fhiry.fhirndjson.Fhirndjson.process_source">[docs]</a>    <span class="k">def</span> <span class="nf">process_source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Read a single JSON resource or a directory full of JSON resources</span>
 <span class="sd">        ONLY COMMON FIELDS IN ALL resources will be mapped</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -74,7 +74,7 @@
             <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_folder</span><span class="p">)):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">process_file</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Fhirndjson.process_file"><a class="viewcode-back" href="../../fhiry.html#fhiry.fhirndjson.Fhirndjson.process_file">[docs]</a>    <span class="k">def</span> <span class="nf">process_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">):</span>
+<div class="viewcode-block" id="Fhirndjson.process_file"><a class="viewcode-back" href="../../api/fhiry.html#fhiry.fhirndjson.Fhirndjson.process_file">[docs]</a>    <span class="k">def</span> <span class="nf">process_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">):</span>
         <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_df</span>
         <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.ndjson&quot;</span><span class="p">):</span>
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_folder</span><span class="p">,</span> <span class="n">file</span><span class="p">))</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
@@ -105,10 +105,6 @@
 
 
 <h3>Navigation</h3>
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">fhiry</a></li>
-</ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
