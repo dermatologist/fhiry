@@ -8,15 +8,6 @@
 import pandas as pd
 import json
 
-LLAMA_INDEX_ENABLED = False
-try:
-    from llama_index.query_engine import PandasQueryEngine
-    LLAMA_INDEX_ENABLED = True
-    from llama_index import ServiceContext
-    from langchain.embeddings import HuggingFaceEmbeddings
-except:
-    pass
-
 class BaseFhiry(object):
     def __init__(self, config_json=None):
         self._df = None
@@ -161,6 +152,15 @@ class BaseFhiry(object):
         Returns:
             Any: Results of the query
         """
+
+        LLAMA_INDEX_ENABLED = False
+        try:
+            LLAMA_INDEX_ENABLED = True
+            from llama_index.query_engine import PandasQueryEngine
+            from llama_index import ServiceContext
+            from langchain.embeddings import HuggingFaceEmbeddings
+        except:
+            pass
         if not LLAMA_INDEX_ENABLED:
             raise Exception("llama_index not installed")
         if self._df is None:
