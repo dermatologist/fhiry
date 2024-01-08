@@ -5,8 +5,15 @@
  https://opensource.org/licenses/MIT
 """
 
+from typing import Any
 import pandas as pd
 import json
+
+
+def default_output_processor(
+    output: str, df: pd.DataFrame, **output_kwargs: Any
+) -> str:
+    return output
 
 class BaseFhiry(object):
     def __init__(self, config_json=None):
@@ -173,5 +180,9 @@ class BaseFhiry(object):
                 llm=llm,
                 embed_model=embed_model,
             )
-        query_engine = PandasQueryEngine(df=self._df, service_context=service_context, verbose=verbose)
+        query_engine = PandasQueryEngine(
+            df=self._df,
+            service_context=service_context,
+            output_processor=default_output_processor,
+            verbose=verbose)
         return query_engine.query(query)

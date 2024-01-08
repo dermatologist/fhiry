@@ -8,13 +8,18 @@ pip install -e .[llm]
 from llama_index.llms import Vertex
 from fhiry.fhirsearch import Fhirsearch
 
-fs = Fhirsearch(fhir_base_url = "http://hapi.fhir.org/baseR4/")
-df = fs.search(resource_type = "Condition", search_parameters = {"_count": 100})
-print(df.info())
+fs = Fhirsearch(fhir_base_url = "https://hapi.fhir.org/baseR4/")
+df = fs.search(resource_type = "Condition", search_parameters = {})
+# print(df.info())
 
 # Create a Vertex LLM
 llm = Vertex(
     model="chat-bison"
 )
-query = "What is the most common condition?"
-print(fs.llm_query(query, llm))
+query = "How many patients have a disease like rheumatoid arthritis?"
+_command = fs.llm_query(query, llm)
+
+print(_command)
+
+print(df["resource.code.text"].str.contains("rheumatoid arthritis").sum())
+
