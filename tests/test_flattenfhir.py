@@ -3,6 +3,7 @@ from fhir.resources.bundle import Bundle
 from fhir.resources.patient import Patient
 from src.fhiry.flattenfhir import FlattenFhir
 from pkg_resources import resource_filename
+import datetime
 
 def test_flatten_fhir():
     # Test with Bundle
@@ -11,13 +12,10 @@ def test_flatten_fhir():
     flatten_fhir = FlattenFhir(bundle)
     assert flatten_fhir.flattened == "Bundle"
 
+def test_flatten_patient():
     # Test with Patient
-    # patient = Patient()
-    # flatten_fhir.fhir_object = patient
-    # assert flatten_fhir.flattened == "Patient"
-    # assert isinstance(flatten_fhir.fhirobject, Patient)
+    jsonfile = open(resource_filename(__name__, 'resources') + '/flattenfhir/patient.json')
+    patient = Patient.parse_raw(jsonfile.read())
+    flatten_fhir = FlattenFhir(patient)
+    assert flatten_fhir.flattened == "Medical record of a male patient born 49 years ago. "
 
-    # Test with None
-    # flatten_fhir.fhir_object = None
-    # assert flatten_fhir.flattened == ""
-    # assert flatten_fhir.fhirobject is None

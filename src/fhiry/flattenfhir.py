@@ -6,7 +6,7 @@ from fhir.resources.bundle import Bundle
 from fhir.resources.patient import Patient
 from fhir.resources.observation import Observation
 from fhir.resources.medication import Medication
-
+import timeago, datetime
 
 class FlattenFhir(ABC):
 
@@ -33,5 +33,19 @@ class FlattenFhir(ABC):
         if isinstance(self._fhirobject, Bundle):
             self._flattened = "Bundle"
         elif isinstance(self._fhirobject, Patient):
-            self._flattened = "Patient"
+            self._flattened = self.flatten_patient(self._fhirobject)
 
+    def get_timeago(self, datestring: datetime) -> str:
+        return timeago.format(datestring, datetime.datetime.now())
+
+    def flatten_patient(self, patient: Patient) -> str:
+        flat_patient = ""
+        try:
+            flat_patient += f"Medical record of a {patient.gender} patient "
+        except:
+            flat_patient += "Medical record of a patient "
+        try:
+            flat_patient += f"born {self.get_timeago(patient.birthDate)}. "
+        except:
+            flat_patient += "of unknown age. "
+        return flat_patient
