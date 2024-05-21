@@ -7,6 +7,8 @@ from fhir.resources.patient import Patient
 from fhir.resources.observation import Observation
 from fhir.resources.medication import Medication
 import timeago, datetime
+import logging
+_logger = logging.getLogger(__name__)
 
 class FlattenFhir(ABC):
 
@@ -43,9 +45,11 @@ class FlattenFhir(ABC):
         try:
             flat_patient += f"Medical record of a {patient.gender} patient "
         except:
+            _logger.info(f"Gender not found for patient {patient.id}")
             flat_patient += "Medical record of a patient "
         try:
             flat_patient += f"born {self.get_timeago(patient.birthDate)}. "
         except:
+            _logger.info(f"Birthdate not found for patient {patient.id}")
             flat_patient += "of unknown age. "
         return flat_patient
