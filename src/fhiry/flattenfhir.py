@@ -10,9 +10,11 @@ from fhir.resources.medication import Medication
 
 class FlattenFhir(ABC):
 
-    def __init__(self, fhir_object, config_json=None):
+    def __init__(self, fhir_object=None, config_json=None):
         self._flattened = ""
         self._fhirobject = fhir_object
+        if fhir_object:
+            self.flatten()
 
     @property
     def flattened(self):
@@ -25,10 +27,11 @@ class FlattenFhir(ABC):
     @fhirobject.setter
     def fhir_object(self, fhirobject):
         self._fhirobject = fhirobject
+        self.flatten()
 
     def flatten(self):
         if isinstance(self._fhirobject, Bundle):
-            print("Bundle")
+            self._flattened = "Bundle"
         elif isinstance(self._fhirobject, Patient):
-            print("Patient")
+            self._flattened = "Patient"
 
