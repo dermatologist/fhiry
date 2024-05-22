@@ -38,6 +38,8 @@ class FlattenFhir(ABC):
             self._flattened = self.flatten_patient(self._fhirobject)
         elif isinstance(self._fhirobject, Observation):
             self._flattened = self.flatten_observation(self._fhirobject)
+        elif isinstance(self._fhirobject, Medication):
+            self._flattened = self.flatten_medication(self._fhirobject)
 
     def get_timeago(self, datestring: datetime) -> str:
         """
@@ -118,3 +120,26 @@ class FlattenFhir(ABC):
         if observation.interpretation[0].text:
             flat_observation += f"Interpretation: {observation.interpretation[0].text}. "
         return flat_observation
+
+    def flatten_medication(self, medication: Medication) -> str:
+        """
+        Flatten the medication object into a string representation.
+
+        Args:
+            medication (Medication): The medication object to be flattened.
+
+        Returns:
+            str: The flattened string representation of the medication object.
+        """
+        flat_medication = ""
+        if medication.code:
+            flat_medication += f"{medication.code.coding[0].display} "
+        else:
+            _logger.info(f"Code not found for medication {medication.id}")
+            flat_medication += "Medication "
+        if medication.status:
+            flat_medication += f"Status: {medication.status}. "
+        else:
+            _logger.info(f"Status not found for medication {medication.id}")
+            flat_medication += "Status: unknown. "
+        return flat_medication

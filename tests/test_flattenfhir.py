@@ -2,6 +2,7 @@ import pytest
 from fhir.resources.bundle import Bundle
 from fhir.resources.patient import Patient
 from fhir.resources.observation import Observation
+from fhir.resources.medication import Medication
 from src.fhiry.flattenfhir import FlattenFhir
 from pkg_resources import resource_filename
 import datetime
@@ -26,3 +27,10 @@ def test_flatten_observation():
     observation = Observation.parse_raw(jsonfile.read())
     flatten_fhir = FlattenFhir(observation)
     assert flatten_fhir.flattened == "RBS recorded 11 years ago was Value: 6.3 mmol/l. "
+
+def test_flatten_medication():
+    # Test with Medication
+    jsonfile = open(resource_filename(__name__, 'resources') + '/flattenfhir/medication.json')
+    medication = Medication.parse_raw(jsonfile.read())
+    flatten_fhir = FlattenFhir(medication)
+    assert flatten_fhir.flattened == "Prednisone 5mg tablet (Product) Status: active. "
