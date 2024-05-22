@@ -50,7 +50,11 @@ class FlattenFhir(ABC):
         :return: A string representing the time elapsed since the given date.
         :rtype: str
         """
-        return timeago.format(datestring.replace(tzinfo=None), datetime.datetime.now())
+        try:
+            datestring = datestring.replace(tzinfo=None)
+        except:
+            pass
+        return timeago.format(datestring, datetime.datetime.now())
 
     def flatten_patient(self, patient: Patient) -> str:
         """
@@ -68,9 +72,9 @@ class FlattenFhir(ABC):
         else:
             _logger.info(f"Gender not found for patient {patient.id}")
             flat_patient += "Medical record of a patient "
-        try:
+        if patient.birthDate:
             flat_patient += f"born {self.get_timeago(patient.birthDate)}. "
-        except:
+        else:
             _logger.info(f"Birthdate not found for patient {patient.id}")
             flat_patient += "of unknown age. "
         return flat_patient
