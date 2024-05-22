@@ -1,4 +1,3 @@
-import pytest
 from fhir.resources.bundle import Bundle
 from fhir.resources.patient import Patient
 from fhir.resources.observation import Observation
@@ -6,14 +5,13 @@ from fhir.resources.medication import Medication
 from fhir.resources.procedure import Procedure
 from src.fhiry.flattenfhir import FlattenFhir
 from pkg_resources import resource_filename
-import datetime
 
-def test_flatten_fhir():
+def test_flatten_bundle():
     # Test with Bundle
     jsonfile = open(resource_filename(__name__, 'resources') + '/flattenfhir/bundle.json')
     bundle = Bundle.parse_raw(jsonfile.read())
     flatten_fhir = FlattenFhir(bundle)
-    assert flatten_fhir.flattened == "Bundle"
+    assert flatten_fhir.flattened == "Medication Status: unknown. "
 
 def test_flatten_patient():
     # Test with Patient

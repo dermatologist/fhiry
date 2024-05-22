@@ -34,7 +34,18 @@ class FlattenFhir(ABC):
 
     def flatten(self):
         if isinstance(self._fhirobject, Bundle):
-            self._flattened = "Bundle"
+            self._flattened = ""
+            for entry in self._fhirobject.entry:
+                if entry.resource.resource_type == "Patient":
+                    self._flattened += self.flatten_patient(entry.resource)
+                elif entry.resource.resource_type == "Observation":
+                    self._flattened += self.flatten_observation(entry.resource)
+                elif entry.resource.resource_type == "Medication":
+                    self._flattened += self.flatten_medication(entry.resource)
+                elif entry.resource.resource_type == "Procedure":
+                    self._flattened += self.flatten_procedure(entry.resource)
+                else:
+                    _logger.info(f"Resource type not supported: {entry.resource.resource_type}")
         elif isinstance(self._fhirobject, Patient):
             self._flattened = self.flatten_patient(self._fhirobject)
         elif isinstance(self._fhirobject, Observation):
