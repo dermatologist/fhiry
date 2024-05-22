@@ -6,6 +6,7 @@ from fhir.resources.bundle import Bundle
 from fhir.resources.patient import Patient
 from fhir.resources.observation import Observation
 from fhir.resources.medication import Medication
+from fhir.resources.procedure import Procedure
 import timeago, datetime
 import logging
 _logger = logging.getLogger(__name__)
@@ -40,6 +41,8 @@ class FlattenFhir(ABC):
             self._flattened = self.flatten_observation(self._fhirobject)
         elif isinstance(self._fhirobject, Medication):
             self._flattened = self.flatten_medication(self._fhirobject)
+        elif isinstance(self._fhirobject, Procedure):
+            self._flattened = self.flatten_procedure(self._fhirobject)
 
     def get_timeago(self, datestring: datetime) -> str:
         """
@@ -147,3 +150,28 @@ class FlattenFhir(ABC):
             _logger.info(f"Status not found for medication {medication.id}")
             flat_medication += "Status: unknown. "
         return flat_medication
+
+    def flatten_procedure(self, procedure: Procedure) -> str:
+        """
+        Flatten the procedure object into a string representation.
+
+        Args:
+            procedure (Procedure): The procedure object to be flattened.
+
+        Returns:
+            str: The flattened string representation of the procedure object.
+        """
+        flat_procedure = ""
+        if procedure.code:
+            flat_procedure += f"{procedure.code.coding[0].display} was "
+        else:
+            _logger.info(f"Code not found for procedure {procedure.id}")
+            flat_procedure += "Procedure was"
+        if procedure.occurrenceDateTime:
+            flat_procedure += f"{procedure.status} {self.get_timeago(procedure.occurrenceDateTime)}. "
+        elif procedure.occurrencePeriod:
+            flat_procedure += f"{procedure.status} {self.get_timeago(procedure.occurrencePeriod.start)}. "
+        else:
+            _logger.info(f"Performed date not found for procedure {procedure.id}")
+            flat_procedure += "on unknown date. "
+        return flat_procedure

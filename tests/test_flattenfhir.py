@@ -3,6 +3,7 @@ from fhir.resources.bundle import Bundle
 from fhir.resources.patient import Patient
 from fhir.resources.observation import Observation
 from fhir.resources.medication import Medication
+from fhir.resources.procedure import Procedure
 from src.fhiry.flattenfhir import FlattenFhir
 from pkg_resources import resource_filename
 import datetime
@@ -34,3 +35,10 @@ def test_flatten_medication():
     medication = Medication.parse_raw(jsonfile.read())
     flatten_fhir = FlattenFhir(medication)
     assert flatten_fhir.flattened == "Prednisone 5mg tablet (Product) Status: active. "
+
+def test_flatten_procedure():
+    # Test with Procedure
+    jsonfile = open(resource_filename(__name__, 'resources') + '/flattenfhir/procedure.json')
+    procedure = Procedure.parse_raw(jsonfile.read())
+    flatten_fhir = FlattenFhir(procedure)
+    assert flatten_fhir.flattened == "Chemotherapy was completed 11 years ago. "
