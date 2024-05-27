@@ -9,6 +9,7 @@ from fhir.resources.medication import Medication
 from fhir.resources.procedure import Procedure
 from fhir.resources.condition import Condition
 from fhir.resources.allergyintolerance import AllergyIntolerance
+from fhir.resources.documentreference import DocumentReference
 import timeago, datetime
 import logging
 _logger = logging.getLogger(__name__)
@@ -50,6 +51,8 @@ class FlattenFhir(ABC):
                     self._flattened += self.flatten_condition(entry.resource)
                 elif entry.resource.resource_type == "AllergyIntolerance":
                     self._flattened += self.flatten_allergyintolerance(entry.resource)
+                elif entry.resource.resource_type == "DocumentReference":
+                    self._flattened += self.flatten_documentreference(entry.resource)
                 else:
                     _logger.info(f"Resource type not supported: {entry.resource.resource_type}")
         elif isinstance(self._fhirobject, Patient):
@@ -64,6 +67,8 @@ class FlattenFhir(ABC):
             self._flattened = self.flatten_condition(self._fhirobject)
         elif isinstance(self._fhirobject, AllergyIntolerance):
             self._flattened = self.flatten_allergyintolerance(self._fhirobject)
+        elif isinstance(self._fhirobject, DocumentReference):
+            self._flattened = self.flatten_documentreference(self._fhirobject)
         else:
             _logger.info(f"Resource type not supported: {type(self._fhirobject)}")
 
@@ -244,3 +249,26 @@ class FlattenFhir(ABC):
             _logger.info(f"Onset date not found for allergyintolerance {allergyintolerance.id}")
             flat_allergyintolerance += "allergy reported. "
         return flat_allergyintolerance
+
+    def flatten_documentreference(self, documentreference: DocumentReference) -> str:
+        """
+        Flatten the documentreference object into a string representation.
+
+        Args:
+            documentreference (DocumentReference): The documentreference object to be flattened.
+
+        Returns:
+            str: The flattened string representation of the documentreference object.
+        """
+        flat_documentreference = ""
+        for content in documentreference.content:
+            if content.attachment.contentType == "text/plain":
+                flat_documentreference += f"{content.attachment.title}: {content.attachment.data}"
+            else:
+                _logger.info(f"Attachment for documentreference {documentreference.id} is not text/plain.")
+        if documentreference.date:
+            flat_documentreference += f" was created {self.get_timeago(documentreference.date)}. "
+        else:
+            _logger.info(f"Date not found for documentreference {documentreference.id}")
+            flat_documentreference += " was created. "
+        return flat_documentreference

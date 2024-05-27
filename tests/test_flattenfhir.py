@@ -5,6 +5,7 @@ from fhir.resources.medication import Medication
 from fhir.resources.procedure import Procedure
 from fhir.resources.condition import Condition
 from fhir.resources.allergyintolerance import AllergyIntolerance
+from fhir.resources.documentreference import DocumentReference
 from src.fhiry.flattenfhir import FlattenFhir
 from pkg_resources import resource_filename
 
@@ -56,3 +57,10 @@ def test_flatten_allergyintolerance():
     allergyintolerance = AllergyIntolerance.parse_raw(jsonfile.read())
     flatten_fhir = FlattenFhir(allergyintolerance)
     assert flatten_fhir.flattened == "Penicillin G allergy reported. "
+
+def test_flatten_documentreference():
+    # Test with DocumentReference
+    jsonfile = open(resource_filename(__name__, 'resources') + '/flattenfhir/document_reference.json')
+    documentreference = DocumentReference.parse_raw(jsonfile.read())
+    flatten_fhir = FlattenFhir(documentreference)
+    assert flatten_fhir.flattened == "Xray report: b'Normal chest x-ray' was created. "
