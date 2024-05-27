@@ -8,6 +8,7 @@ from fhir.resources.observation import Observation
 from fhir.resources.medication import Medication
 from fhir.resources.procedure import Procedure
 from fhir.resources.condition import Condition
+from fhir.resources.allergyintolerance import AllergyIntolerance
 import timeago, datetime
 import logging
 _logger = logging.getLogger(__name__)
@@ -47,6 +48,8 @@ class FlattenFhir(ABC):
                     self._flattened += self.flatten_procedure(entry.resource)
                 elif entry.resource.resource_type == "Condition":
                     self._flattened += self.flatten_condition(entry.resource)
+                elif entry.resource.resource_type == "AllergyIntolerance":
+                    self._flattened += self.flatten_allergyintolerance(entry.resource)
                 else:
                     _logger.info(f"Resource type not supported: {entry.resource.resource_type}")
         elif isinstance(self._fhirobject, Patient):
@@ -59,6 +62,10 @@ class FlattenFhir(ABC):
             self._flattened = self.flatten_procedure(self._fhirobject)
         elif isinstance(self._fhirobject, Condition):
             self._flattened = self.flatten_condition(self._fhirobject)
+        elif isinstance(self._fhirobject, AllergyIntolerance):
+            self._flattened = self.flatten_allergyintolerance(self._fhirobject)
+        else:
+            _logger.info(f"Resource type not supported: {type(self._fhirobject)}")
 
     def get_timeago(self, datestring: datetime) -> str:
         """
@@ -214,3 +221,26 @@ class FlattenFhir(ABC):
             _logger.info(f"Onset date not found for condition {condition.id}")
             flat_condition += "was diagnosed. "
         return flat_condition
+
+    def flatten_allergyintolerance(self, allergyintolerance: AllergyIntolerance) -> str:
+        """
+        Flatten the allergyintolerance object into a string representation.
+
+        Args:
+            allergyintolerance (AllergyIntolerance): The allergyintolerance object to be flattened.
+
+        Returns:
+            str: The flattened string representation of the allergyintolerance object.
+        """
+        flat_allergyintolerance = ""
+        if allergyintolerance.code:
+            flat_allergyintolerance += f"{allergyintolerance.code.coding[0].display} "
+        else:
+            _logger.info(f"Code not found for allergyintolerance {allergyintolerance.id}")
+            flat_allergyintolerance += "AllergyIntolerance "
+        if allergyintolerance.onsetDateTime:
+            flat_allergyintolerance += f" allergy was reported on {self.get_timeago(allergyintolerance.onsetDateTime)}. "
+        else:
+            _logger.info(f"Onset date not found for allergyintolerance {allergyintolerance.id}")
+            flat_allergyintolerance += "allergy reported. "
+        return flat_allergyintolerance

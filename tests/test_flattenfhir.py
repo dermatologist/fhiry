@@ -4,6 +4,7 @@ from fhir.resources.observation import Observation
 from fhir.resources.medication import Medication
 from fhir.resources.procedure import Procedure
 from fhir.resources.condition import Condition
+from fhir.resources.allergyintolerance import AllergyIntolerance
 from src.fhiry.flattenfhir import FlattenFhir
 from pkg_resources import resource_filename
 
@@ -48,3 +49,10 @@ def test_flatten_condition():
     condition = Condition.parse_raw(jsonfile.read())
     flatten_fhir = FlattenFhir(condition)
     assert flatten_fhir.flattened == "Bacterial sepsis was diagnosed 11 years ago. "
+
+def test_flatten_allergyintolerance():
+    # Test with AllergyIntolerance
+    jsonfile = open(resource_filename(__name__, 'resources') + '/flattenfhir/allergy_intolerance.json')
+    allergyintolerance = AllergyIntolerance.parse_raw(jsonfile.read())
+    flatten_fhir = FlattenFhir(allergyintolerance)
+    assert flatten_fhir.flattened == "Penicillin G allergy reported. "
