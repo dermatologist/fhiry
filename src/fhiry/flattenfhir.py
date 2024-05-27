@@ -7,6 +7,7 @@ from fhir.resources.patient import Patient
 from fhir.resources.observation import Observation
 from fhir.resources.medication import Medication
 from fhir.resources.procedure import Procedure
+from fhir.resources.condition import Condition
 import timeago, datetime
 import logging
 _logger = logging.getLogger(__name__)
@@ -44,6 +45,8 @@ class FlattenFhir(ABC):
                     self._flattened += self.flatten_medication(entry.resource)
                 elif entry.resource.resource_type == "Procedure":
                     self._flattened += self.flatten_procedure(entry.resource)
+                elif entry.resource.resource_type == "Condition":
+                    self._flattened += self.flatten_condition(entry.resource)
                 else:
                     _logger.info(f"Resource type not supported: {entry.resource.resource_type}")
         elif isinstance(self._fhirobject, Patient):
@@ -54,6 +57,8 @@ class FlattenFhir(ABC):
             self._flattened = self.flatten_medication(self._fhirobject)
         elif isinstance(self._fhirobject, Procedure):
             self._flattened = self.flatten_procedure(self._fhirobject)
+        elif isinstance(self._fhirobject, Condition):
+            self._flattened = self.flatten_condition(self._fhirobject)
 
     def get_timeago(self, datestring: datetime) -> str:
         """
@@ -186,3 +191,26 @@ class FlattenFhir(ABC):
             _logger.info(f"Performed date not found for procedure {procedure.id}")
             flat_procedure += "on unknown date. "
         return flat_procedure
+
+    def flatten_condition(self, condition: Condition) -> str:
+        """
+        Flatten the condition object into a string representation.
+
+        Args:
+            condition (Condition): The condition object to be flattened.
+
+        Returns:
+            str: The flattened string representation of the condition object.
+        """
+        flat_condition = ""
+        if condition.code:
+            flat_condition += f"{condition.code.coding[0].display} "
+        else:
+            _logger.info(f"Code not found for condition {condition.id}")
+            flat_condition += "Condition "
+        if condition.onsetDateTime:
+            flat_condition += f"was diagnosed {self.get_timeago(condition.onsetDateTime)}. "
+        else:
+            _logger.info(f"Onset date not found for condition {condition.id}")
+            flat_condition += "was diagnosed. "
+        return flat_condition

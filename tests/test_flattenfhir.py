@@ -3,6 +3,7 @@ from fhir.resources.patient import Patient
 from fhir.resources.observation import Observation
 from fhir.resources.medication import Medication
 from fhir.resources.procedure import Procedure
+from fhir.resources.condition import Condition
 from src.fhiry.flattenfhir import FlattenFhir
 from pkg_resources import resource_filename
 
@@ -40,3 +41,10 @@ def test_flatten_procedure():
     procedure = Procedure.parse_raw(jsonfile.read())
     flatten_fhir = FlattenFhir(procedure)
     assert flatten_fhir.flattened == "Chemotherapy was completed 11 years ago. "
+
+def test_flatten_condition():
+    # Test with Condition
+    jsonfile = open(resource_filename(__name__, 'resources') + '/flattenfhir/condition.json')
+    condition = Condition.parse_raw(jsonfile.read())
+    flatten_fhir = FlattenFhir(condition)
+    assert flatten_fhir.flattened == "Bacterial sepsis was diagnosed 11 years ago. "
