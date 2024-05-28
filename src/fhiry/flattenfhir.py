@@ -1,25 +1,22 @@
 
 
 
-from abc import ABC
-from fhir.resources.bundle import Bundle
-from fhir.resources.patient import Patient
-from fhir.resources.observation import Observation
-from fhir.resources.medication import Medication
-from fhir.resources.procedure import Procedure
-from fhir.resources.condition import Condition
-from fhir.resources.allergyintolerance import AllergyIntolerance
-from fhir.resources.documentreference import DocumentReference
-import timeago, datetime
+import datetime
 import logging
+from abc import ABC
+
+import timeago
+
 _logger = logging.getLogger(__name__)
+from prodict import Prodict
+
 
 class FlattenFhir(ABC):
 
-    def __init__(self, fhir_object=None, config_json=None):
+    def __init__(self, fhirobject=None, config_json=None):
         self._flattened = ""
-        self._fhirobject = fhir_object
-        if fhir_object:
+        self._fhirobject = Prodict.from_dict(fhirobject)
+        if fhirobject:
             self.flatten()
 
     @property
@@ -31,52 +28,46 @@ class FlattenFhir(ABC):
         return self._fhirobject
 
     @fhirobject.setter
-    def fhir_object(self, fhirobject):
-        self._fhirobject = fhirobject
+    def fhirobject(self, fhirobject):
+        self._fhirobject = Prodict.from_dict(fhirobject)
         self.flatten()
 
     def flatten(self):
         if not self._fhirobject:
             _logger.info("FHIR object is not set.")
             raise ValueError("FHIR object is not set.")
-        if isinstance(self._fhirobject, Bundle):
-            self._flattened = ""
+        self._flattened = ""
+        if self._fhirobject.resourceType == "Bundle":
             for entry in self._fhirobject.entry:
-                if entry.resource.resource_type == "Patient":
-                    self._flattened += self.flatten_patient(entry.resource)
-                elif entry.resource.resource_type == "Observation":
-                    self._flattened += self.flatten_observation(entry.resource)
-                elif entry.resource.resource_type == "Medication":
-                    self._flattened += self.flatten_medication(entry.resource)
-                elif entry.resource.resource_type == "Procedure":
-                    self._flattened += self.flatten_procedure(entry.resource)
-                elif entry.resource.resource_type == "Condition":
-                    self._flattened += self.flatten_condition(entry.resource)
-                elif entry.resource.resource_type == "AllergyIntolerance":
-                    self._flattened += self.flatten_allergyintolerance(entry.resource)
-                elif entry.resource.resource_type == "DocumentReference":
-                    self._flattened += self.flatten_documentreference(entry.resource)
-                else:
-                    _logger.info(f"Resource type not supported: {entry.resource.resource_type}")
-        elif isinstance(self._fhirobject, Patient):
-            self._flattened = self.flatten_patient(self._fhirobject)
-        elif isinstance(self._fhirobject, Observation):
-            self._flattened = self.flatten_observation(self._fhirobject)
-        elif isinstance(self._fhirobject, Medication):
-            self._flattened = self.flatten_medication(self._fhirobject)
-        elif isinstance(self._fhirobject, Procedure):
-            self._flattened = self.flatten_procedure(self._fhirobject)
-        elif isinstance(self._fhirobject, Condition):
-            self._flattened = self.flatten_condition(self._fhirobject)
-        elif isinstance(self._fhirobject, AllergyIntolerance):
-            self._flattened = self.flatten_allergyintolerance(self._fhirobject)
-        elif isinstance(self._fhirobject, DocumentReference):
-            self._flattened = self.flatten_documentreference(self._fhirobject)
+                _entry = Prodict.from_dict(entry)
+                self.get_flattened_text(_entry.resource)
         else:
-            _logger.info(f"Resource type not supported: {type(self._fhirobject)}")
+            self.get_flattened_text(self._fhirobject)
         return self._flattened
 
-    def get_timeago(self, datestring: datetime) -> str:
+
+
+
+    def get_flattened_text(self, entry):
+        if entry.resourceType == "Patient":
+            self._flattened += self.flatten_patient(entry)
+        elif entry.resourceType == "Observation":
+            self._flattened += self.flatten_observation(entry)
+        elif entry.resourceType == "Medication":
+            self._flattened += self.flatten_medication(entry)
+        elif entry.resourceType == "Procedure":
+            self._flattened += self.flatten_procedure(entry)
+        elif entry.resourceType == "Condition":
+            self._flattened += self.flatten_condition(entry)
+        elif entry.resourceType == "AllergyIntolerance":
+            self._flattened += self.flatten_allergyintolerance(entry)
+        elif entry.resourceType == "DocumentReference":
+            self._flattened += self.flatten_documentreference(entry)
+        else:
+            _logger.info(f"Resource type not supported: {entry.resourceType}")
+        return self._flattened
+
+    def get_timeago(self, datestring) -> str:
         """
         Returns a string representing the time elapsed since the given date.
 
@@ -85,13 +76,10 @@ class FlattenFhir(ABC):
         :return: A string representing the time elapsed since the given date.
         :rtype: str
         """
-        try:
-            datestring = datestring.replace(tzinfo=None)
-        except:
-            pass
+        datestring = datestring[0:10]
         return timeago.format(datestring, datetime.datetime.now())
 
-    def flatten_patient(self, patient: Patient) -> str:
+    def flatten_patient(self, patient) -> str:
         """
         Flatten the patient object into a string representation.
 
@@ -114,7 +102,7 @@ class FlattenFhir(ABC):
             flat_patient += "of unknown age. "
         return flat_patient
 
-    def flatten_observation(self, observation: Observation) -> str:
+    def flatten_observation(self, observation) -> str:
         """
         Flatten the observation object into a string representation.
 
@@ -125,12 +113,14 @@ class FlattenFhir(ABC):
             str: The flattened string representation of the observation object.
         """
         flat_observation = ""
+        _display = observation.code.coding[0]
         if observation.code:
-            flat_observation += f"{observation.code.coding[0].display} "
+            flat_observation += f"{_display['display']} "
         else:
             _logger.info(f"Code not found for observation {observation.id}")
             flat_observation += "Observation "
-        if observation.effectiveDateTime:
+        x = observation.effectiveDateTime
+        if 'effectiveDateTime' in observation:
             flat_observation += f"recorded {self.get_timeago(observation.effectiveDateTime)} was "
         else:
             _logger.info(f"Effective date not found for observation {observation.id}")
@@ -156,11 +146,12 @@ class FlattenFhir(ABC):
         else:
             _logger.info(f"Value not found for observation {observation.id}")
             flat_observation += "Value: unknown. "
-        if observation.interpretation[0].text:
-            flat_observation += f"Interpretation: {observation.interpretation[0].text}. "
+        if 'coding' in observation.interpretation[0]:
+            _text = observation.interpretation[0]['coding'][0]
+            flat_observation += f"Interpretation: {_text['display']}. "
         return flat_observation
 
-    def flatten_medication(self, medication: Medication) -> str:
+    def flatten_medication(self, medication) -> str:
         """
         Flatten the medication object into a string representation.
 
@@ -171,19 +162,19 @@ class FlattenFhir(ABC):
             str: The flattened string representation of the medication object.
         """
         flat_medication = ""
-        if medication.code:
-            flat_medication += f"{medication.code.coding[0].display} "
+        if 'code' in medication:
+            flat_medication += f"{medication.code.coding[0]['display']} "
         else:
             _logger.info(f"Code not found for medication {medication.id}")
             flat_medication += "Medication "
-        if medication.status:
+        if 'status' in medication:
             flat_medication += f"Status: {medication.status}. "
         else:
             _logger.info(f"Status not found for medication {medication.id}")
             flat_medication += "Status: unknown. "
         return flat_medication
 
-    def flatten_procedure(self, procedure: Procedure) -> str:
+    def flatten_procedure(self, procedure) -> str:
         """
         Flatten the procedure object into a string representation.
 
@@ -195,20 +186,20 @@ class FlattenFhir(ABC):
         """
         flat_procedure = ""
         if procedure.code:
-            flat_procedure += f"{procedure.code.coding[0].display} was "
+            flat_procedure += f"{procedure.code.coding[0]['display']} was "
         else:
             _logger.info(f"Code not found for procedure {procedure.id}")
             flat_procedure += "Procedure was"
-        if procedure.occurrenceDateTime:
+        if 'occurrenceDateTime' in procedure:
             flat_procedure += f"{procedure.status} {self.get_timeago(procedure.occurrenceDateTime)}. "
-        elif procedure.occurrencePeriod:
+        elif 'occurrencePeriod' in procedure:
             flat_procedure += f"{procedure.status} {self.get_timeago(procedure.occurrencePeriod.start)}. "
         else:
             _logger.info(f"Performed date not found for procedure {procedure.id}")
             flat_procedure += "on unknown date. "
         return flat_procedure
 
-    def flatten_condition(self, condition: Condition) -> str:
+    def flatten_condition(self, condition) -> str:
         """
         Flatten the condition object into a string representation.
 
@@ -220,7 +211,7 @@ class FlattenFhir(ABC):
         """
         flat_condition = ""
         if condition.code:
-            flat_condition += f"{condition.code.coding[0].display} "
+            flat_condition += f"{condition.code.coding[0]['display']} "
         else:
             _logger.info(f"Code not found for condition {condition.id}")
             flat_condition += "Condition "
@@ -231,7 +222,7 @@ class FlattenFhir(ABC):
             flat_condition += "was diagnosed. "
         return flat_condition
 
-    def flatten_allergyintolerance(self, allergyintolerance: AllergyIntolerance) -> str:
+    def flatten_allergyintolerance(self, allergyintolerance) -> str:
         """
         Flatten the allergyintolerance object into a string representation.
 
@@ -242,19 +233,20 @@ class FlattenFhir(ABC):
             str: The flattened string representation of the allergyintolerance object.
         """
         flat_allergyintolerance = ""
+        _display = allergyintolerance.code.coding[0]
         if allergyintolerance.code:
-            flat_allergyintolerance += f"{allergyintolerance.code.coding[0].display} "
+            flat_allergyintolerance += f"{_display['display']} "
         else:
             _logger.info(f"Code not found for allergyintolerance {allergyintolerance.id}")
             flat_allergyintolerance += "AllergyIntolerance "
-        if allergyintolerance.onsetDateTime:
+        if 'onsetDateTime' in allergyintolerance:
             flat_allergyintolerance += f" allergy was reported on {self.get_timeago(allergyintolerance.onsetDateTime)}. "
         else:
             _logger.info(f"Onset date not found for allergyintolerance {allergyintolerance.id}")
             flat_allergyintolerance += "allergy reported. "
         return flat_allergyintolerance
 
-    def flatten_documentreference(self, documentreference: DocumentReference) -> str:
+    def flatten_documentreference(self, documentreference) -> str:
         """
         Flatten the documentreference object into a string representation.
 
@@ -266,11 +258,12 @@ class FlattenFhir(ABC):
         """
         flat_documentreference = ""
         for content in documentreference.content:
+            content = Prodict.from_dict(content)
             if content.attachment.contentType == "text/plain":
                 flat_documentreference += f"{content.attachment.title}: {content.attachment.data}"
             else:
                 _logger.info(f"Attachment for documentreference {documentreference.id} is not text/plain.")
-        if documentreference.date:
+        if 'date' in documentreference:
             flat_documentreference += f" was created {self.get_timeago(documentreference.date)}. "
         else:
             _logger.info(f"Date not found for documentreference {documentreference.id}")
