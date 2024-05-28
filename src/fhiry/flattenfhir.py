@@ -36,6 +36,9 @@ class FlattenFhir(ABC):
         self.flatten()
 
     def flatten(self):
+        if not self._fhirobject:
+            _logger.info("FHIR object is not set.")
+            raise ValueError("FHIR object is not set.")
         if isinstance(self._fhirobject, Bundle):
             self._flattened = ""
             for entry in self._fhirobject.entry:
@@ -71,6 +74,7 @@ class FlattenFhir(ABC):
             self._flattened = self.flatten_documentreference(self._fhirobject)
         else:
             _logger.info(f"Resource type not supported: {type(self._fhirobject)}")
+        return self._flattened
 
     def get_timeago(self, datestring: datetime) -> str:
         """
