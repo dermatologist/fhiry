@@ -1,15 +1,16 @@
+"""
+ Copyright (c) 2024 Bell Eapen
 
-
-
+ This software is released under the MIT License.
+ https://opensource.org/licenses/MIT
+"""
 import datetime
 import logging
 from abc import ABC
-
 import timeago
-
-_logger = logging.getLogger(__name__)
 from prodict import Prodict
 
+_logger = logging.getLogger(__name__)
 
 class FlattenFhir(ABC):
 
@@ -113,13 +114,12 @@ class FlattenFhir(ABC):
             str: The flattened string representation of the observation object.
         """
         flat_observation = ""
-        _display = observation.code.coding[0]
         if observation.code:
+            _display = observation.code.coding[0]
             flat_observation += f"{_display['display']} "
         else:
             _logger.info(f"Code not found for observation {observation.id}")
             flat_observation += "Observation "
-        x = observation.effectiveDateTime
         if 'effectiveDateTime' in observation:
             flat_observation += f"recorded {self.get_timeago(observation.effectiveDateTime)} was "
         else:
