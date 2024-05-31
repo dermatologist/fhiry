@@ -91,12 +91,12 @@ class FlattenFhir(ABC):
             str: The flattened string representation of the patient object.
         """
         flat_patient = ""
-        if patient.gender:
+        if 'gender' in patient:
             flat_patient += f"Medical record of a {patient.gender} patient "
         else:
             _logger.info(f"Gender not found for patient {patient.id}")
             flat_patient += "Medical record of a patient "
-        if patient.birthDate:
+        if 'birthDate' in patient:
             flat_patient += f"born {self.get_timeago(patient.birthDate)}. "
         else:
             _logger.info(f"Birthdate not found for patient {patient.id}")
@@ -114,7 +114,7 @@ class FlattenFhir(ABC):
             str: The flattened string representation of the observation object.
         """
         flat_observation = ""
-        if observation.code:
+        if 'code' in observation:
             _display = observation.code.coding[0]
             flat_observation += f"{_display['display']} "
         else:
@@ -185,7 +185,7 @@ class FlattenFhir(ABC):
             str: The flattened string representation of the procedure object.
         """
         flat_procedure = ""
-        if procedure.code:
+        if 'code' in procedure and 'coding' in procedure.code and 'display' in procedure.code.coding[0]:
             flat_procedure += f"{procedure.code.coding[0]['display']} was "
         else:
             _logger.info(f"Code not found for procedure {procedure.id}")
@@ -210,7 +210,7 @@ class FlattenFhir(ABC):
             str: The flattened string representation of the condition object.
         """
         flat_condition = ""
-        if condition.code:
+        if 'code' in condition:
             flat_condition += f"{condition.code.coding[0]['display']} "
         else:
             _logger.info(f"Code not found for condition {condition.id}")
@@ -234,7 +234,7 @@ class FlattenFhir(ABC):
         """
         flat_allergyintolerance = ""
         _display = allergyintolerance.code.coding[0]
-        if allergyintolerance.code:
+        if 'code' in allergyintolerance and 'display' in _display:
             flat_allergyintolerance += f"{_display['display']} "
         else:
             _logger.info(f"Code not found for allergyintolerance {allergyintolerance.id}")
