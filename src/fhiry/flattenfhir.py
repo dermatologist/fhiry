@@ -125,25 +125,25 @@ class FlattenFhir(ABC):
         else:
             _logger.info(f"Effective date not found for observation {observation.id}")
             flat_observation += "of unknown date was "
-        if observation.valueQuantity:
+        if "valueQuantity" in observation and "value" in observation.valueQuantity:
             flat_observation += f"Value: {observation.valueQuantity.value} "
             if 'unit' in observation.valueQuantity:
                 flat_observation += f"{observation.valueQuantity.unit}. "
-        elif observation.valueString:
+        elif "valueString" in observation:
             flat_observation += f"Value: {observation.valueString}. "
-        elif observation.valueBoolean:
+        elif "valueBoolean" in observation:
             flat_observation += f"Value: {observation.valueBoolean}. "
-        elif observation.valueRange:
+        elif "valueRange" in observation and "low" in observation.valueRange and "high" in observation.valueRange:
             flat_observation += f"Value: {observation.valueRange.low.value} - {observation.valueRange.high.value} {observation.valueRange.low.unit}. "
-        elif observation.valueRatio:
+        elif "valueRatio" in observation and "numerator" in observation.valueRatio and "denominator" in observation.valueRatio:
             flat_observation += f"Value: {observation.valueRatio.numerator.value} {observation.valueRatio.numerator.unit} / {observation.valueRatio.denominator.value} {observation.valueRatio.denominator.unit}. "
-        elif observation.valuePeriod:
+        elif "valuePeriod" in observation and "start" in observation.valuePeriod and "end" in observation.valuePeriod:
             flat_observation += f"Value: {observation.valuePeriod.start} - {observation.valuePeriod.end}. "
-        elif observation.valueDateTime:
+        elif "valueDateTime" in observation and observation.valueDateTime != "":
             flat_observation += f"Value: {observation.valueDateTime}. "
-        elif observation.valueTime:
+        elif "valueTime" in observation and observation.valueTime != "":
             flat_observation += f"Value: {observation.valueTime}. "
-        elif observation.valueSampledData:
+        elif "valueSampledData" in observation and "data" in observation.valueSampledData:
             flat_observation += f"Value: {observation.valueSampledData.data}. "
         else:
             _logger.info(f"Value not found for observation {observation.id}")
