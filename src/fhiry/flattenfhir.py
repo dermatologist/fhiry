@@ -126,7 +126,9 @@ class FlattenFhir(ABC):
             _logger.info(f"Effective date not found for observation {observation.id}")
             flat_observation += "of unknown date was "
         if observation.valueQuantity:
-            flat_observation += f"Value: {observation.valueQuantity.value} {observation.valueQuantity.unit}. "
+            flat_observation += f"Value: {observation.valueQuantity.value} "
+            if 'unit' in observation.valueQuantity:
+                flat_observation += f"{observation.valueQuantity.unit}. "
         elif observation.valueString:
             flat_observation += f"Value: {observation.valueString}. "
         elif observation.valueBoolean:
@@ -146,9 +148,14 @@ class FlattenFhir(ABC):
         else:
             _logger.info(f"Value not found for observation {observation.id}")
             flat_observation += "Value: unknown. "
-        if 'coding' in observation.interpretation[0]:
-            _text = observation.interpretation[0]['coding'][0]
-            flat_observation += f"Interpretation: {_text['display']}. "
+        try:
+            if 'interpretation' in observation and 'coding' in observation.interpretation[0]:
+                if 'coding' in observation.interpretation[0]:
+                    _text = observation.interpretation[0]['coding'][0]
+                    flat_observation += f"Interpretation: {_text['display']}. "
+        except:
+            _logger.info(f"Interpretation not found for observation {observation.id}")
+            flat_observation += "Interpretation: unknown. "
         return flat_observation
 
     def flatten_medication(self, medication) -> str:
