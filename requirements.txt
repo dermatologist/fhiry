@@ -78,7 +78,7 @@ python-dateutil==2.8.2
     #   pandas
 pytz==2023.3.post1
     # via pandas
-requests==2.31.0
+requests==2.32.3
     # via
     #   google-api-core
     #   google-cloud-bigquery
