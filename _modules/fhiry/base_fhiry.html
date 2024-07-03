@@ -38,8 +38,15 @@
 <span class="sd"> https://opensource.org/licenses/MIT</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">json</span>
+
+
+<div class="viewcode-block" id="default_output_processor"><a class="viewcode-back" href="../../api/fhiry.html#fhiry.base_fhiry.default_output_processor">[docs]</a><span class="k">def</span> <span class="nf">default_output_processor</span><span class="p">(</span>
+    <span class="n">output</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="o">**</span><span class="n">output_kwargs</span><span class="p">:</span> <span class="n">Any</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">output</span></div>
 
 <div class="viewcode-block" id="BaseFhiry"><a class="viewcode-back" href="../../api/fhiry.html#fhiry.base_fhiry.BaseFhiry">[docs]</a><span class="k">class</span> <span class="nc">BaseFhiry</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_json</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -167,7 +174,51 @@
                     <span class="n">myCodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">])</span>
                 <span class="k">elif</span> <span class="s1">&#39;display&#39;</span> <span class="ow">in</span> <span class="n">entry</span><span class="p">:</span>
                     <span class="n">myCodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s1">&#39;display&#39;</span><span class="p">])</span>
-        <span class="k">return</span> <span class="n">myCodes</span></div></div>
+        <span class="k">return</span> <span class="n">myCodes</span></div>
+
+<div class="viewcode-block" id="BaseFhiry.llm_query"><a class="viewcode-back" href="../../api/fhiry.html#fhiry.base_fhiry.BaseFhiry.llm_query">[docs]</a>    <span class="k">def</span> <span class="nf">llm_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">llm</span><span class="p">,</span> <span class="n">embed_model</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Execute a query using llama_index</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            query (str): The natural language query</span>
+<span class="sd">            llm (Any): The Language Model</span>
+<span class="sd">            embed_model (str, optional): The embedding model string from HuggingFace. Defaults to None.</span>
+<span class="sd">            verbose (bool, optional): Verbose or not. Defaults to True.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            Exception: Llama_index not installed</span>
+<span class="sd">            Exception: Dataframe is empty</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Any: Results of the query</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">LLAMA_INDEX_ENABLED</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">LLAMA_INDEX_ENABLED</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="kn">from</span> <span class="nn">llama_index.query_engine</span> <span class="kn">import</span> <span class="n">PandasQueryEngine</span>
+            <span class="kn">from</span> <span class="nn">llama_index</span> <span class="kn">import</span> <span class="n">ServiceContext</span>
+            <span class="kn">from</span> <span class="nn">langchain.embeddings</span> <span class="kn">import</span> <span class="n">HuggingFaceEmbeddings</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">LLAMA_INDEX_ENABLED</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;llama_index not installed&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_df</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Dataframe is empty&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">embed_model</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">embed_model</span> <span class="o">=</span> <span class="n">HuggingFaceEmbeddings</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;BAAI/bge-small-en-v1.5&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">embed_model</span> <span class="o">=</span> <span class="n">HuggingFaceEmbeddings</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="n">embed_model</span><span class="p">)</span>
+        <span class="n">service_context</span> <span class="o">=</span> <span class="n">ServiceContext</span><span class="o">.</span><span class="n">from_defaults</span><span class="p">(</span>
+                <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span>
+                <span class="n">embed_model</span><span class="o">=</span><span class="n">embed_model</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="n">query_engine</span> <span class="o">=</span> <span class="n">PandasQueryEngine</span><span class="p">(</span>
+            <span class="n">df</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="p">,</span>
+            <span class="n">service_context</span><span class="o">=</span><span class="n">service_context</span><span class="p">,</span>
+            <span class="n">output_processor</span><span class="o">=</span><span class="n">default_output_processor</span><span class="p">,</span>
+            <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">query_engine</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">query</span><span class="p">)</span></div></div>
 </pre></div>
 
           </div>

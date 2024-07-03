@@ -44,6 +44,14 @@ fhiry.fhiry module
    :undoc-members:
    :show-inheritance:
 
+fhiry.flattenfhir module
+------------------------
+
+.. automodule:: fhiry.flattenfhir
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 fhiry.parallel module
 ---------------------
 

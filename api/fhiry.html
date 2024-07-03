@@ -85,6 +85,34 @@
 <dd></dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="fhiry.base_fhiry.BaseFhiry.llm_query">
+<span class="sig-name descname"><span class="pre">llm_query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">llm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embed_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/base_fhiry.html#BaseFhiry.llm_query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.base_fhiry.BaseFhiry.llm_query" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute a query using llama_index</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The natural language query</p></li>
+<li><p><strong>llm</strong> (<em>Any</em>) – The Language Model</p></li>
+<li><p><strong>embed_model</strong> (<a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) – The embedding model string from HuggingFace. Defaults to None.</p></li>
+<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3.10/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – Verbose or not. Defaults to True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3.10/library/exceptions.html#Exception" title="(in Python v3.10)"><strong>Exception</strong></a> – Llama_index not installed</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3.10/library/exceptions.html#Exception" title="(in Python v3.10)"><strong>Exception</strong></a> – Dataframe is empty</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Results of the query</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Any</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="fhiry.base_fhiry.BaseFhiry.process_bundle_dict">
 <span class="sig-name descname"><span class="pre">process_bundle_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bundle_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/base_fhiry.html#BaseFhiry.process_bundle_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.base_fhiry.BaseFhiry.process_bundle_dict" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -122,6 +150,11 @@
 <dd></dd></dl>
 
 </dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fhiry.base_fhiry.default_output_processor">
+<span class="sig-prename descclassname"><span class="pre">fhiry.base_fhiry.</span></span><span class="sig-name descname"><span class="pre">default_output_processor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.2)"><span class="pre">pandas.core.frame.DataFrame</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">output_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.10/library/typing.html#typing.Any" title="(in Python v3.10)"><span class="pre">Any</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/fhiry/base_fhiry.html#default_output_processor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.base_fhiry.default_output_processor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </section>
 <section id="module-fhiry.bqsearch">
@@ -249,6 +282,174 @@ ONLY COMMON FIELDS IN ALL resources will be mapped</p>
 <dt class="sig sig-object py" id="fhiry.fhiry.Fhiry.read_bundle_from_file">
 <span class="sig-name descname"><span class="pre">read_bundle_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/fhiry.html#Fhiry.read_bundle_from_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.fhiry.Fhiry.read_bundle_from_file" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-fhiry.flattenfhir">
+<span id="fhiry-flattenfhir-module"></span><h2>fhiry.flattenfhir module<a class="headerlink" href="#module-fhiry.flattenfhir" title="Permalink to this headline">¶</a></h2>
+<p>Copyright (c) 2024 Bell Eapen</p>
+<p>This software is released under the MIT License.
+<a class="reference external" href="https://opensource.org/licenses/MIT">https://opensource.org/licenses/MIT</a></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="fhiry.flattenfhir.FlattenFhir">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fhiry.flattenfhir.</span></span><span class="sig-name descname"><span class="pre">FlattenFhir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fhirobject</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_json</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/flattenfhir.html#FlattenFhir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.flattenfhir.FlattenFhir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.10/library/abc.html#abc.ABC" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="fhiry.flattenfhir.FlattenFhir.fhirobject">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fhirobject</span></span><a class="headerlink" href="#fhiry.flattenfhir.FlattenFhir.fhirobject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fhiry.flattenfhir.FlattenFhir.flatten">
+<span class="sig-name descname"><span class="pre">flatten</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/flattenfhir.html#FlattenFhir.flatten"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.flattenfhir.FlattenFhir.flatten" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fhiry.flattenfhir.FlattenFhir.flatten_allergyintolerance">
+<span class="sig-name descname"><span class="pre">flatten_allergyintolerance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">allergyintolerance</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/fhiry/flattenfhir.html#FlattenFhir.flatten_allergyintolerance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.flattenfhir.FlattenFhir.flatten_allergyintolerance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flatten the allergyintolerance object into a string representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>allergyintolerance</strong> (<em>AllergyIntolerance</em>) – The allergyintolerance object to be flattened.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The flattened string representation of the allergyintolerance object.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fhiry.flattenfhir.FlattenFhir.flatten_condition">
+<span class="sig-name descname"><span class="pre">flatten_condition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">condition</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/fhiry/flattenfhir.html#FlattenFhir.flatten_condition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.flattenfhir.FlattenFhir.flatten_condition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flatten the condition object into a string representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>condition</strong> (<em>Condition</em>) – The condition object to be flattened.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The flattened string representation of the condition object.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fhiry.flattenfhir.FlattenFhir.flatten_documentreference">
+<span class="sig-name descname"><span class="pre">flatten_documentreference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">documentreference</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/fhiry/flattenfhir.html#FlattenFhir.flatten_documentreference"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.flattenfhir.FlattenFhir.flatten_documentreference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flatten the documentreference object into a string representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>documentreference</strong> (<em>DocumentReference</em>) – The documentreference object to be flattened.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The flattened string representation of the documentreference object.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fhiry.flattenfhir.FlattenFhir.flatten_medication">
+<span class="sig-name descname"><span class="pre">flatten_medication</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">medication</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/fhiry/flattenfhir.html#FlattenFhir.flatten_medication"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.flattenfhir.FlattenFhir.flatten_medication" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flatten the medication object into a string representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>medication</strong> (<em>Medication</em>) – The medication object to be flattened.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The flattened string representation of the medication object.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fhiry.flattenfhir.FlattenFhir.flatten_observation">
+<span class="sig-name descname"><span class="pre">flatten_observation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">observation</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/fhiry/flattenfhir.html#FlattenFhir.flatten_observation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.flattenfhir.FlattenFhir.flatten_observation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flatten the observation object into a string representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>observation</strong> (<em>Observation</em>) – The observation object to be flattened.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The flattened string representation of the observation object.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fhiry.flattenfhir.FlattenFhir.flatten_patient">
+<span class="sig-name descname"><span class="pre">flatten_patient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">patient</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/fhiry/flattenfhir.html#FlattenFhir.flatten_patient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.flattenfhir.FlattenFhir.flatten_patient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flatten the patient object into a string representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>patient</strong> (<em>Patient</em>) – The patient object to be flattened.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The flattened string representation of the patient object.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fhiry.flattenfhir.FlattenFhir.flatten_procedure">
+<span class="sig-name descname"><span class="pre">flatten_procedure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">procedure</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/fhiry/flattenfhir.html#FlattenFhir.flatten_procedure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.flattenfhir.FlattenFhir.flatten_procedure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flatten the procedure object into a string representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>procedure</strong> (<em>Procedure</em>) – The procedure object to be flattened.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The flattened string representation of the procedure object.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="fhiry.flattenfhir.FlattenFhir.flattened">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">flattened</span></span><a class="headerlink" href="#fhiry.flattenfhir.FlattenFhir.flattened" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fhiry.flattenfhir.FlattenFhir.get_flattened_text">
+<span class="sig-name descname"><span class="pre">get_flattened_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entry</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/flattenfhir.html#FlattenFhir.get_flattened_text"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.flattenfhir.FlattenFhir.get_flattened_text" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fhiry.flattenfhir.FlattenFhir.get_timeago">
+<span class="sig-name descname"><span class="pre">get_timeago</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">datestring</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/fhiry/flattenfhir.html#FlattenFhir.get_timeago"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.flattenfhir.FlattenFhir.get_timeago" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a string representing the time elapsed since the given date.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>datestring</strong> (<em>datetime</em>) – The date to calculate the time ago from.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A string representing the time elapsed since the given date.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 

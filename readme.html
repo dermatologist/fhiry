@@ -41,9 +41,16 @@
 <img alt="GitHub tag (latest by date)" src="https://img.shields.io/github/v/tag/dermatologist/fhiry" /></p>
 <p>:fire: <strong>FHIRy</strong> is a <a class="reference external" href="https://www.python.org/">python</a> package to facilitate health data analytics and machine learning by converting a folder of <a class="reference external" href="https://www.hl7.org/fhir/bundle.html">FHIR bundles</a>/ndjson from <a class="reference external" href="https://hl7.org/fhir/uv/bulkdata/export/index.html">bulk data export</a> into a <a class="reference external" href="https://pandas.pydata.org/docs/user_guide/index.html">pandas</a> data frame for analysis. You can import the dataframe
 into ML packages such as Tensorflow and PyTorch. <strong>FHIRy also supports FHIR server search and FHIR tables on BigQuery.</strong></p>
+<section id="update">
+<h2>UPDATE<a class="headerlink" href="#update" title="Permalink to this headline">¶</a></h2>
+<p>Recently added support for <strong>LLM based natural language queries</strong> of FHIR bundles/ndjson using <span class="xref myst">llama-index</span>. Please install the llm extras as follows. Please be cognizant of the privacy issues with publically hosted LLMs. Any feedback will be highly appreciated. <span class="xref myst">See usage</span>!</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">fhiry</span><span class="p">[</span><span class="n">llm</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><span class="xref myst">See usage</span>.</p>
 <p>Test this with the <a class="reference external" href="https://synthea.mitre.org/downloads">synthea sample</a> or the downloaded ndjson from the <a class="reference external" href="https://bulk-data.smarthealthit.org/">SMART Bulk data server</a>. Use the ‘Discussions’ tab above for feature requests.</p>
 <p>:sparkles: Checkout <a class="reference external" href="https://github.com/dermatologist/kedro-multimodal">this template</a> for Multimodal machine learning in healthcare!</p>
-<p>:fire: Checkout <a class="reference external" href="https://github.com/dermatologist/medprompt">MedPrompt</a> for Medical LLM prompts, including FHIR related prompts, such as text-to-FHIRQuery mapper!</p>
+</section>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <section id="stable">
@@ -183,6 +190,7 @@ into ML packages such as Tensorflow and PyTorch. <strong>FHIRy also supports FHI
 <h3>Navigation</h3>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#update">UPDATE</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#filters">Filters</a></li>
