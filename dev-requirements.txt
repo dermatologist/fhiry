@@ -10,28 +10,34 @@ attrs==21.2.0
     # via pytest
 babel==2.9.1
     # via sphinx
-backports-entry-points-selectable==1.1.0
-    # via virtualenv
+cachetools==5.3.3
+    # via
+    #   -c requirements.txt
+    #   tox
 certifi==2024.6.2
     # via
     #   -c requirements.txt
     #   requests
+chardet==5.2.0
+    # via tox
 charset-normalizer==3.3.2
     # via
     #   -c requirements.txt
     #   requests
+colorama==0.4.6
+    # via tox
 commonmark==0.9.1
     # via recommonmark
 coverage[toml]==5.5
     # via pytest-cov
-distlib==0.3.2
+distlib==0.3.8
     # via virtualenv
 docutils==0.17.1
     # via
     #   myst-parser
     #   recommonmark
     #   sphinx
-filelock==3.0.12
+filelock==3.15.4
     # via
     #   tox
     #   virtualenv
@@ -64,22 +70,25 @@ myst-parser[linkify]==0.18.1
 packaging==24.1
     # via
     #   -c requirements.txt
+    #   pyproject-api
     #   pytest
     #   setuptools-scm
     #   sphinx
     #   tox
-platformdirs==2.3.0
-    # via virtualenv
-pluggy==1.0.0
+platformdirs==4.2.2
+    # via
+    #   tox
+    #   virtualenv
+pluggy==1.5.0
     # via
     #   pytest
     #   tox
 py==1.10.0
-    # via
-    #   pytest
-    #   tox
+    # via pytest
 pygments==2.10.0
     # via sphinx
+pyproject-api==1.7.1
+    # via tox
 pytest==7.1.2
     # via
     #   -r dev-requirements.in
@@ -103,11 +112,6 @@ responses==0.22.0
     # via -r dev-requirements.in
 setuptools-scm==6.4.2
     # via -r dev-requirements.in
-six==1.16.0
-    # via
-    #   -c requirements.txt
-    #   tox
-    #   virtualenv
 snowballstemmer==2.1.0
     # via sphinx
 sphinx==4.4.0
@@ -131,12 +135,13 @@ toml==0.10.2
     # via
     #   coverage
     #   responses
-    #   tox
-tomli==1.2.1
+tomli==2.0.1
     # via
+    #   pyproject-api
     #   pytest
     #   setuptools-scm
-tox==3.25.0
+    #   tox
+tox==4.16.0
     # via -r dev-requirements.in
 types-toml==0.10.8.1
     # via responses
@@ -149,7 +154,7 @@ urllib3==2.2.2
     #   -c requirements.txt
     #   requests
     #   responses
-virtualenv==20.8.0
+virtualenv==20.26.3
     # via tox
 wheel==0.41.0
     # via -r dev-requirements.in
