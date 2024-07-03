@@ -4,60 +4,51 @@
 #
 #    pip-compile
 #
-annotated-types==0.7.0
-    # via pydantic
 cachetools==5.3.3
     # via google-auth
-certifi==2024.2.2
+certifi==2024.6.2
     # via requests
 charset-normalizer==3.3.2
     # via requests
 db-dtypes==1.2.0
     # via fhiry (setup.py)
-dnspython==2.6.1
-    # via email-validator
-email-validator==2.1.1
-    # via pydantic
-fhir-resources==7.1.0
-    # via fhiry (setup.py)
-google-api-core[grpc]==2.19.0
+google-api-core[grpc]==2.19.1
     # via
     #   google-api-core
     #   google-cloud-bigquery
     #   google-cloud-core
-google-auth==2.29.0
+google-auth==2.31.0
     # via
     #   google-api-core
     #   google-cloud-bigquery
     #   google-cloud-core
-google-cloud-bigquery==3.23.1
+google-cloud-bigquery==3.25.0
     # via fhiry (setup.py)
 google-cloud-core==2.4.1
     # via google-cloud-bigquery
 google-crc32c==1.5.0
     # via google-resumable-media
-google-resumable-media==2.7.0
+google-resumable-media==2.7.1
     # via google-cloud-bigquery
-googleapis-common-protos==1.63.0
+googleapis-common-protos==1.63.2
     # via
     #   google-api-core
     #   grpcio-status
-grpcio==1.64.0
+grpcio==1.64.1
     # via
     #   google-api-core
     #   grpcio-status
-grpcio-status==1.62.2
+grpcio-status==1.64.1
     # via google-api-core
 idna==3.7
-    # via
-    #   email-validator
-    #   requests
+    # via requests
 numpy==1.26.4
     # via
     #   db-dtypes
+    #   fhiry (setup.py)
     #   pandas
     #   pyarrow
-packaging==24.0
+packaging==24.1
     # via
     #   db-dtypes
     #   google-cloud-bigquery
@@ -65,9 +56,11 @@ pandas==2.2.2
     # via
     #   db-dtypes
     #   fhiry (setup.py)
-proto-plus==1.23.0
+prodict==0.8.18
+    # via fhiry (setup.py)
+proto-plus==1.24.0
     # via google-api-core
-protobuf==4.25.3
+protobuf==5.27.2
     # via
     #   google-api-core
     #   googleapis-common-protos
@@ -81,19 +74,13 @@ pyasn1==0.6.0
     #   rsa
 pyasn1-modules==0.4.0
     # via google-auth
-pydantic[email]==2.7.1
-    # via
-    #   fhir-resources
-    #   pydantic
-pydantic-core==2.18.2
-    # via pydantic
 python-dateutil==2.9.0.post0
     # via
     #   google-cloud-bigquery
     #   pandas
 pytz==2024.1
     # via pandas
-requests==2.32.2
+requests==2.32.3
     # via
     #   google-api-core
     #   google-cloud-bigquery
@@ -105,11 +92,7 @@ timeago==1.0.16
     # via fhiry (setup.py)
 tqdm==4.66.4
     # via fhiry (setup.py)
-typing-extensions==4.11.0
-    # via
-    #   pydantic
-    #   pydantic-core
 tzdata==2024.1
     # via pandas
-urllib3==2.2.1
+urllib3==2.2.2
     # via requests
