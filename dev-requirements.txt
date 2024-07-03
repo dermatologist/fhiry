@@ -26,7 +26,7 @@ coverage[toml]==5.5
     # via pytest-cov
 distlib==0.3.2
     # via virtualenv
-docutils==0.17.1
+docutils==0.20.1
     # via
     #   myst-parser
     #   recommonmark
@@ -39,7 +39,7 @@ idna==3.7
     # via
     #   -c requirements.txt
     #   requests
-imagesize==1.2.0
+imagesize==1.4.1
     # via sphinx
 iniconfig==1.1.1
     # via pytest
@@ -78,7 +78,7 @@ py==1.10.0
     # via
     #   pytest
     #   tox
-pygments==2.10.0
+pygments==2.16.1
     # via sphinx
 pytest==7.1.2
     # via
@@ -110,11 +110,12 @@ six==1.16.0
     #   virtualenv
 snowballstemmer==2.1.0
     # via sphinx
-sphinx==4.4.0
+sphinx==7.2.6
     # via
     #   -r dev-requirements.in
     #   myst-parser
     #   recommonmark
+    #   sphinxcontrib-serializinghtml
 sphinxcontrib-applehelp==1.0.2
     # via sphinx
 sphinxcontrib-devhelp==1.0.2
@@ -125,7 +126,7 @@ sphinxcontrib-jsmath==1.0.1
     # via sphinx
 sphinxcontrib-qthelp==1.0.3
     # via sphinx
-sphinxcontrib-serializinghtml==1.1.5
+sphinxcontrib-serializinghtml==1.1.9
     # via sphinx
 toml==0.10.2
     # via
