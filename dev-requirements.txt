@@ -101,7 +101,7 @@ requests==2.32.3
     #   sphinx
 responses==0.22.0
     # via -r dev-requirements.in
-setuptools-scm==6.4.2
+setuptools-scm==8.1.0
     # via -r dev-requirements.in
 six==1.16.0
     # via
