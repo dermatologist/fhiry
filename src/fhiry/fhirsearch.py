@@ -47,7 +47,8 @@ class Fhirsearch(BaseFhiry):
         else:
             df = pd.DataFrame(columns=[])
 
-        return df
+        self._df = df
+        return self._df
 
 
 

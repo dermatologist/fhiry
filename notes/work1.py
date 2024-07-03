@@ -2,7 +2,6 @@ import json
 from types import CodeType
 import pandas as pd
 import numpy as np
-import fhir.resources
 with open('/gpfs/fs0/scratch/a/archer/beapen/home/scratch/fhiry/data/fhir/Aaafhir.json', 'r') as f:
     json_in = f.read()
 

@@ -5,8 +5,15 @@
  https://opensource.org/licenses/MIT
 """
 
+from typing import Any
 import pandas as pd
 import json
+
+
+def default_output_processor(
+    output: str, df: pd.DataFrame, **output_kwargs: Any
+) -> str:
+    return output
 
 class BaseFhiry(object):
     def __init__(self, config_json=None):
@@ -135,3 +142,47 @@ class BaseFhiry(object):
                 elif 'display' in entry:
                     myCodes.append(entry['display'])
         return myCodes
+
+    def llm_query(self, query, llm, embed_model=None, verbose=True):
+        """Execute a query using llama_index
+
+        Args:
+            query (str): The natural language query
+            llm (Any): The Language Model
+            embed_model (str, optional): The embedding model string from HuggingFace. Defaults to None.
+            verbose (bool, optional): Verbose or not. Defaults to True.
+
+        Raises:
+            Exception: Llama_index not installed
+            Exception: Dataframe is empty
+
+        Returns:
+            Any: Results of the query
+        """
+
+        LLAMA_INDEX_ENABLED = False
+        try:
+            LLAMA_INDEX_ENABLED = True
+            from llama_index.query_engine import PandasQueryEngine
+            from llama_index import ServiceContext
+            from langchain.embeddings import HuggingFaceEmbeddings
+        except:
+            pass
+        if not LLAMA_INDEX_ENABLED:
+            raise Exception("llama_index not installed")
+        if self._df is None:
+            raise Exception("Dataframe is empty")
+        if embed_model is None:
+            embed_model = HuggingFaceEmbeddings(model_name="BAAI/bge-small-en-v1.5")
+        else:
+            embed_model = HuggingFaceEmbeddings(model_name=embed_model)
+        service_context = ServiceContext.from_defaults(
+                llm=llm,
+                embed_model=embed_model,
+            )
+        query_engine = PandasQueryEngine(
+            df=self._df,
+            service_context=service_context,
+            output_processor=default_output_processor,
+            verbose=verbose)
+        return query_engine.query(query)
