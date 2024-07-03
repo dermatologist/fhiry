@@ -1,0 +1,26 @@
+{
+    "resourceType": "DocumentReference",
+    "id": "ex-documentreference2",
+    "meta": {
+        "security": [
+            {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+                "code": "HTEST"
+            }
+        ]
+    },
+    "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative: DocumentReference</b><a name=\"ex-documentreference2\"> </a><a name=\"hcex-documentreference2\"> </a></p><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">ResourceDocumentReference &quot;ex-documentreference2&quot; </p><p style=\"margin-bottom: 0px\">Security Labels: <span title=\"{http://terminology.hl7.org/CodeSystem/v3-ActReason http://terminology.hl7.org/CodeSystem/v3-ActReason}\">http://terminology.hl7.org/CodeSystem/v3-ActReason</span></p></div><p><b>status</b>: current</p><blockquote><p><b>content</b></p><h3>Attachments</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>ContentType</b></td><td><b>Title</b></td></tr><tr><td style=\"display: none\">*</td><td>text/plain</td><td>Hello World</td></tr></table></blockquote></div>"
+    },
+    "status": "current",
+    "content": [
+        {
+            "attachment": {
+                "contentType": "text/plain",
+                "title": "Xray report",
+                "data": "Normal chest x-ray"
+            }
+        }
+    ]
+}
