@@ -9,20 +9,16 @@ Virtual flattened view of *FHIR Bundle / ndjson / FHIR server / BigQuery!*
 into ML packages such as Tensorflow and PyTorch. **FHIRy also supports FHIR server search and FHIR tables on BigQuery.**
 
 ## UPDATE
-Recently added support for **LLM based natural language queries** of FHIR bundles/ndjson using [llama-index](examples/llm_example.py). Please install the llm extras from the develop branch as follows. Please be cognizant of the privacy issues with publically hosted LLMs. Any feedback will be highly appreciated. [See usage](examples/llm_example.py)!
+Recently added support for **LLM based natural language queries** of FHIR bundles/ndjson using [llama-index](examples/llm_example.py). Please install the llm extras as follows. Please be cognizant of the privacy issues with publically hosted LLMs. Any feedback will be highly appreciated. [See usage](examples/llm_example.py)!
 
 ```
-git clone https://github.com/dermatologist/fhiry.git@develop
-cd fhiry
-pip install -e .[llm]
+pip install fhiry[llm]
 ```
 [See usage](examples/llm_example.py).
 
 Test this with the [synthea sample](https://synthea.mitre.org/downloads) or the downloaded ndjson from the [SMART Bulk data server](https://bulk-data.smarthealthit.org/). Use the 'Discussions' tab above for feature requests.
 
 :sparkles: Checkout [this template](https://github.com/dermatologist/kedro-multimodal) for Multimodal machine learning in healthcare!
-
-:fire: Checkout [MedPrompt](https://github.com/dermatologist/medprompt) for Medical LLM prompts, including FHIR related prompts, such as text-to-FHIRQuery mapper!
 
 
 ## Installation
