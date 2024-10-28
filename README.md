@@ -8,7 +8,13 @@ Virtual flattened view of *FHIR Bundle / ndjson / FHIR server / BigQuery!*
 :fire: **FHIRy** is a [python](https://www.python.org/) package to facilitate health data analytics and machine learning by converting a folder of [FHIR bundles](https://www.hl7.org/fhir/bundle.html)/ndjson from [bulk data export](https://hl7.org/fhir/uv/bulkdata/export/index.html) into a [pandas](https://pandas.pydata.org/docs/user_guide/index.html) data frame for analysis. You can import the dataframe
 into ML packages such as Tensorflow and PyTorch. **FHIRy also supports FHIR server search and FHIR tables on BigQuery.**
 
-## UPDATE
+
+Test this with the [synthea sample](https://synthea.mitre.org/downloads) or the downloaded ndjson from the [SMART Bulk data server](https://bulk-data.smarthealthit.org/). Use the 'Discussions' tab above for feature requests.
+
+:sparkles: Checkout [this template](https://github.com/dermatologist/kedro-multimodal) for Multimodal machine learning in healthcare!
+
+
+## UPDATE 1
 Recently added support for **LLM based natural language queries** of FHIR bundles/ndjson using [llama-index](examples/llm_example.py). Please install the llm extras as follows. Please be cognizant of the privacy issues with publically hosted LLMs. Any feedback will be highly appreciated. [See usage](examples/llm_example.py)!
 
 ```
@@ -16,10 +22,15 @@ pip install fhiry[llm]
 ```
 [See usage](examples/llm_example.py).
 
-Test this with the [synthea sample](https://synthea.mitre.org/downloads) or the downloaded ndjson from the [SMART Bulk data server](https://bulk-data.smarthealthit.org/). Use the 'Discussions' tab above for feature requests.
+## UPDATE 2
+Added support for converting a FHIR Bundle to its textual representation for LLMs. You can also convert individual FHIR resources including *Patient, Condition, Observation, Procedure, Medication, AllergyIntolerance and DocumentReference*.
 
-:sparkles: Checkout [this template](https://github.com/dermatologist/kedro-multimodal) for Multimodal machine learning in healthcare!
-
+```
+from fhiry import FlattenFhir
+bundle = json.load(jsonfile)
+flatten_fhir = FlattenFhir(bundle)
+print(flatten_fhir.flattened)
+```
 
 ## Installation
 
