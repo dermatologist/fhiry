@@ -2,8 +2,6 @@
 #    uv pip compile dev-requirements.in -o dev-requirements.txt --universal
 alabaster==0.7.12
     # via sphinx
-atomicwrites==1.4.1 ; sys_platform == 'win32'
-    # via pytest
 attrs==21.2.0
     # via pytest
 babel==2.9.1
@@ -18,15 +16,9 @@ charset-normalizer==3.3.2
     # via
     #   -c requirements.txt
     #   requests
-colorama==0.4.6 ; sys_platform == 'win32' or platform_system == 'Windows'
-    # via
-    #   -c requirements.txt
-    #   pytest
-    #   sphinx
-    #   tox
 commonmark==0.9.1
     # via recommonmark
-coverage==5.5
+coverage[toml]==7.6.7
     # via pytest-cov
 distlib==0.3.2
     # via virtualenv
@@ -63,7 +55,7 @@ mdit-py-plugins==0.3.5
     # via myst-parser
 mdurl==0.1.2
     # via markdown-it-py
-myst-parser==0.18.1
+myst-parser[linkify]==0.18.1
     # via -r dev-requirements.in
 packaging==24.1
     # via
@@ -89,7 +81,7 @@ pytest==7.1.2
     # via
     #   -r dev-requirements.in
     #   pytest-cov
-pytest-cov==3.0.0
+pytest-cov==6.0.0
     # via -r dev-requirements.in
 pytz==2024.1
     # via
@@ -106,10 +98,6 @@ requests==2.32.3
     #   sphinx
 responses==0.22.0
     # via -r dev-requirements.in
-setuptools==75.5.0
-    # via
-    #   -r dev-requirements.in
-    #   setuptools-scm
 setuptools-scm==6.4.2
     # via -r dev-requirements.in
 six==1.16.0
@@ -138,7 +126,6 @@ sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
 toml==0.10.2
     # via
-    #   coverage
     #   responses
     #   tox
 tomli==1.2.1
