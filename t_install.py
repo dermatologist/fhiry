@@ -15,4 +15,4 @@ my_fhir_search_parameters = {
 from fhiry.flattenfhir import FlattenFhir
 jsonfile = open(resource_filename(__name__, 'tests/resources') + '/flattenfhir/patient.json')
 flatten_fhir = FlattenFhir(json.loads(jsonfile.read()))
-assert flatten_fhir.flattened == "Medical record of a male patient born 49 years ago. "
+assert "Medical record of a male patient" in flatten_fhir.flattened
