@@ -15,6 +15,7 @@ def default_output_processor(
 ) -> str:
     return output
 
+
 class BaseFhiry(object):
     def __init__(self, config_json=None):
         self._df = None
@@ -33,12 +34,14 @@ class BaseFhiry(object):
         self._delete_col_raw_coding = True
         if config_json is not None:
             try:
-                with open(config_json, 'r') as f: # config_json is a file path
+                with open(config_json, "r") as f:  # config_json is a file path
                     self.config = json.load(f)
             except:
-                self.config = json.loads(config_json)   # config_json is a json string
+                self.config = json.loads(config_json)  # config_json is a json string
         else:
-            self.config = json.loads('{ "REMOVE": ["resource.text.div"], "RENAME": { "resource.id": "id" } }')
+            self.config = json.loads(
+                '{ "REMOVE": ["resource.text.div"], "RENAME": { "resource.id": "id" } }'
+            )
 
     @property
     def df(self):
@@ -53,22 +56,21 @@ class BaseFhiry(object):
         self._delete_col_raw_coding = delete_col_raw_coding
 
     def read_bundle_from_bundle_dict(self, bundle_dict):
-        return pd.json_normalize(bundle_dict['entry'])
+        return pd.json_normalize(bundle_dict["entry"])
 
     def delete_unwanted_cols(self):
-        for col in self.config['REMOVE']:
+        for col in self.config["REMOVE"]:
             if col in self._df.columns:
                 del self._df[col]
 
     def rename_cols(self):
-        self._df.rename(columns=self.config['RENAME'], inplace=True)
+        self._df.rename(columns=self.config["RENAME"], inplace=True)
 
     def process_df(self):
         self.delete_unwanted_cols()
         self.convert_object_to_list()
         self.add_patient_id()
         self.rename_cols()
-
 
     def process_bundle_dict(self, bundle_dict):
         self._df = self.read_bundle_from_bundle_dict(bundle_dict)
@@ -79,44 +81,54 @@ class BaseFhiry(object):
         return self._df
 
     def convert_object_to_list(self):
-        """Convert object to a list of codes
-        """
+        """Convert object to a list of codes"""
         for col in self._df.columns:
-            if 'coding' in col:
-                codes = self._df.apply(
-                    lambda x: self.process_list(x[col]), axis=1)
+            if "coding" in col:
+                codes = self._df.apply(lambda x: self.process_list(x[col]), axis=1)
                 self._df = pd.concat(
-                    [self._df, codes.to_frame(name=col+'codes')], axis=1)
+                    [self._df, codes.to_frame(name=col + "codes")], axis=1
+                )
                 if self._delete_col_raw_coding:
                     del self._df[col]
-            if 'display' in col:
-                codes = self._df.apply(
-                    lambda x: self.process_list(x[col]), axis=1)
+            if "display" in col:
+                codes = self._df.apply(lambda x: self.process_list(x[col]), axis=1)
                 self._df = pd.concat(
-                    [self._df, codes.to_frame(name=col+'display')], axis=1)
+                    [self._df, codes.to_frame(name=col + "display")], axis=1
+                )
                 del self._df[col]
 
     def add_patient_id(self):
-        """Create a patientId column with the resource.id if a Patient resource or with the resource.subject.reference if other resource type
-        """
+        """Create a patientId column with the resource.id if a Patient resource or with the resource.subject.reference if other resource type"""
         try:
             # PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
             newframe = self._df.copy()
-            newframe['patientId'] = self._df.apply(lambda x: x['resource.id'] if x['resource.resourceType']
-                                               == 'Patient' else self.check_subject_reference(x), axis=1)
+            newframe["patientId"] = self._df.apply(
+                lambda x: (
+                    x["resource.id"]
+                    if x["resource.resourceType"] == "Patient"
+                    else self.check_subject_reference(x)
+                ),
+                axis=1,
+            )
             self._df = newframe
         except:
             try:
                 newframe = self._df.copy()
-                newframe['patientId'] = self._df.apply(lambda x: x['id'] if x['resourceType']
-                                                    == 'Patient' else self.check_subject_reference(x), axis=1)
+                newframe["patientId"] = self._df.apply(
+                    lambda x: (
+                        x["id"]
+                        if x["resourceType"] == "Patient"
+                        else self.check_subject_reference(x)
+                    ),
+                    axis=1,
+                )
                 self._df = newframe
             except:
                 pass
 
     def check_subject_reference(self, row):
         try:
-            return row['resource.subject.reference'].replace('Patient/', '')
+            return row["resource.subject.reference"].replace("Patient/", "")
         except:
             return ""
 
@@ -137,10 +149,10 @@ class BaseFhiry(object):
         myCodes = []
         if isinstance(myList, list):
             for entry in myList:
-                if 'code' in entry:
-                    myCodes.append(entry['code'])
-                elif 'display' in entry:
-                    myCodes.append(entry['display'])
+                if "code" in entry:
+                    myCodes.append(entry["code"])
+                elif "display" in entry:
+                    myCodes.append(entry["display"])
         return myCodes
 
     def llm_query(self, query, llm, embed_model=None, verbose=True):
@@ -177,12 +189,13 @@ class BaseFhiry(object):
         else:
             embed_model = HuggingFaceEmbeddings(model_name=embed_model)
         service_context = ServiceContext.from_defaults(
-                llm=llm,
-                embed_model=embed_model,
-            )
+            llm=llm,
+            embed_model=embed_model,
+        )
         query_engine = PandasQueryEngine(
             df=self._df,
             service_context=service_context,
             output_processor=default_output_processor,
-            verbose=verbose)
+            verbose=verbose,
+        )
         return query_engine.query(query)

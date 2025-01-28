@@ -5,12 +5,12 @@
  https://opensource.org/licenses/MIT
 """
 
-
 import pandas as pd
 import json
 import os
 from .base_fhiry import BaseFhiry
 from tqdm import tqdm
+
 
 class Fhirndjson(BaseFhiry):
     def __init__(self, config_json=None):
@@ -28,7 +28,6 @@ class Fhirndjson(BaseFhiry):
     @folder.setter
     def folder(self, folder):
         self._folder = folder
-
 
     def read_resource_from_line(self, line):
         return pd.json_normalize(json.loads(line))
@@ -52,5 +51,3 @@ class Fhirndjson(BaseFhiry):
                     df = pd.concat([df, self._df])
         self._df = df
         return self._df
-
-
