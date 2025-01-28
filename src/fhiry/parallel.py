@@ -13,6 +13,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 def process(folder, config_json=None):
     logger.info("CPU count: {}".format(mp.cpu_count()))
     pool = mp.Pool(mp.cpu_count())
@@ -21,7 +22,7 @@ def process(folder, config_json=None):
     if os.path.isdir(folder):
         for filename in os.listdir(folder):
             if filename.endswith(".json"):
-                filenames.append(folder + '/' + filename)
+                filenames.append(folder + "/" + filename)
     else:
         filenames.append(folder)
 
@@ -39,7 +40,7 @@ def ndjson(folder, config_json=None):
     if os.path.isdir(folder):
         for filename in os.listdir(folder):
             if filename.endswith(".ndjson"):
-                filenames.append(folder + '/' + filename)
+                filenames.append(folder + "/" + filename)
     else:
         filenames.append(folder)
 

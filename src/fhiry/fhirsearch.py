@@ -2,6 +2,7 @@ import pandas as pd
 import requests
 from .base_fhiry import BaseFhiry
 
+
 class Fhirsearch(BaseFhiry):
 
     def __init__(self, fhir_base_url, config_json=None):
@@ -23,15 +24,20 @@ class Fhirsearch(BaseFhiry):
 
         headers = {"Content-Type": "application/fhir+json"}
 
-        if '_count' not in search_parameters:
-            search_parameters['_count'] = self.page_size
+        if "_count" not in search_parameters:
+            search_parameters["_count"] = self.page_size
 
-        search_url = f'{self.fhir_base_url}/{resource_type}'
-        r = requests.get(search_url, params=search_parameters, headers=headers, **self.requests_kwargs)
+        search_url = f"{self.fhir_base_url}/{resource_type}"
+        r = requests.get(
+            search_url,
+            params=search_parameters,
+            headers=headers,
+            **self.requests_kwargs,
+        )
         r.raise_for_status()
         bundle_dict = r.json()
 
-        if 'entry' in bundle_dict:
+        if "entry" in bundle_dict:
             df = super().process_bundle_dict(bundle_dict)
 
             next_page_url = get_next_page_url(bundle_dict)
@@ -51,13 +57,12 @@ class Fhirsearch(BaseFhiry):
         return self._df
 
 
-
 def get_next_page_url(bundle_dict):
-    links = bundle_dict.get('link')
+    links = bundle_dict.get("link")
     if links:
-       for link in links:
-            relation = link.get('relation')
-            if relation == 'next':
-                return link.get('url')
+        for link in links:
+            relation = link.get("relation")
+            if relation == "next":
+                return link.get("url")
 
     return None
