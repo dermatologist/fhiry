@@ -18,7 +18,7 @@ charset-normalizer==3.3.2
     #   requests
 commonmark==0.9.1
     # via recommonmark
-coverage[toml]==5.5
+coverage[toml]==7.8.0
     # via pytest-cov
 distlib==0.3.2
     # via virtualenv
@@ -36,6 +36,8 @@ idna==3.7
     #   -c requirements.txt
     #   requests
 imagesize==1.2.0
+    # via sphinx
+importlib-metadata==8.6.1
     # via sphinx
 iniconfig==1.1.1
     # via pytest
@@ -81,7 +83,7 @@ pytest==7.1.2
     # via
     #   -r dev-requirements.in
     #   pytest-cov
-pytest-cov==3.0.0
+pytest-cov==6.1.1
     # via -r dev-requirements.in
 pytz==2024.1
     # via
@@ -126,11 +128,11 @@ sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
 toml==0.10.2
     # via
-    #   coverage
     #   responses
     #   tox
 tomli==1.2.1
     # via
+    #   coverage
     #   pytest
     #   setuptools-scm
 tox==3.25.0
@@ -150,3 +152,5 @@ virtualenv==20.8.0
     # via tox
 wheel==0.41.0
     # via -r dev-requirements.in
+zipp==3.21.0
+    # via importlib-metadata
