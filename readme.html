@@ -1,18 +1,17 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>:fire: fhiry - FHIR to pandas dataframe for data analytics, AI and ML &#8212; fhiry unknown documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
+    <title>:fire: fhiry - FHIR to pandas dataframe for data analytics, AI and ML &#8212; fhiry 0.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=0ca6144b" />
+    <script src="_static/documentation_options.js?v=7026087e"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="fhiry" href="api/modules.html" />
@@ -20,8 +19,9 @@
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -34,68 +34,78 @@
           <div class="body" role="main">
             
   <section class="tex2jax_ignore mathjax_ignore" id="fire-fhiry-fhir-to-pandas-dataframe-for-data-analytics-ai-and-ml">
-<h1>:fire: fhiry - FHIR to pandas dataframe for data analytics, AI and ML<a class="headerlink" href="#fire-fhiry-fhir-to-pandas-dataframe-for-data-analytics-ai-and-ml" title="Permalink to this headline">¶</a></h1>
+<h1>:fire: fhiry - FHIR to pandas dataframe for data analytics, AI and ML<a class="headerlink" href="#fire-fhiry-fhir-to-pandas-dataframe-for-data-analytics-ai-and-ml" title="Link to this heading">¶</a></h1>
 <p>Virtual flattened view of <em>FHIR Bundle / ndjson / FHIR server / BigQuery!</em></p>
 <p><img alt="Libraries.io SourceRank" src="https://img.shields.io/librariesio/sourcerank/pypi/fhiry" />
 <a class="reference external" href="https://pypi.python.org/pypi/fhiry/"><img alt="PyPI download total" src="https://img.shields.io/pypi/dm/fhiry.svg" /></a>
 <img alt="GitHub tag (latest by date)" src="https://img.shields.io/github/v/tag/dermatologist/fhiry" /></p>
 <p>:fire: <strong>FHIRy</strong> is a <a class="reference external" href="https://www.python.org/">python</a> package to facilitate health data analytics and machine learning by converting a folder of <a class="reference external" href="https://www.hl7.org/fhir/bundle.html">FHIR bundles</a>/ndjson from <a class="reference external" href="https://hl7.org/fhir/uv/bulkdata/export/index.html">bulk data export</a> into a <a class="reference external" href="https://pandas.pydata.org/docs/user_guide/index.html">pandas</a> data frame for analysis. You can import the dataframe
 into ML packages such as Tensorflow and PyTorch. <strong>FHIRy also supports FHIR server search and FHIR tables on BigQuery.</strong></p>
-<section id="update">
-<h2>UPDATE<a class="headerlink" href="#update" title="Permalink to this headline">¶</a></h2>
-<p>Recently added support for <strong>LLM based natural language queries</strong> of FHIR bundles/ndjson using <span class="xref myst">llama-index</span>. Please install the llm extras as follows. Please be cognizant of the privacy issues with publically hosted LLMs. Any feedback will be highly appreciated. <span class="xref myst">See usage</span>!</p>
+<p>Test this with the <a class="reference external" href="https://synthea.mitre.org/downloads">synthea sample</a> or the downloaded ndjson from the <a class="reference external" href="https://bulk-data.smarthealthit.org/">SMART Bulk data server</a>. Use the ‘Discussions’ tab above for feature requests.</p>
+<p>:sparkles: Checkout <a class="reference external" href="https://github.com/dermatologist/kedro-multimodal">this template</a> for Multimodal machine learning in healthcare!</p>
+<section id="update-1">
+<h2>UPDATE 1<a class="headerlink" href="#update-1" title="Link to this heading">¶</a></h2>
+<p>Recently added support for <strong>LLM based natural language queries</strong> of FHIR bundles/ndjson using <a class="reference internal" href="#examples/llm_example.py"><span class="xref myst">llama-index</span></a>. Please install the llm extras as follows. Please be cognizant of the privacy issues with publically hosted LLMs. Any feedback will be highly appreciated. <a class="reference internal" href="#examples/llm_example.py"><span class="xref myst">See usage</span></a>!</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">fhiry</span><span class="p">[</span><span class="n">llm</span><span class="p">]</span>
 </pre></div>
 </div>
-<p><span class="xref myst">See usage</span>.</p>
-<p>Test this with the <a class="reference external" href="https://synthea.mitre.org/downloads">synthea sample</a> or the downloaded ndjson from the <a class="reference external" href="https://bulk-data.smarthealthit.org/">SMART Bulk data server</a>. Use the ‘Discussions’ tab above for feature requests.</p>
-<p>:sparkles: Checkout <a class="reference external" href="https://github.com/dermatologist/kedro-multimodal">this template</a> for Multimodal machine learning in healthcare!</p>
+<p><a class="reference internal" href="#examples/llm_example.py"><span class="xref myst">See usage</span></a>.</p>
+</section>
+<section id="update-2">
+<h2>UPDATE 2<a class="headerlink" href="#update-2" title="Link to this heading">¶</a></h2>
+<p>Added support for converting a FHIR Bundle to its textual representation for LLMs. You can also convert individual FHIR resources including <em>Patient, Condition, Observation, Procedure, Medication, AllergyIntolerance and DocumentReference</em>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">fhiry</span><span class="w"> </span><span class="kn">import</span> <span class="n">FlattenFhir</span>
+<span class="n">bundle</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">jsonfile</span><span class="p">)</span>
+<span class="n">flatten_fhir</span> <span class="o">=</span> <span class="n">FlattenFhir</span><span class="p">(</span><span class="n">bundle</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">flatten_fhir</span><span class="o">.</span><span class="n">flattened</span><span class="p">)</span>
+</pre></div>
+</div>
 </section>
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
 <section id="stable">
-<h3>Stable<a class="headerlink" href="#stable" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install fhiry
+<h3>Stable<a class="headerlink" href="#stable" title="Link to this heading">¶</a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>fhiry
 </pre></div>
 </div>
 </section>
 <section id="latest-dev-version">
-<h3>Latest dev version<a class="headerlink" href="#latest-dev-version" title="Permalink to this headline">¶</a></h3>
+<h3>Latest dev version<a class="headerlink" href="#latest-dev-version" title="Link to this heading">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">dermatologist</span><span class="o">/</span><span class="n">fhiry</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
 </div>
 </section>
 </section>
 <section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
 <section id="import-fhir-bundles-json-from-folder-to-pandas-dataframe">
-<h3>1. Import FHIR bundles (JSON) from folder to pandas dataframe<a class="headerlink" href="#import-fhir-bundles-json-from-folder-to-pandas-dataframe" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">fhiry.parallel</span> <span class="k">as</span> <span class="nn">fp</span>
+<h3>1. Import FHIR bundles (JSON) from folder to pandas dataframe<a class="headerlink" href="#import-fhir-bundles-json-from-folder-to-pandas-dataframe" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">fhiry.parallel</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fp</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="s1">&#39;/path/to/fhir/resources&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">())</span>
 </pre></div>
 </div>
 <p>Example source data set: <a class="reference external" href="https://synthea.mitre.org/downloads">Synthea</a></p>
-<p>Jupyter notebook example: <span class="xref myst"><code class="docutils literal notranslate"><span class="pre">notebooks/synthea.ipynb</span></code></span></p>
+<p>Jupyter notebook example: <a class="reference internal" href="#notebooks/synthea.ipynb"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">notebooks/synthea.ipynb</span></code></span></a></p>
 </section>
 <section id="import-ndjson-from-folder-to-pandas-dataframe">
-<h3>2. Import NDJSON from folder to pandas dataframe<a class="headerlink" href="#import-ndjson-from-folder-to-pandas-dataframe" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">fhiry.parallel</span> <span class="k">as</span> <span class="nn">fp</span>
+<h3>2. Import NDJSON from folder to pandas dataframe<a class="headerlink" href="#import-ndjson-from-folder-to-pandas-dataframe" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">fhiry.parallel</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fp</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">ndjson</span><span class="p">(</span><span class="s1">&#39;/path/to/fhir/ndjson/files&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">())</span>
 </pre></div>
 </div>
 <p>Example source data set: <a class="reference external" href="https://bulk-data.smarthealthit.org/">SMART Bulk Data Server</a> Export</p>
-<p>Jupyter notebook example: <span class="xref myst"><code class="docutils literal notranslate"><span class="pre">notebooks/ndjson.ipynb</span></code></span></p>
+<p>Jupyter notebook example: <a class="reference internal" href="#notebooks/ndjson.ipynb"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">notebooks/ndjson.ipynb</span></code></span></a></p>
 </section>
 <section id="import-fhir-search-results-to-pandas-dataframe">
-<h3>3. Import FHIR Search results to pandas dataframe<a class="headerlink" href="#import-fhir-search-results-to-pandas-dataframe" title="Permalink to this headline">¶</a></h3>
+<h3>3. Import FHIR Search results to pandas dataframe<a class="headerlink" href="#import-fhir-search-results-to-pandas-dataframe" title="Link to this heading">¶</a></h3>
 <p>Fetch and import resources from <a class="reference external" href="https://www.hl7.org/fhir/search.html">FHIR Search API</a> results to pandas dataframe.</p>
-<p>Documentation: <span class="xref myst"><code class="docutils literal notranslate"><span class="pre">fhir-search.md</span></code></span></p>
+<p>Documentation: <a class="reference internal" href="#fhir-search.md"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">fhir-search.md</span></code></span></a></p>
 <section id="example-import-all-conditions-with-a-certain-code-from-fhir-server">
-<h4>Example: Import all conditions with a certain code from FHIR Server<a class="headerlink" href="#example-import-all-conditions-with-a-certain-code-from-fhir-server" title="Permalink to this headline">¶</a></h4>
+<h4>Example: Import all conditions with a certain code from FHIR Server<a class="headerlink" href="#example-import-all-conditions-with-a-certain-code-from-fhir-server" title="Link to this heading">¶</a></h4>
 <p>Fetch and import all condition resources with Snomed (Codesystem <code class="docutils literal notranslate"><span class="pre">http://snomed.info/sct</span></code>) Code <code class="docutils literal notranslate"><span class="pre">39065001</span></code> in the FHIR element <code class="docutils literal notranslate"><span class="pre">Condition.code</span></code> (<a class="reference external" href="https://www.hl7.org/fhir/condition.html#search">resource type specific FHIR search parameter <code class="docutils literal notranslate"><span class="pre">code</span></code></a>) to a pandas dataframe:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fhiry.fhirsearch</span> <span class="kn">import</span> <span class="n">Fhirsearch</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">fhiry.fhirsearch</span><span class="w"> </span><span class="kn">import</span> <span class="n">Fhirsearch</span>
 
 <span class="n">fs</span> <span class="o">=</span> <span class="n">Fhirsearch</span><span class="p">(</span><span class="n">fhir_base_url</span> <span class="o">=</span> <span class="s2">&quot;http://fhir-server:8080/fhir&quot;</span><span class="p">)</span>
 
@@ -111,8 +121,8 @@ into ML packages such as Tensorflow and PyTorch. <strong>FHIRy also supports FHI
 </section>
 </section>
 <section id="import-google-bigquery-fhir-dataset">
-<h3>4. Import <a class="reference external" href="https://cloud.google.com/bigquery">Google BigQuery</a> <a class="reference external" href="https://console.cloud.google.com/marketplace/details/mitre/synthea-fhir?q=synthea">FHIR dataset</a><a class="headerlink" href="#import-google-bigquery-fhir-dataset" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fhiry.bqsearch</span> <span class="kn">import</span> <span class="n">BQsearch</span>
+<h3>4. Import <a class="reference external" href="https://cloud.google.com/bigquery">Google BigQuery</a> <a class="reference external" href="https://console.cloud.google.com/marketplace/details/mitre/synthea-fhir?q=synthea">FHIR dataset</a><a class="headerlink" href="#import-google-bigquery-fhir-dataset" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">fhiry.bqsearch</span><span class="w"> </span><span class="kn">import</span> <span class="n">BQsearch</span>
 <span class="n">bqs</span> <span class="o">=</span> <span class="n">BQsearch</span><span class="p">()</span>
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">bqs</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM `bigquery-public-data.fhir_synthea.patient` LIMIT 20&quot;</span><span class="p">)</span> <span class="c1"># can be a path to .sql file</span>
@@ -122,7 +132,7 @@ into ML packages such as Tensorflow and PyTorch. <strong>FHIRy also supports FHI
 </section>
 </section>
 <section id="filters">
-<h2>Filters<a class="headerlink" href="#filters" title="Permalink to this headline">¶</a></h2>
+<h2>Filters<a class="headerlink" href="#filters" title="Link to this heading">¶</a></h2>
 <p>Pass a config json to any of the constructors:</p>
 <ul class="simple">
 <li><p>config_json can be a path to a json file.</p></li>
@@ -136,7 +146,7 @@ into ML packages such as Tensorflow and PyTorch. <strong>FHIRy also supports FHI
 </div>
 </section>
 <section id="columns">
-<h2>Columns<a class="headerlink" href="#columns" title="Permalink to this headline">¶</a></h2>
+<h2>Columns<a class="headerlink" href="#columns" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>see df.columns</p></li>
 </ul>
@@ -153,19 +163,19 @@ into ML packages such as Tensorflow and PyTorch. <strong>FHIRy also supports FHI
 </pre></div>
 </div>
 <section id="documentation">
-<h3><a class="reference external" href="https://dermatologist.github.io/fhiry/">Documentation</a><a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h3>
+<h3><a class="reference external" href="https://dermatologist.github.io/fhiry/">Documentation</a><a class="headerlink" href="#documentation" title="Link to this heading">¶</a></h3>
 </section>
 </section>
 <section id="give-us-a-star">
-<h2>Give us a star ⭐️<a class="headerlink" href="#give-us-a-star" title="Permalink to this headline">¶</a></h2>
+<h2>Give us a star ⭐️<a class="headerlink" href="#give-us-a-star" title="Link to this heading">¶</a></h2>
 <p>If you find this project useful, give us a star. It helps others discover the project.</p>
 </section>
 <section id="contributors">
-<h2>Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline">¶</a></h2>
+<h2>Contributors<a class="headerlink" href="#contributors" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://nuchange.ca">Bell Eapen</a> | <a class="reference external" href="https://twitter.com/beapen"><img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/beapen?style=social" /></a></p></li>
 <li><p><a class="reference external" href="https://github.com/Mandalka">Markus Mandalka</a></p></li>
-<li><p>PR welcome, please see <span class="xref myst">CONTRIBUTING.md</span></p></li>
+<li><p>PR welcome, please see <a class="reference internal" href="#/CONTRIBUTING.md"><span class="xref myst">CONTRIBUTING.md</span></a></p></li>
 <li><p><a class="reference external" href="https://alliancecan.ca/en/services/advanced-research-computing"><img alt="forthebadge" src="https://forthebadge.com/images/badges/built-with-love.svg" /> using CC</a></p></li>
 </ul>
 </section>
@@ -176,7 +186,7 @@ into ML packages such as Tensorflow and PyTorch. <strong>FHIRy also supports FHI
           
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="index.html">fhiry</a></h1>
 
@@ -187,10 +197,20 @@ into ML packages such as Tensorflow and PyTorch. <strong>FHIRy also supports FHI
 
 
 
-<h3>Navigation</h3>
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Overview</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#update">UPDATE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#update-1">UPDATE 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#update-2">UPDATE 2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#filters">Filters</a></li>
@@ -215,16 +235,6 @@ into ML packages such as Tensorflow and PyTorch. <strong>FHIRy also supports FHI
   </ul></li>
 </ul>
 </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
 
 
 
@@ -238,11 +248,11 @@ into ML packages such as Tensorflow and PyTorch. <strong>FHIRy also supports FHI
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2023, Bell Eapen.
+      &#169;2023, Bell Eapen.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |
       <a href="_sources/readme.md.txt"

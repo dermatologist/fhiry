@@ -9,61 +9,61 @@ fhiry.base\_fhiry module
 
 .. automodule:: fhiry.base_fhiry
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 fhiry.bqsearch module
 ---------------------
 
 .. automodule:: fhiry.bqsearch
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 fhiry.fhirndjson module
 -----------------------
 
 .. automodule:: fhiry.fhirndjson
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 fhiry.fhirsearch module
 -----------------------
 
 .. automodule:: fhiry.fhirsearch
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 fhiry.fhiry module
 ------------------
 
 .. automodule:: fhiry.fhiry
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 fhiry.flattenfhir module
 ------------------------
 
 .. automodule:: fhiry.flattenfhir
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 fhiry.parallel module
 ---------------------
 
 .. automodule:: fhiry.parallel
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 Module contents
 ---------------
 
 .. automodule:: fhiry
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:

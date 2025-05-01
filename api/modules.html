@@ -1,18 +1,17 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>fhiry &#8212; fhiry unknown documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <title>fhiry &#8212; fhiry 0.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=0ca6144b" />
+    <script src="../_static/documentation_options.js?v=7026087e"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="fhiry package" href="fhiry.html" />
@@ -20,8 +19,9 @@
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -34,18 +34,94 @@
           <div class="body" role="main">
             
   <section id="fhiry">
-<h1>fhiry<a class="headerlink" href="#fhiry" title="Permalink to this headline">¶</a></h1>
+<h1>fhiry<a class="headerlink" href="#fhiry" title="Link to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="fhiry.html">fhiry package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="fhiry.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fhiry.html#module-fhiry.base_fhiry">fhiry.base_fhiry module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fhiry.html#module-fhiry.bqsearch">fhiry.bqsearch module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fhiry.html#module-fhiry.fhirndjson">fhiry.fhirndjson module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fhiry.html#module-fhiry.fhirsearch">fhiry.fhirsearch module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fhiry.html#module-fhiry.fhiry">fhiry.fhiry module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fhiry.html#module-fhiry.flattenfhir">fhiry.flattenfhir module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fhiry.html#module-fhiry.parallel">fhiry.parallel module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fhiry.html#module-fhiry.base_fhiry">fhiry.base_fhiry module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="fhiry.html#fhiry.base_fhiry.BaseFhiry"><code class="docutils literal notranslate"><span class="pre">BaseFhiry</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.base_fhiry.BaseFhiry.add_patient_id"><code class="docutils literal notranslate"><span class="pre">BaseFhiry.add_patient_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.base_fhiry.BaseFhiry.check_subject_reference"><code class="docutils literal notranslate"><span class="pre">BaseFhiry.check_subject_reference()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.base_fhiry.BaseFhiry.convert_object_to_list"><code class="docutils literal notranslate"><span class="pre">BaseFhiry.convert_object_to_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.base_fhiry.BaseFhiry.delete_col_raw_coding"><code class="docutils literal notranslate"><span class="pre">BaseFhiry.delete_col_raw_coding</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.base_fhiry.BaseFhiry.delete_unwanted_cols"><code class="docutils literal notranslate"><span class="pre">BaseFhiry.delete_unwanted_cols()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.base_fhiry.BaseFhiry.df"><code class="docutils literal notranslate"><span class="pre">BaseFhiry.df</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.base_fhiry.BaseFhiry.get_info"><code class="docutils literal notranslate"><span class="pre">BaseFhiry.get_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.base_fhiry.BaseFhiry.llm_query"><code class="docutils literal notranslate"><span class="pre">BaseFhiry.llm_query()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.base_fhiry.BaseFhiry.process_bundle_dict"><code class="docutils literal notranslate"><span class="pre">BaseFhiry.process_bundle_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.base_fhiry.BaseFhiry.process_df"><code class="docutils literal notranslate"><span class="pre">BaseFhiry.process_df()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.base_fhiry.BaseFhiry.process_list"><code class="docutils literal notranslate"><span class="pre">BaseFhiry.process_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.base_fhiry.BaseFhiry.read_bundle_from_bundle_dict"><code class="docutils literal notranslate"><span class="pre">BaseFhiry.read_bundle_from_bundle_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.base_fhiry.BaseFhiry.rename_cols"><code class="docutils literal notranslate"><span class="pre">BaseFhiry.rename_cols()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="fhiry.html#fhiry.base_fhiry.default_output_processor"><code class="docutils literal notranslate"><span class="pre">default_output_processor()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fhiry.html#module-fhiry.bqsearch">fhiry.bqsearch module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="fhiry.html#fhiry.bqsearch.BQsearch"><code class="docutils literal notranslate"><span class="pre">BQsearch</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.bqsearch.BQsearch.search"><code class="docutils literal notranslate"><span class="pre">BQsearch.search()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fhiry.html#module-fhiry.fhirndjson">fhiry.fhirndjson module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="fhiry.html#fhiry.fhirndjson.Fhirndjson"><code class="docutils literal notranslate"><span class="pre">Fhirndjson</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.fhirndjson.Fhirndjson.df"><code class="docutils literal notranslate"><span class="pre">Fhirndjson.df</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.fhirndjson.Fhirndjson.folder"><code class="docutils literal notranslate"><span class="pre">Fhirndjson.folder</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.fhirndjson.Fhirndjson.process_file"><code class="docutils literal notranslate"><span class="pre">Fhirndjson.process_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.fhirndjson.Fhirndjson.process_source"><code class="docutils literal notranslate"><span class="pre">Fhirndjson.process_source()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.fhirndjson.Fhirndjson.read_resource_from_line"><code class="docutils literal notranslate"><span class="pre">Fhirndjson.read_resource_from_line()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fhiry.html#module-fhiry.fhirsearch">fhiry.fhirsearch module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="fhiry.html#fhiry.fhirsearch.Fhirsearch"><code class="docutils literal notranslate"><span class="pre">Fhirsearch</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.fhirsearch.Fhirsearch.search"><code class="docutils literal notranslate"><span class="pre">Fhirsearch.search()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="fhiry.html#fhiry.fhirsearch.get_next_page_url"><code class="docutils literal notranslate"><span class="pre">get_next_page_url()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fhiry.html#module-fhiry.fhiry">fhiry.fhiry module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="fhiry.html#fhiry.fhiry.Fhiry"><code class="docutils literal notranslate"><span class="pre">Fhiry</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.fhiry.Fhiry.delete_col_raw_coding"><code class="docutils literal notranslate"><span class="pre">Fhiry.delete_col_raw_coding</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.fhiry.Fhiry.df"><code class="docutils literal notranslate"><span class="pre">Fhiry.df</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.fhiry.Fhiry.filename"><code class="docutils literal notranslate"><span class="pre">Fhiry.filename</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.fhiry.Fhiry.folder"><code class="docutils literal notranslate"><span class="pre">Fhiry.folder</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.fhiry.Fhiry.process_bundle_dict"><code class="docutils literal notranslate"><span class="pre">Fhiry.process_bundle_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.fhiry.Fhiry.process_file"><code class="docutils literal notranslate"><span class="pre">Fhiry.process_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.fhiry.Fhiry.process_source"><code class="docutils literal notranslate"><span class="pre">Fhiry.process_source()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.fhiry.Fhiry.read_bundle_from_file"><code class="docutils literal notranslate"><span class="pre">Fhiry.read_bundle_from_file()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fhiry.html#module-fhiry.flattenfhir">fhiry.flattenfhir module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="fhiry.html#fhiry.flattenfhir.FlattenFhir"><code class="docutils literal notranslate"><span class="pre">FlattenFhir</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.flattenfhir.FlattenFhir.fhirobject"><code class="docutils literal notranslate"><span class="pre">FlattenFhir.fhirobject</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.flattenfhir.FlattenFhir.flatten"><code class="docutils literal notranslate"><span class="pre">FlattenFhir.flatten()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.flattenfhir.FlattenFhir.flatten_allergyintolerance"><code class="docutils literal notranslate"><span class="pre">FlattenFhir.flatten_allergyintolerance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.flattenfhir.FlattenFhir.flatten_condition"><code class="docutils literal notranslate"><span class="pre">FlattenFhir.flatten_condition()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.flattenfhir.FlattenFhir.flatten_documentreference"><code class="docutils literal notranslate"><span class="pre">FlattenFhir.flatten_documentreference()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.flattenfhir.FlattenFhir.flatten_medication"><code class="docutils literal notranslate"><span class="pre">FlattenFhir.flatten_medication()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.flattenfhir.FlattenFhir.flatten_observation"><code class="docutils literal notranslate"><span class="pre">FlattenFhir.flatten_observation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.flattenfhir.FlattenFhir.flatten_patient"><code class="docutils literal notranslate"><span class="pre">FlattenFhir.flatten_patient()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.flattenfhir.FlattenFhir.flatten_procedure"><code class="docutils literal notranslate"><span class="pre">FlattenFhir.flatten_procedure()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.flattenfhir.FlattenFhir.flattened"><code class="docutils literal notranslate"><span class="pre">FlattenFhir.flattened</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.flattenfhir.FlattenFhir.get_flattened_text"><code class="docutils literal notranslate"><span class="pre">FlattenFhir.get_flattened_text()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhiry.html#fhiry.flattenfhir.FlattenFhir.get_timeago"><code class="docutils literal notranslate"><span class="pre">FlattenFhir.get_timeago()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fhiry.html#module-fhiry.parallel">fhiry.parallel module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="fhiry.html#fhiry.parallel.ndjson"><code class="docutils literal notranslate"><span class="pre">ndjson()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="fhiry.html#fhiry.parallel.process"><code class="docutils literal notranslate"><span class="pre">process()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="fhiry.html#module-fhiry">Module contents</a></li>
 </ul>
 </li>
@@ -58,7 +134,7 @@
           
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="../index.html">fhiry</a></h1>
 
@@ -69,7 +145,16 @@
 
 
 
-<h3>Navigation</h3>
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../readme.html">Overview</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Module Reference</a><ul>
@@ -91,16 +176,6 @@
   </ul></li>
 </ul>
 </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
 
 
 
@@ -114,11 +189,11 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2023, Bell Eapen.
+      &#169;2023, Bell Eapen.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |
       <a href="../_sources/api/modules.rst.txt"
