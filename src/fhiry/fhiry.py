@@ -14,6 +14,7 @@ from tqdm import tqdm
 
 logger = logging.getLogger(__name__)
 
+
 class Fhiry(BaseFhiry):
     def __init__(self, config_json=None):
         self._filename = ""
@@ -50,10 +51,10 @@ class Fhiry(BaseFhiry):
         self._delete_col_raw_coding = delete_col_raw_coding
 
     def read_bundle_from_file(self, filename):
-        with open(filename, encoding='utf8', mode='r') as f:
+        with open(filename, encoding="utf8", mode="r") as f:
             json_in = f.read()
             json_in = json.loads(json_in)
-            return pd.json_normalize(json_in['entry'])
+            return pd.json_normalize(json_in["entry"])
 
     def process_source(self):
         """Read a single JSON resource or a directory full of JSON resources
@@ -64,7 +65,8 @@ class Fhiry(BaseFhiry):
             for file in tqdm(os.listdir(self._folder)):
                 if file.endswith(".json"):
                     self._df = self.read_bundle_from_file(
-                        os.path.join(self._folder, file))
+                        os.path.join(self._folder, file)
+                    )
                     self.process_df()
                     if df.empty:
                         df = self._df
@@ -84,5 +86,3 @@ class Fhiry(BaseFhiry):
         self._df = self.read_bundle_from_bundle_dict(bundle_dict)
         self.process_df()
         return self._df
-
-
