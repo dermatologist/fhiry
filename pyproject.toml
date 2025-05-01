@@ -5,17 +5,17 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "fhiry"
 description = "FHIR to pandas.dataframe for AI and ML"
+license = "MIT"
 classifiers = [ "Intended Audience :: Science/Research", "Development Status :: 4 - Beta", "Operating System :: OS Independent", "Programming Language :: Python", "Programming Language :: Python :: 3.9", "Programming Language :: Python :: 3.10", "Programming Language :: Python :: 3.11", "Topic :: Scientific/Engineering :: Information Analysis",]
 requires-python = ">=3.9, <3.12"
 dependencies = [ "importlib-metadata; python_version<\"3.8\"", "pandas", "google-cloud-bigquery", "tqdm", "timeago", "prodict", "numpy", "packaging>22.0", "responses",]
 dynamic = [ "version",]
 
+
 [[project.authors]]
 name = "Bell Eapen"
 email = "github_public@gulfdoctor.net"
 
-[project.license]
-text = "MIT"
 
 [project.readme]
 file = "README.md"
@@ -39,7 +39,7 @@ dev = [
     "sphinx",
     "wheel",
     "twine",
-    
+    "build",
 ]
 
 [tool.setuptools]
@@ -65,8 +65,6 @@ addopts = "\n--verbose"
 norecursedirs = [ "dist", "build", ".tox",]
 testpaths = [ "tests",]
 
-[tool.distutils.bdist_wheel]
-universal = 1
 
 [tool.devpi.upload]
 no_vcs = "1"
