@@ -25,7 +25,7 @@ jobs:
         uv pip install -r docs/requirements.txt
     - name: Create docs
       run: |
-        uv run python -m sphinx -b html docs/ docs/_build
+        uv run python -m sphinx -b html docs/ docs/_build/html
         cp docs/_config.yml docs/_build/html/_config.yml
     - name: Deploy Docs 🚀
       uses: JamesIves/github-pages-deploy-action@v4
