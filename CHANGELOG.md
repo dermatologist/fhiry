@@ -1,5 +1,9 @@
 # Changelog
 
+## [4.1.1](https://github.com/dermatologist/fhiry/tree/4.1.1) (2025-05-01)
+
+[Full Changelog](https://github.com/dermatologist/fhiry/compare/4.1.0...4.1.1)
+
 ## [4.1.0](https://github.com/dermatologist/fhiry/tree/4.1.0) (2025-05-01)
 
 [Full Changelog](https://github.com/dermatologist/fhiry/compare/4.0.0...4.1.0)
