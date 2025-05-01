@@ -70,7 +70,8 @@ testpaths = [ "tests",]
 no_vcs = "1"
 formats = "bdist_wheel"
 
+
 [tool.setuptools.packages.find]
-where = [ "src",]
-exclude = [ "tests",]
+where = [ "src"]
+exclude = [ "tests", "notes", "docs"]
 namespaces = true
