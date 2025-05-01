@@ -39,7 +39,7 @@ dev = [
     "sphinx",
     "wheel",
     "twine",
-    "tox",
+    
 ]
 
 [tool.setuptools]
