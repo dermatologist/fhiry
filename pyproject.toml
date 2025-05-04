@@ -26,7 +26,7 @@ Homepage = "https://nuchange.ca"
 Source = "https://github.com/dermatologist/fhiry"
 
 [project.optional-dependencies]
-llm = [ "llama-index", "langchain", "overrides",]
+llm = [ "llama-index", "llama-index-experimental", "langchain", "langchain-community", "langchain-huggingface", "llama-index-embeddings-langchain", "overrides", "llama-index-llms-google-genai",]
 testing = [ "setuptools", "pytest", "pytest-cov",]
 dev = [
     "setuptools>=77.0.0",

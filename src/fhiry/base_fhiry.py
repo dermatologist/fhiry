@@ -8,12 +8,9 @@
 from typing import Any
 import pandas as pd
 import json
-
-
-def default_output_processor(
-    output: str, df: pd.DataFrame, **output_kwargs: Any
-) -> str:
-    return output
+from llama_index.experimental.query_engine import PandasQueryEngine
+from llama_index.core import Settings
+from langchain_huggingface import HuggingFaceEmbeddings
 
 
 class BaseFhiry(object):
@@ -172,30 +169,20 @@ class BaseFhiry(object):
             Any: Results of the query
         """
 
-        LLAMA_INDEX_ENABLED = False
-        try:
-            LLAMA_INDEX_ENABLED = True
-            from llama_index.query_engine import PandasQueryEngine
-            from llama_index import ServiceContext
-            from langchain.embeddings import HuggingFaceEmbeddings
-        except:
-            pass
-        if not LLAMA_INDEX_ENABLED:
-            raise Exception("llama_index not installed")
         if self._df is None:
             raise Exception("Dataframe is empty")
         if embed_model is None:
             embed_model = HuggingFaceEmbeddings(model_name="BAAI/bge-small-en-v1.5")
         else:
             embed_model = HuggingFaceEmbeddings(model_name=embed_model)
-        service_context = ServiceContext.from_defaults(
-            llm=llm,
-            embed_model=embed_model,
-        )
+        # service_context = ServiceContext.from_defaults(
+        #     llm=llm,
+        #     embed_model=embed_model,
+        # )
+        Settings.llm = llm
+        Settings.embed_model = embed_model
         query_engine = PandasQueryEngine(
             df=self._df,
-            service_context=service_context,
-            output_processor=default_output_processor,
             verbose=verbose,
         )
         return query_engine.query(query)
