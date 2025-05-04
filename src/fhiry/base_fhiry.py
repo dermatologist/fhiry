@@ -175,10 +175,6 @@ class BaseFhiry(object):
             embed_model = HuggingFaceEmbeddings(model_name="BAAI/bge-small-en-v1.5")
         else:
             embed_model = HuggingFaceEmbeddings(model_name=embed_model)
-        # service_context = ServiceContext.from_defaults(
-        #     llm=llm,
-        #     embed_model=embed_model,
-        # )
         Settings.llm = llm
         Settings.embed_model = embed_model
         query_engine = PandasQueryEngine(

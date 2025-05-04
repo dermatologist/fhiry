@@ -7,7 +7,7 @@ name = "fhiry"
 description = "FHIR to pandas.dataframe for AI and ML"
 license = "MIT"
 classifiers = [ "Intended Audience :: Science/Research", "Development Status :: 4 - Beta", "Operating System :: OS Independent", "Programming Language :: Python", "Programming Language :: Python :: 3.9", "Programming Language :: Python :: 3.10", "Programming Language :: Python :: 3.11", "Topic :: Scientific/Engineering :: Information Analysis",]
-requires-python = ">=3.9, <3.12"
+requires-python = ">=3.10, <3.12"
 dependencies = [ "importlib-metadata; python_version<\"3.8\"", "pandas", "google-cloud-bigquery", "tqdm", "timeago", "prodict", "numpy", "responses",]
 dynamic = [ "version",]
 
