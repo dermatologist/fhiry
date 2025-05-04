@@ -8,9 +8,7 @@
 from typing import Any
 import pandas as pd
 import json
-from llama_index.experimental.query_engine import PandasQueryEngine
-from llama_index.core import Settings
-from langchain_huggingface import HuggingFaceEmbeddings
+
 
 
 class BaseFhiry(object):
@@ -168,7 +166,16 @@ class BaseFhiry(object):
         Returns:
             Any: Results of the query
         """
-
+        LLAMA_INDEX_ENABLED = False
+        try:
+            from llama_index.experimental.query_engine import PandasQueryEngine
+            from llama_index.core import Settings
+            from langchain_huggingface import HuggingFaceEmbeddings
+            LLAMA_INDEX_ENABLED = True
+        except:
+            pass
+        if not LLAMA_INDEX_ENABLED:
+            raise Exception("llama_index not installed")
         if self._df is None:
             raise Exception("Dataframe is empty")
         if embed_model is None:
