@@ -26,7 +26,7 @@ def cli(input_path, output_path, flatten, url, search_type, resource_types, quer
         import fhiry.parallel as fp
         # read config file to config_json
         config = {
-            "REMOVE": ["text.div", "meta", "meta.profile", "request.url"],
+            "REMOVE": ["text.div", "meta"],
             "RENAME": {}
         }
         config_json = json.dumps(config)
