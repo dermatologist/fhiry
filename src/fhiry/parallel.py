@@ -1,8 +1,8 @@
 """
- Copyright (c) 2023 Bell Eapen
+Copyright (c) 2023 Bell Eapen
 
- This software is released under the MIT License.
- https://opensource.org/licenses/MIT
+This software is released under the MIT License.
+https://opensource.org/licenses/MIT
 """
 
 import multiprocessing as mp

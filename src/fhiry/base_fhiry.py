@@ -1,14 +1,13 @@
 """
- Copyright (c) 2020 Bell Eapen
+Copyright (c) 2020 Bell Eapen
 
- This software is released under the MIT License.
- https://opensource.org/licenses/MIT
+This software is released under the MIT License.
+https://opensource.org/licenses/MIT
 """
 
 from typing import Any
 import pandas as pd
 import json
-
 
 
 class BaseFhiry(object):
@@ -171,6 +170,7 @@ class BaseFhiry(object):
             from llama_index.experimental.query_engine import PandasQueryEngine
             from llama_index.core import Settings
             from langchain_huggingface import HuggingFaceEmbeddings
+
             LLAMA_INDEX_ENABLED = True
         except:
             pass
