@@ -102,11 +102,23 @@ class BaseFhiry(object):
     def process_df(self):
         self.convert_object_to_list()
         self.add_patient_id()
-        self.drop_empty_cols()
         self.remove_string_from_columns(string_to_remove="resource.")
+        self.empty_list_to_nan()
+        self.drop_empty_cols()
         self.delete_unwanted_cols()
         self.rename_cols()
         return self._df
+
+    def empty_list_to_nan(self):
+        """Convert empty lists in the dataframe to NaN."""
+        if self._df is None:
+            logger.warning("Dataframe is empty, nothing to convert")
+            return
+        for col in self._df.columns:
+            if self._df[col].dtype == "object":
+                self._df[col] = self._df[col].apply(
+                    lambda x: float("nan") if isinstance(x, list) and len(x) == 0 else x
+                )
 
     def drop_empty_cols(self):
         """Drop columns that are completely empty (all NaN values) from the dataframe."""
