@@ -41,8 +41,8 @@ def cli(input_path, output_path, flatten, url, resource_type, query):
         ext = Path(output_path).suffix.lower()
         if ext == ".csv":
             df.to_csv(output_path, index=False)
-        elif ext == ".json":
-            df.to_json(output_path, orient="records", lines=True)
+        elif ext == ".xlsx":
+            df.to_excel(output_path, index=False)
         elif ext == ".parquet":
             df.to_parquet(output_path, index=False)
         else:
