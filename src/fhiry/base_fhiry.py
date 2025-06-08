@@ -8,6 +8,9 @@ https://opensource.org/licenses/MIT
 from typing import Any
 import pandas as pd
 import json
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class BaseFhiry(object):
@@ -53,12 +56,31 @@ class BaseFhiry(object):
         return pd.json_normalize(bundle_dict["entry"])
 
     def delete_unwanted_cols(self):
+        if self._df is None:
+            logger.warning("Dataframe is empty, nothing to delete")
+            return
+        """Delete unwanted columns from the dataframe"""
+        if "REMOVE" not in self.config:
+            logger.warning("No columns to remove defined in config")
+            return
+        if not isinstance(self.config["REMOVE"], list):
+            logger.warning(
+                "REMOVE in config is not a list, expected a list of column names to remove"
+            )
+            return
+        if len(self.config["REMOVE"]) == 0:
+            logger.warning("No columns to remove defined in config")
+            return
+        logger.info("Removing columns: {}".format(self.config["REMOVE"]))
         for col in self.config["REMOVE"]:
             if col in self._df.columns:
                 del self._df[col]
 
     def rename_cols(self):
-        self._df.rename(columns=self.config["RENAME"], inplace=True)
+        if self._df is not None:
+            self._df.rename(columns=self.config["RENAME"], inplace=True)
+        else:
+            logger.warning("Dataframe is empty, nothing to rename")
 
     def process_df(self):
         self.delete_unwanted_cols()
@@ -75,6 +97,9 @@ class BaseFhiry(object):
         return self._df
 
     def convert_object_to_list(self):
+        if self._df is None:
+            logger.warning("Dataframe is empty, nothing to convert")
+            return
         """Convert object to a list of codes"""
         for col in self._df.columns:
             if "coding" in col:
@@ -93,6 +118,9 @@ class BaseFhiry(object):
 
     def add_patient_id(self):
         """Create a patientId column with the resource.id if a Patient resource or with the resource.subject.reference if other resource type"""
+        if self._df is None:
+            logger.warning("Dataframe is empty, cannot add patientId")
+            return
         try:
             # PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
             newframe = self._df.copy()
@@ -165,17 +193,12 @@ class BaseFhiry(object):
         Returns:
             Any: Results of the query
         """
-        LLAMA_INDEX_ENABLED = False
         try:
             from llama_index.experimental.query_engine import PandasQueryEngine
             from llama_index.core import Settings
             from langchain_huggingface import HuggingFaceEmbeddings
-
-            LLAMA_INDEX_ENABLED = True
-        except:
-            pass
-        if not LLAMA_INDEX_ENABLED:
-            raise Exception("llama_index not installed")
+        except Exception:
+            raise Exception("llama_index or HuggingFaceEmbeddings not installed")
         if self._df is None:
             raise Exception("Dataframe is empty")
         if embed_model is None:
