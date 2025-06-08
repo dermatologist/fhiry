@@ -12,7 +12,8 @@ from pathlib import Path
 @click.option('--search-type', help='FHIR resource type for server search (e.g. Condition).')
 @click.option('--resource-types', help='Comma separated list of FHIR resource types (e.g. Encounter,Condition).')
 @click.option('--query', help='FHIR search parameters as JSON string.')
-def cli(input_path, output_path, flatten, url, search_type, resource_types, query):
+@click.option('--config-file', type=click.Path(exists=True), help='Path to configuration file.')
+def cli(input_path, output_path, flatten, url, search_type, resource_types, query, config_file):
     """
     Process FHIR data from folder or FHIR server and output as dataframe.
     """
@@ -23,12 +24,27 @@ def cli(input_path, output_path, flatten, url, search_type, resource_types, quer
         df = fs.search(resource_type=search_type, search_parameters=params)
     elif input_path:
         import fhiry.parallel as fp
+        # read config file to config_json
+        config_json = {
+            "REMOVE": ["resource.text.div", ],
+            "RENAME": {"resource.id": "id"}
+        }
+        if config_file:
+            try:
+                with open(config_file, 'r') as f:
+                    config_json = json.load(f)
+            except Exception as e:
+                click.echo(f"Error reading config file: {e}", err=True)
+                sys.exit(1)
         # Try ndjson first, fallback to process
         ndjson_files = list(Path(input_path).glob("*.ndjson"))
         if ndjson_files:
-            df = fp.ndjson(input_path)
+            df = fp.ndjson(input_path, config_json=config_json)
         else:
-            df = fp.process(input_path)
+            df = fp.process(input_path, config_json=config_json)
+        if df.empty:
+            click.echo("No data found.", err=True)
+            sys.exit(1)
     else:
         click.echo("Please provide either --input or --url.", err=True)
         sys.exit(1)
@@ -44,7 +60,8 @@ def cli(input_path, output_path, flatten, url, search_type, resource_types, quer
         if resource_types:
             try:
                 resource_types = [rt.strip() for rt in resource_types.split(',')]
-                df = df[df['resource.resourceType'].isin(resource_types)]
+                col = 'resource.resourceType' if 'resource.resourceType' in df.columns else 'resourceType'
+                df = df[df[col].isin(resource_types)]
             except Exception as e:
                 click.echo(f"Error filtering resource types: {e}", err=True)
                 sys.exit(1)
