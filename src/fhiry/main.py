@@ -2,7 +2,7 @@ import click
 import sys
 import json
 from pathlib import Path
-
+import pandas as pd
 
 @click.command()
 @click.option('--input', '-i', 'input_path', type=click.Path(exists=True, file_okay=False), help='Input folder with FHIR bundles or ndjson files.')
@@ -50,6 +50,10 @@ def cli(input_path, output_path, flatten, url, search_type, resource_types, quer
         click.echo("Please provide either --input or --url.", err=True)
         sys.exit(1)
 
+    if df is None or df.empty:
+        click.echo("No data found in the input.", err=True)
+        sys.exit(1)
+
     if flatten:
         from fhiry.flattenfhir import FlattenFhir
         # Flatten each row's resource
@@ -69,7 +73,19 @@ def cli(input_path, output_path, flatten, url, search_type, resource_types, quer
         if ext == ".csv":
             df.to_csv(output_path, index=False)
         elif ext == ".xlsx":
-            df.to_excel(output_path, index=False)
+            if resource_types:
+                try:
+                    # filter on resource types and send to separate sheets
+                    with pd.ExcelWriter(output_path) as writer:
+                        for rt in resource_types:
+                            _df = df[df['resourceType'] == rt]
+                            _df.dropna(axis=1, thresh=0.1, inplace=True)
+                            _df.to_excel(writer, sheet_name=rt, index=False)
+                except Exception as e:
+                    df.to_excel(output_path, index=False)
+                    click.echo(f"Error writing to Excel: {e}", err=True)
+            else:
+                df.to_excel(output_path, index=False)
         elif ext == ".parquet":
             df.to_parquet(output_path, index=False)
         else:
