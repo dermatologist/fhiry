@@ -125,8 +125,8 @@ class BaseFhiry(object):
         if self._df is None:
             logger.warning("Dataframe is empty, nothing to drop")
             return
-        # threshold is 25% of rows
-        thresh = int(len(self._df) * 0.25)
+        # threshold is 10% of rows
+        thresh = int(len(self._df) * 0.1)
         self._df.dropna(axis=1, thresh=thresh, inplace=True)
         if self._df is not None and self._df.empty:
             logger.warning("Dataframe is empty after dropping empty columns")
@@ -149,14 +149,14 @@ class BaseFhiry(object):
             if "coding" in col:
                 codes = self._df.apply(lambda x: self.process_list(x[col]), axis=1)
                 self._df = pd.concat(
-                    [self._df, codes.to_frame(name=col + "codes")], axis=1
+                    [self._df, codes.to_frame(name=col + ".codes")], axis=1
                 )
                 if self._delete_col_raw_coding:
                     del self._df[col]
             if "display" in col:
                 codes = self._df.apply(lambda x: self.process_list(x[col]), axis=1)
                 self._df = pd.concat(
-                    [self._df, codes.to_frame(name=col + "display")], axis=1
+                    [self._df, codes.to_frame(name=col + ".display")], axis=1
                 )
                 del self._df[col]
 
