@@ -4,6 +4,7 @@ Virtual flattened view of *FHIR Bundle / ndjson / FHIR server / BigQuery!*
 ![Libraries.io SourceRank](https://img.shields.io/librariesio/sourcerank/pypi/fhiry)
 [![PyPI download total](https://img.shields.io/pypi/dm/fhiry.svg)](https://pypi.python.org/pypi/fhiry/)
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/dermatologist/fhiry)
+[![Documentation](https://badgen.net/badge/icon/documentation?icon=libraries&label)](https://dermatologist.github.io/fhiry/)
 
 :fire: **FHIRy** is a [python](https://www.python.org/) package to facilitate health data analytics and machine learning by converting a folder of [FHIR bundles](https://www.hl7.org/fhir/bundle.html)/ndjson from [bulk data export](https://hl7.org/fhir/uv/bulkdata/export/index.html) into a [pandas](https://pandas.pydata.org/docs/user_guide/index.html) data frame for analysis. You can import the dataframe
 into ML packages such as Tensorflow and PyTorch. **FHIRy also supports FHIR server search and FHIR tables on BigQuery.**
