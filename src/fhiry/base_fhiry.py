@@ -102,16 +102,30 @@ class BaseFhiry(object):
     def process_df(self):
         self.convert_object_to_list()
         self.add_patient_id()
+        self.drop_empty_cols()
         self.remove_string_from_columns(string_to_remove="resource.")
         self.delete_unwanted_cols()
         self.rename_cols()
+        return self._df
+
+    def drop_empty_cols(self):
+        """Drop columns that are completely empty (all NaN values) from the dataframe."""
+        if self._df is None:
+            logger.warning("Dataframe is empty, nothing to drop")
+            return
+        # threshold is 25% of rows
+        thresh = int(len(self._df) * 0.25)
+        self._df.dropna(axis=1, thresh=thresh, inplace=True)
+        if self._df is not None and self._df.empty:
+            logger.warning("Dataframe is empty after dropping empty columns")
+        return self._df
 
     def process_bundle_dict(self, bundle_dict):
         self._df = self.read_bundle_from_bundle_dict(bundle_dict)
-        self.delete_unwanted_cols()
-        self.convert_object_to_list()
-        self.add_patient_id()
-        self.rename_cols()
+        if self._df is None or self._df.empty:
+            logger.warning("Dataframe is empty, nothing to process")
+            return None
+        self._df = self.process_df()
         return self._df
 
     def convert_object_to_list(self):
