@@ -194,7 +194,11 @@ class BaseFhiry(object):
 
     def check_subject_reference(self, row):
         try:
-            return row["resource.subject.reference"].replace("Patient/", "")
+            return (
+                row["resource.subject.reference"]
+                .replace("Patient/", "")
+                .replace("urn:uuid:", "")
+            )
         except:
             return ""
 
