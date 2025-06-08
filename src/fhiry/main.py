@@ -25,10 +25,11 @@ def cli(input_path, output_path, flatten, url, search_type, resource_types, quer
     elif input_path:
         import fhiry.parallel as fp
         # read config file to config_json
-        config_json = {
-            "REMOVE": ["resource.text.div", ],
-            "RENAME": {"resource.id": "id"}
+        config = {
+            "REMOVE": ["text.div", "meta", "meta.profile", "request.url"],
+            "RENAME": {}
         }
+        config_json = json.dumps(config)
         if config_file:
             try:
                 with open(config_file, 'r') as f:

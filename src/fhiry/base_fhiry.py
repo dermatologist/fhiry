@@ -82,10 +82,27 @@ class BaseFhiry(object):
         else:
             logger.warning("Dataframe is empty, nothing to rename")
 
+    def remove_string_from_columns(self, string_to_remove='resource.'):
+        """Removes a string from all column names in a Pandas DataFrame.
+
+        Args:
+            df (pd.DataFrame): The input DataFrame.
+            string_to_remove (str): The string to remove from column names.
+
+        Returns:
+            pd.DataFrame: A new DataFrame with modified column names.
+        """
+        if self._df is not None:
+            self._df.columns = self._df.columns.str.replace(string_to_remove, '', regex=False)
+        else:
+            logger.warning("Dataframe is empty, cannot remove string from columns")
+        return self._df
+
     def process_df(self):
-        self.delete_unwanted_cols()
         self.convert_object_to_list()
         self.add_patient_id()
+        self.remove_string_from_columns(string_to_remove="resource.")
+        self.delete_unwanted_cols()
         self.rename_cols()
 
     def process_bundle_dict(self, bundle_dict):
