@@ -3,19 +3,15 @@ import sys
 import json
 from pathlib import Path
 
-@click.group()
-def cli():
-    """fhiry: FHIR to pandas dataframe CLI."""
-    pass
 
-@cli.command()
+@click.command()
 @click.option('--input', '-i', 'input_path', type=click.Path(exists=True, file_okay=False), help='Input folder with FHIR bundles or ndjson files.')
 @click.option('--output', '-o', 'output_path', type=click.Path(), help='Output file path for the dataframe (CSV/JSON/Parquet).')
 @click.option('--flatten', is_flag=True, help='Flatten FHIR resources for LLM/text output.')
 @click.option('--url', help='FHIR server base URL for search.')
 @click.option('--resource-type', help='FHIR resource type for server search (e.g., Patient, Condition).')
 @click.option('--query', help='FHIR search parameters as JSON string.')
-def process(input_path, output_path, flatten, url, resource_type, query):
+def cli(input_path, output_path, flatten, url, resource_type, query):
     """
     Process FHIR data from folder or FHIR server and output as dataframe.
     """
