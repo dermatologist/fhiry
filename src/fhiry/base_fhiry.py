@@ -125,9 +125,7 @@ class BaseFhiry(object):
         if self._df is None:
             logger.warning("Dataframe is empty, nothing to drop")
             return
-        # threshold is 10% of rows
-        thresh = int(len(self._df) * 0.1)
-        self._df.dropna(axis=1, thresh=thresh, inplace=True)
+        self._df.dropna(axis=1, how='all', inplace=True)
         if self._df is not None and self._df.empty:
             logger.warning("Dataframe is empty after dropping empty columns")
         return self._df
