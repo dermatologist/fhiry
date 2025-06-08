@@ -78,12 +78,12 @@ def cli(input_path, output_path, flatten, url, search_type, resource_types, quer
                     # filter on resource types and send to separate sheets
                     with pd.ExcelWriter(output_path) as writer:
                         for rt in resource_types:
-                            _df = df[df['resourceType'] == rt]
+                            _df = df[df['resourceType'] == rt].copy()
                             _df.dropna(axis=1, thresh=0.1, inplace=True)
                             _df.to_excel(writer, sheet_name=rt, index=False)
                 except Exception as e:
-                    df.to_excel(output_path, index=False)
                     click.echo(f"Error writing to Excel: {e}", err=True)
+                    sys.exit(1)
             else:
                 df.to_excel(output_path, index=False)
         elif ext == ".parquet":
