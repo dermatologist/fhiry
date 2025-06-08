@@ -43,6 +43,9 @@ dev = [
     "build",
 ]
 
+[project.scripts]
+fhiry = "fhiry.main:cli"
+
 [tool.setuptools]
 zip-safe = false
 include-package-data = true
