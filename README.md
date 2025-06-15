@@ -47,7 +47,7 @@ pip install git+https://github.com/dermatologist/fhiry.git
 ```
 ## Usage
 
-### [command line interface (CLI)](examples/cli.md) examples
+### 👉 [command line interface (CLI)](examples/cli.md) examples
 
 ### 1. Import FHIR bundles (JSON) from folder to pandas dataframe
 
