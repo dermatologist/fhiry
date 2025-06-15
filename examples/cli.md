@@ -12,7 +12,7 @@ unzip synthea_sample_data_fhir_latest.zip -d ~/synthea-sample-data-fhir
 fhiry -i ~/synthea-sample-data-fhir -o ~/synthea-sample-data-fhir/output.xlsx --resource-types=Condition,Patient
 ```
 
-### All rows have a partientId column which is the FHIR resource id of the Patient resource.
+### All rows have a patientId column which is the FHIR resource id of the Patient resource.
 
 * You can load a config file to specify the resource types and other options:
 ```bash
