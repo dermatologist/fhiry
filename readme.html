@@ -38,7 +38,8 @@
 <p>Virtual flattened view of <em>FHIR Bundle / ndjson / FHIR server / BigQuery!</em></p>
 <p><img alt="Libraries.io SourceRank" src="https://img.shields.io/librariesio/sourcerank/pypi/fhiry" />
 <a class="reference external" href="https://pypi.python.org/pypi/fhiry/"><img alt="PyPI download total" src="https://img.shields.io/pypi/dm/fhiry.svg" /></a>
-<img alt="GitHub tag (latest by date)" src="https://img.shields.io/github/v/tag/dermatologist/fhiry" /></p>
+<img alt="GitHub tag (latest by date)" src="https://img.shields.io/github/v/tag/dermatologist/fhiry" />
+<a class="reference external" href="https://dermatologist.github.io/fhiry/"><img alt="Documentation" src="https://badgen.net/badge/icon/documentation?icon=libraries&amp;label" /></a></p>
 <p>:fire: <strong>FHIRy</strong> is a <a class="reference external" href="https://www.python.org/">python</a> package to facilitate health data analytics and machine learning by converting a folder of <a class="reference external" href="https://www.hl7.org/fhir/bundle.html">FHIR bundles</a>/ndjson from <a class="reference external" href="https://hl7.org/fhir/uv/bulkdata/export/index.html">bulk data export</a> into a <a class="reference external" href="https://pandas.pydata.org/docs/user_guide/index.html">pandas</a> data frame for analysis. You can import the dataframe
 into ML packages such as Tensorflow and PyTorch. <strong>FHIRy also supports FHIR server search and FHIR tables on BigQuery.</strong></p>
 <p>Test this with the <a class="reference external" href="https://synthea.mitre.org/downloads">synthea sample</a> or the downloaded ndjson from the <a class="reference external" href="https://bulk-data.smarthealthit.org/">SMART Bulk data server</a>. Use the ‘Discussions’ tab above for feature requests.</p>
@@ -76,8 +77,17 @@ into ML packages such as Tensorflow and PyTorch. <strong>FHIRy also supports FHI
 </div>
 </section>
 </section>
-<section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
+<section id="cli-usage">
+<h2>CLI Usage<a class="headerlink" href="#cli-usage" title="Link to this heading">¶</a></h2>
+<section id="see-command-line-interface-cli-examples">
+<h3>👉 See <a class="reference internal" href="#examples/cli.md"><span class="xref myst">command line interface (CLI)</span></a> examples<a class="headerlink" href="#see-command-line-interface-cli-examples" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>fhiry<span class="w"> </span>--help
+</pre></div>
+</div>
+</section>
+</section>
+<section id="code-usage">
+<h2>Code Usage<a class="headerlink" href="#code-usage" title="Link to this heading">¶</a></h2>
 <section id="import-fhir-bundles-json-from-folder-to-pandas-dataframe">
 <h3>1. Import FHIR bundles (JSON) from folder to pandas dataframe<a class="headerlink" href="#import-fhir-bundles-json-from-folder-to-pandas-dataframe" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">fhiry.parallel</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fp</span>
@@ -212,7 +222,8 @@ into ML packages such as Tensorflow and PyTorch. <strong>FHIRy also supports FHI
 <li class="toctree-l2"><a class="reference internal" href="#update-1">UPDATE 1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#update-2">UPDATE 2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cli-usage">CLI Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#code-usage">Code Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#filters">Filters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#columns">Columns</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#give-us-a-star">Give us a star ⭐️</a></li>

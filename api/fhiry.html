@@ -61,8 +61,7 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="fhiry.base_fhiry.BaseFhiry.convert_object_to_list">
 <span class="sig-name descname"><span class="pre">convert_object_to_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/base_fhiry.html#BaseFhiry.convert_object_to_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.base_fhiry.BaseFhiry.convert_object_to_list" title="Link to this definition">¶</a></dt>
-<dd><p>Convert object to a list of codes</p>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="fhiry.base_fhiry.BaseFhiry.delete_col_raw_coding">
@@ -78,6 +77,18 @@
 <dt class="sig sig-object py" id="fhiry.base_fhiry.BaseFhiry.df">
 <em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">df</span></span><a class="headerlink" href="#fhiry.base_fhiry.BaseFhiry.df" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fhiry.base_fhiry.BaseFhiry.drop_empty_cols">
+<span class="sig-name descname"><span class="pre">drop_empty_cols</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/base_fhiry.html#BaseFhiry.drop_empty_cols"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.base_fhiry.BaseFhiry.drop_empty_cols" title="Link to this definition">¶</a></dt>
+<dd><p>Drop columns that are completely empty (all NaN values) from the dataframe.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fhiry.base_fhiry.BaseFhiry.empty_list_to_nan">
+<span class="sig-name descname"><span class="pre">empty_list_to_nan</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/base_fhiry.html#BaseFhiry.empty_list_to_nan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.base_fhiry.BaseFhiry.empty_list_to_nan" title="Link to this definition">¶</a></dt>
+<dd><p>Convert empty lists in the dataframe to NaN.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="fhiry.base_fhiry.BaseFhiry.get_info">
@@ -143,6 +154,26 @@
 <dt class="sig sig-object py" id="fhiry.base_fhiry.BaseFhiry.read_bundle_from_bundle_dict">
 <span class="sig-name descname"><span class="pre">read_bundle_from_bundle_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bundle_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/base_fhiry.html#BaseFhiry.read_bundle_from_bundle_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.base_fhiry.BaseFhiry.read_bundle_from_bundle_dict" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fhiry.base_fhiry.BaseFhiry.remove_string_from_columns">
+<span class="sig-name descname"><span class="pre">remove_string_from_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string_to_remove</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'resource.'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/base_fhiry.html#BaseFhiry.remove_string_from_columns"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.base_fhiry.BaseFhiry.remove_string_from_columns" title="Link to this definition">¶</a></dt>
+<dd><p>Removes a string from all column names in a Pandas DataFrame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – The input DataFrame.</p></li>
+<li><p><strong>string_to_remove</strong> (<a class="reference external" href="https://docs.python.org/3.11/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – The string to remove from column names.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new DataFrame with modified column names.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="fhiry.base_fhiry.BaseFhiry.rename_cols">
@@ -288,7 +319,7 @@ ONLY COMMON FIELDS IN ALL resources will be mapped</p>
 <a class="reference external" href="https://opensource.org/licenses/MIT">https://opensource.org/licenses/MIT</a></p>
 <dl class="py class">
 <dt class="sig sig-object py" id="fhiry.flattenfhir.FlattenFhir">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fhiry.flattenfhir.</span></span><span class="sig-name descname"><span class="pre">FlattenFhir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fhirobject</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_json</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/flattenfhir.html#FlattenFhir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.flattenfhir.FlattenFhir" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fhiry.flattenfhir.</span></span><span class="sig-name descname"><span class="pre">FlattenFhir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fhirobject</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_json</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/flattenfhir.html#FlattenFhir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.flattenfhir.FlattenFhir" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.11/library/abc.html#abc.ABC" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
 <dl class="py property">
 <dt class="sig sig-object py" id="fhiry.flattenfhir.FlattenFhir.fhirobject">
@@ -449,11 +480,14 @@ ONLY COMMON FIELDS IN ALL resources will be mapped</p>
 </dd></dl>
 
 </section>
-<section id="module-fhiry.parallel">
-<span id="fhiry-parallel-module"></span><h2>fhiry.parallel module<a class="headerlink" href="#module-fhiry.parallel" title="Link to this heading">¶</a></h2>
-<p>Copyright (c) 2023 Bell Eapen</p>
+<section id="module-fhiry.main">
+<span id="fhiry-main-module"></span><h2>fhiry.main module<a class="headerlink" href="#module-fhiry.main" title="Link to this heading">¶</a></h2>
+<p>Copyright (c) 2025 Bell Eapen</p>
 <p>This software is released under the MIT License.
 <a class="reference external" href="https://opensource.org/licenses/MIT">https://opensource.org/licenses/MIT</a></p>
+</section>
+<section id="module-fhiry.parallel">
+<span id="fhiry-parallel-module"></span><h2>fhiry.parallel module<a class="headerlink" href="#module-fhiry.parallel" title="Link to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="fhiry.parallel.ndjson">
 <span class="sig-prename descclassname"><span class="pre">fhiry.parallel.</span></span><span class="sig-name descname"><span class="pre">ndjson</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_json</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fhiry/parallel.html#ndjson"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fhiry.parallel.ndjson" title="Link to this definition">¶</a></dt>
