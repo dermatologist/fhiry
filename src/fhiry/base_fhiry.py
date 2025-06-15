@@ -73,7 +73,7 @@ class BaseFhiry(object):
             return
         logger.info("Removing columns: {}".format(self.config["REMOVE"]))
         for col in self.config["REMOVE"]:
-            cols_to_remove = [c for c in self._df.columns if c.startswith(col)]
+            cols_to_remove = [c for c in self._df.columns if c == col or c.startswith(f"{col}.")]
             for c in cols_to_remove:
                 del self._df[c]
 
