@@ -44,15 +44,19 @@ def test_fhirsearch():
 
     df = fs.search(resource_type="Condition", search_parameters={})
 
+    # exit if df is None
+    if df is None:
+        raise ValueError("Dataframe is None, something went wrong with the FHIR search")
+
     # resulting df must include all 5 condition resources (processed from all three mocked search results pages)
     assert len(df) == 5
 
     # Are all the different Condition codes there (exactly once)?
-    assert len(df[df['resource.code.codingcodes'].astype('string') == "['A00.0']"]) == 1
-    assert len(df[df['resource.code.codingcodes'].astype('string') == "['A01.0']"]) == 1
-    assert len(df[df['resource.code.codingcodes'].astype('string') == "['A02.0']"]) == 1
-    assert len(df[df['resource.code.codingcodes'].astype('string') == "['A03.0']"]) == 1
-    assert len(df[df['resource.code.codingcodes'].astype('string') == "['A04.0']"]) == 1
+    assert len(df[df['code.coding.codes'].astype('string') == "['A00.0']"]) == 1
+    assert len(df[df['code.coding.codes'].astype('string') == "['A01.0']"]) == 1
+    assert len(df[df['code.coding.codes'].astype('string') == "['A02.0']"]) == 1
+    assert len(df[df['code.coding.codes'].astype('string') == "['A03.0']"]) == 1
+    assert len(df[df['code.coding.codes'].astype('string') == "['A04.0']"]) == 1
 
     # There is no resource with code A05.0 in the FHIR search results
-    assert len(df[df['resource.code.codingcodes'].astype('string') == "['A05.0']"]) == 0
+    assert len(df[df['code.coding.codes'].astype('string') == "['A05.0']"]) == 0
