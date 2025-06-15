@@ -1,5 +1,45 @@
 # Changelog
 
+## [Unreleased](https://github.com/dermatologist/fhiry/tree/HEAD)
+
+[Full Changelog](https://github.com/dermatologist/fhiry/compare/4.2.1...HEAD)
+
+**Implemented enhancements:**
+
+- Feature/bq 1 [\#118](https://github.com/dermatologist/fhiry/pull/118) ([dermatologist](https://github.com/dermatologist))
+
+**Merged pull requests:**
+
+- Feature/command line 1 [\#213](https://github.com/dermatologist/fhiry/pull/213) ([dermatologist](https://github.com/dermatologist))
+- fix: update LLM example and dependencies for GoogleGenAI integration [\#211](https://github.com/dermatologist/fhiry/pull/211) ([dermatologist](https://github.com/dermatologist))
+- Feature/uv 1 [\#210](https://github.com/dermatologist/fhiry/pull/210) ([dermatologist](https://github.com/dermatologist))
+- Feature/uv 1 [\#209](https://github.com/dermatologist/fhiry/pull/209) ([dermatologist](https://github.com/dermatologist))
+- build\(deps\): bump jinja2 from 3.1.4 to 3.1.6 [\#203](https://github.com/dermatologist/fhiry/pull/203) ([dependabot[bot]](https://github.com/apps/dependabot))
+- style: clean up code formatting and improve consistency in string quotes [\#199](https://github.com/dermatologist/fhiry/pull/199) ([dermatologist](https://github.com/dermatologist))
+- test: update patient birth date and adjust age calculation in tests [\#198](https://github.com/dermatologist/fhiry/pull/198) ([dermatologist](https://github.com/dermatologist))
+- Feature/update deps 1 [\#194](https://github.com/dermatologist/fhiry/pull/194) ([dermatologist](https://github.com/dermatologist))
+- build\(deps\): bump actions/setup-python from 5.1.1 to 5.3.0 [\#192](https://github.com/dermatologist/fhiry/pull/192) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump actions/setup-python from 5.1.0 to 5.1.1 [\#187](https://github.com/dermatologist/fhiry/pull/187) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump jinja2 from 3.1.3 to 3.1.4 [\#180](https://github.com/dermatologist/fhiry/pull/180) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump actions/setup-python from 5.0.0 to 5.1.0 [\#174](https://github.com/dermatologist/fhiry/pull/174) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump jinja2 from 3.0.1 to 3.1.3 [\#167](https://github.com/dermatologist/fhiry/pull/167) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump actions/setup-python from 4.1.0 to 5.0.0 [\#166](https://github.com/dermatologist/fhiry/pull/166) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Feature/update deps 1 [\#164](https://github.com/dermatologist/fhiry/pull/164) ([dermatologist](https://github.com/dermatologist))
+- Feature/update python 1 [\#162](https://github.com/dermatologist/fhiry/pull/162) ([dermatologist](https://github.com/dermatologist))
+- fix \#135 [\#160](https://github.com/dermatologist/fhiry/pull/160) ([dermatologist](https://github.com/dermatologist))
+- Bump pyarrow from 13.0.0 to 14.0.1 [\#159](https://github.com/dermatologist/fhiry/pull/159) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump actions/checkout from 3 to 4 [\#150](https://github.com/dermatologist/fhiry/pull/150) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update deps [\#145](https://github.com/dermatologist/fhiry/pull/145) ([dermatologist](https://github.com/dermatologist))
+- Bump wheel from 0.37.1 to 0.41.0 [\#142](https://github.com/dermatologist/fhiry/pull/142) ([dependabot[bot]](https://github.com/apps/dependabot))
+- add utf-8 encoding [\#134](https://github.com/dermatologist/fhiry/pull/134) ([fhirfly](https://github.com/fhirfly))
+- Feature/fix-warnings-1 [\#113](https://github.com/dermatologist/fhiry/pull/113) ([dermatologist](https://github.com/dermatologist))
+- Findability: Add important/more specific keywords to headings [\#108](https://github.com/dermatologist/fhiry/pull/108) ([Mandalka](https://github.com/Mandalka))
+- Fix JSONDecodeError on parallel processing of test resources [\#107](https://github.com/dermatologist/fhiry/pull/107) ([Mandalka](https://github.com/Mandalka))
+
+## [4.2.1](https://github.com/dermatologist/fhiry/tree/4.2.1) (2025-05-04)
+
+[Full Changelog](https://github.com/dermatologist/fhiry/compare/4.2.0...4.2.1)
+
 ## [4.2.0](https://github.com/dermatologist/fhiry/tree/4.2.0) (2025-05-04)
 
 [Full Changelog](https://github.com/dermatologist/fhiry/compare/4.1.3...4.2.0)
@@ -65,23 +105,9 @@
 
 [Full Changelog](https://github.com/dermatologist/fhiry/compare/1.0.0...2.0.0)
 
-**Closed issues:**
-
-- Import directly \(no need for conditional\) when `python_requires = >= 3.8` [\#10](https://github.com/dermatologist/fhiry/issues/10)
-- ", [\#9](https://github.com/dermatologist/fhiry/issues/9)
-
 ## [1.0.0](https://github.com/dermatologist/fhiry/tree/1.0.0) (2021-09-17)
 
 [Full Changelog](https://github.com/dermatologist/fhiry/compare/0.5.0...1.0.0)
-
-**Merged pull requests:**
-
-- Feature/pyscaffold-1 [\#8](https://github.com/dermatologist/fhiry/pull/8) ([dermatologist](https://github.com/dermatologist))
-- Bump pytest from 6.2.4 to 6.2.5 [\#7](https://github.com/dermatologist/fhiry/pull/7) ([dependabot[bot]](https://github.com/apps/dependabot))
-- Bump pytest from 5.4.3 to 6.2.4 [\#6](https://github.com/dermatologist/fhiry/pull/6) ([dependabot[bot]](https://github.com/apps/dependabot))
-- Bump pandas from 1.1.4 to 1.1.5 [\#5](https://github.com/dermatologist/fhiry/pull/5) ([dependabot[bot]](https://github.com/apps/dependabot))
-- Bump autopep8 from 1.5.4 to 1.5.7 [\#4](https://github.com/dermatologist/fhiry/pull/4) ([dependabot[bot]](https://github.com/apps/dependabot))
-- Bump abatilo/actions-poetry from 2.0.0 to 2.1.2 [\#3](https://github.com/dermatologist/fhiry/pull/3) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 ## [0.5.0](https://github.com/dermatologist/fhiry/tree/0.5.0) (2020-12-26)
 
@@ -98,10 +124,6 @@
 ## [0.2.0](https://github.com/dermatologist/fhiry/tree/0.2.0) (2020-12-15)
 
 [Full Changelog](https://github.com/dermatologist/fhiry/compare/5e47672d9eaa776e0e9d54135ebf0413c15083e1...0.2.0)
-
-**Merged pull requests:**
-
-- Create README.md [\#1](https://github.com/dermatologist/fhiry/pull/1) ([dermatologist](https://github.com/dermatologist))
 
 
 

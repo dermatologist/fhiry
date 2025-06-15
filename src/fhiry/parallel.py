@@ -1,22 +1,15 @@
-"""
- Copyright (c) 2023 Bell Eapen
-
- This software is released under the MIT License.
- https://opensource.org/licenses/MIT
-"""
-
 import multiprocessing as mp
 import os
 import pandas as pd
 from . import Fhirndjson, Fhiry
 import logging
+from tqdm import tqdm  # Add this import
 
 logger = logging.getLogger(__name__)
 
 
 def process(folder, config_json=None):
     logger.info("CPU count: {}".format(mp.cpu_count()))
-    pool = mp.Pool(mp.cpu_count())
     f = Fhiry(config_json=config_json)
     filenames = []
     if os.path.isdir(folder):
@@ -26,14 +19,19 @@ def process(folder, config_json=None):
     else:
         filenames.append(folder)
 
-    list_of_dataframes = pool.map(f.process_file, filenames)
-    pool.close()
+    with mp.Pool(mp.cpu_count()) as pool:
+        list_of_dataframes = list(
+            tqdm(
+                pool.imap(f.process_file, filenames),
+                total=len(filenames),
+                desc="Processing JSON files",
+            )
+        )
     return pd.concat(list_of_dataframes)
 
 
 def ndjson(folder, config_json=None):
     logger.info("CPU count: {}".format(mp.cpu_count()))
-    pool = mp.Pool(mp.cpu_count())
     f = Fhirndjson(config_json=config_json)
     filenames = []
 
@@ -44,6 +42,12 @@ def ndjson(folder, config_json=None):
     else:
         filenames.append(folder)
 
-    list_of_dataframes = pool.map(f.process_file, filenames)
-    pool.close()
+    with mp.Pool(mp.cpu_count()) as pool:
+        list_of_dataframes = list(
+            tqdm(
+                pool.imap(f.process_file, filenames),
+                total=len(filenames),
+                desc="Processing NDJSON files",
+            )
+        )
     return pd.concat(list_of_dataframes)

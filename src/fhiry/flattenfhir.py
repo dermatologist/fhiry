@@ -1,8 +1,8 @@
 """
- Copyright (c) 2024 Bell Eapen
+Copyright (c) 2024 Bell Eapen
 
- This software is released under the MIT License.
- https://opensource.org/licenses/MIT
+This software is released under the MIT License.
+https://opensource.org/licenses/MIT
 """
 
 import datetime
@@ -16,7 +16,7 @@ _logger = logging.getLogger(__name__)
 
 class FlattenFhir(ABC):
 
-    def __init__(self, fhirobject=None, config_json=None):
+    def __init__(self, fhirobject={}, config_json=None):
         self._flattened = ""
         self._fhirobject = Prodict.from_dict(fhirobject)
         if fhirobject:
