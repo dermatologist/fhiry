@@ -16,7 +16,7 @@ _logger = logging.getLogger(__name__)
 
 class FlattenFhir(ABC):
 
-    def __init__(self, fhirobject=None, config_json=None):
+    def __init__(self, fhirobject={}, config_json=None):
         self._flattened = ""
         self._fhirobject = Prodict.from_dict(fhirobject)
         if fhirobject:

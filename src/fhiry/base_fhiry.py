@@ -73,7 +73,9 @@ class BaseFhiry(object):
             return
         logger.info("Removing columns: {}".format(self.config["REMOVE"]))
         for col in self.config["REMOVE"]:
-            cols_to_remove = [c for c in self._df.columns if c == col or c.startswith(f"{col}.")]
+            cols_to_remove = [
+                c for c in self._df.columns if c == col or c.startswith(f"{col}.")
+            ]
             for c in cols_to_remove:
                 del self._df[c]
 
@@ -83,7 +85,7 @@ class BaseFhiry(object):
         else:
             logger.warning("Dataframe is empty, nothing to rename")
 
-    def remove_string_from_columns(self, string_to_remove='resource.'):
+    def remove_string_from_columns(self, string_to_remove="resource."):
         """Removes a string from all column names in a Pandas DataFrame.
 
         Args:
@@ -94,7 +96,9 @@ class BaseFhiry(object):
             pd.DataFrame: A new DataFrame with modified column names.
         """
         if self._df is not None:
-            self._df.columns = self._df.columns.str.replace(string_to_remove, '', regex=False)
+            self._df.columns = self._df.columns.str.replace(
+                string_to_remove, "", regex=False
+            )
         else:
             logger.warning("Dataframe is empty, cannot remove string from columns")
         return self._df
@@ -125,7 +129,7 @@ class BaseFhiry(object):
         if self._df is None:
             logger.warning("Dataframe is empty, nothing to drop")
             return
-        self._df.dropna(axis=1, how='all', inplace=True)
+        self._df.dropna(axis=1, how="all", inplace=True)
         if self._df is not None and self._df.empty:
             logger.warning("Dataframe is empty after dropping empty columns")
         return self._df
