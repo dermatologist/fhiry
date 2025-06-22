@@ -10,7 +10,7 @@ FHIRy also supports FHIR server search and FHIR tables on BigQuery.
 
 ---
 
-## Features
+## ✨ Features
 
 - **Flatten FHIR Bundles/NDJSON** to DataFrames for analytics and ML
 - **Import from FHIR Server** via FHIR Search API
@@ -20,7 +20,7 @@ FHIRy also supports FHIR server search and FHIR tables on BigQuery.
 
 ---
 
-## Quick Start
+## 🔧 Quick Start
 
 ### Installation
 
@@ -93,7 +93,7 @@ df = bqs.search("SELECT * FROM `bigquery-public-data.fhir_synthea.patient` LIMIT
 
 ---
 
-### 5. LLM-based Natural Language Queries
+### 🚀 5. LLM-based Natural Language Queries
 
 FHIRy supports natural language queries over FHIR bundles/NDJSON using [llama-index](examples/llm_example.py):
 
@@ -104,7 +104,7 @@ See usage: [`examples/llm_example.py`](examples/llm_example.py)
 
 ---
 
-### 6. Convert FHIR Bundles/Resources to Text
+### 🚀 6. Convert FHIR Bundles/Resources to Text for LLMs
 
 Convert a FHIR Bundle or resource to a textual representation for LLMs:
 
