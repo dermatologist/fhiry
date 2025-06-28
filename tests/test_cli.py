@@ -3,7 +3,7 @@ from src.fhiry.main import cli
 
 
 def test_main_routine(capsys):
-    # assert exit code 0``
+    # assert exit code 0
     with pytest.raises(SystemExit) as pytest_wrapped_e:
         cli()
         captured = capsys.readouterr()
