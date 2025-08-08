@@ -13,8 +13,6 @@
 #     return _f
 
 
-
-
 # def test_process_bq(f, capsys):
 #     try:
 #         f.search()

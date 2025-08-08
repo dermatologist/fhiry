@@ -4,6 +4,7 @@ from pkg_resources import resource_filename
 
 from src.fhiry.fhirsearch import Fhirsearch
 
+
 # Test import FHIR search results (five resources with different codes)
 # separated by three mocked FHIR search results pages
 # to one Pandas dataframe
@@ -11,7 +12,10 @@ from src.fhiry.fhirsearch import Fhirsearch
 def test_fhirsearch():
 
     # Mock FHIR search URL of page 1
-    jsonfile = open(resource_filename(__name__, 'resources') + '/fhirsearch/search-conditions-page1.json')
+    jsonfile = open(
+        resource_filename(__name__, "resources")
+        + "/fhirsearch/search-conditions-page1.json"
+    )
     responses.add(
         responses.GET,
         "http://fhir-server/fhir/Condition?_count=2",
@@ -20,7 +24,10 @@ def test_fhirsearch():
     )
 
     # Mock FHIR search URL of page 2
-    jsonfile = open(resource_filename(__name__, 'resources') + '/fhirsearch/search-conditions-page2.json')
+    jsonfile = open(
+        resource_filename(__name__, "resources")
+        + "/fhirsearch/search-conditions-page2.json"
+    )
     responses.add(
         responses.GET,
         "http://fhir-server/fhir?_getpages=b5f2b2b3-6372-4159-969a-49cbd243e154&_getpagesoffset=2&_count=2&_bundletype=searchset",
@@ -29,7 +36,10 @@ def test_fhirsearch():
     )
 
     # Mock FHIR search URL of page 3
-    jsonfile = open(resource_filename(__name__, 'resources') + '/fhirsearch/search-conditions-page3.json')
+    jsonfile = open(
+        resource_filename(__name__, "resources")
+        + "/fhirsearch/search-conditions-page3.json"
+    )
     responses.add(
         responses.GET,
         "http://fhir-server/fhir?_getpages=b5f2b2b3-6372-4159-969a-49cbd243e154&_getpagesoffset=4&_count=2&_bundletype=searchset",
@@ -52,11 +62,11 @@ def test_fhirsearch():
     assert len(df) == 5
 
     # Are all the different Condition codes there (exactly once)?
-    assert len(df[df['code.coding.codes'].astype('string') == "['A00.0']"]) == 1
-    assert len(df[df['code.coding.codes'].astype('string') == "['A01.0']"]) == 1
-    assert len(df[df['code.coding.codes'].astype('string') == "['A02.0']"]) == 1
-    assert len(df[df['code.coding.codes'].astype('string') == "['A03.0']"]) == 1
-    assert len(df[df['code.coding.codes'].astype('string') == "['A04.0']"]) == 1
+    assert len(df[df["code.coding.codes"].astype("string") == "['A00.0']"]) == 1
+    assert len(df[df["code.coding.codes"].astype("string") == "['A01.0']"]) == 1
+    assert len(df[df["code.coding.codes"].astype("string") == "['A02.0']"]) == 1
+    assert len(df[df["code.coding.codes"].astype("string") == "['A03.0']"]) == 1
+    assert len(df[df["code.coding.codes"].astype("string") == "['A04.0']"]) == 1
 
     # There is no resource with code A05.0 in the FHIR search results
-    assert len(df[df['code.coding.codes'].astype('string') == "['A05.0']"]) == 0
+    assert len(df[df["code.coding.codes"].astype("string") == "['A05.0']"]) == 0
