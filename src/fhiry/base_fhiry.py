@@ -195,31 +195,23 @@ class BaseFhiry(object):
                 pass
 
     def check_subject_reference(self, row):
-        # if resource.subject.reference exists
-        if "resource.subject.reference" in row:
-            return (
-                row["resource.subject.reference"]
-                .replace("Patient/", "")
-                .replace("urn:uuid:", "")
-            )
-        if "resource.patient.reference" in row:
-            return (
-                row["resource.patient.reference"]
-                .replace("Patient/", "")
-                .replace("urn:uuid:", "")
-            )
-        if "subject.reference" in row:
-            return (
-                row["subject.reference"]
-                .replace("Patient/", "")
-                .replace("urn:uuid:", "")
-            )
-        if "patient.reference" in row:
-            return (
-                row["patient.reference"]
-                .replace("Patient/", "")
-                .replace("urn:uuid:", "")
-            )
+        keys = [
+            "resource.subject.reference",
+            "resource.patient.reference",
+            "subject.reference",
+            "patient.reference",
+        ]
+
+        def _clean(ref):
+            if not isinstance(ref, str):
+                return ""
+            return ref.replace("Patient/", "").replace("urn:uuid:", "")
+
+        for key in keys:
+            ref = row.get(key, None)
+            if pd.notna(ref):
+                return _clean(ref)
+
         return ""
 
     def get_info(self):
