@@ -225,7 +225,7 @@ class BaseFhiry(object):
                     del self._df[col]
             if "display" in col:
                 codes = self._df.apply(lambda x: self.process_list(x[col]), axis=1)
-                codes_as_comma_separated = codes.apply(lambda x: ", ".join(x) if isinstance(x, list) else x)
+                codes_as_comma_separated = codes.apply(lambda x: ", ".join(x) if isinstance(x, list) and x is not None else (x if x is not None else ""))
                 self._df = pd.concat(
                     [self._df, codes_as_comma_separated.to_frame(name=col + ".display")], axis=1
                 )
