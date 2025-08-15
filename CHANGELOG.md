@@ -2,7 +2,7 @@
 
 ## [Unreleased](https://github.com/dermatologist/fhiry/tree/HEAD)
 
-[Full Changelog](https://github.com/dermatologist/fhiry/compare/4.2.1...HEAD)
+[Full Changelog](https://github.com/dermatologist/fhiry/compare/5.0.0...HEAD)
 
 **Implemented enhancements:**
 
@@ -10,6 +10,11 @@
 
 **Merged pull requests:**
 
+- fix: update DataFrame column handling to use comma-separated values f… [\#218](https://github.com/dermatologist/fhiry/pull/218) ([dermatologist](https://github.com/dermatologist))
+- Feature/uv 2 [\#217](https://github.com/dermatologist/fhiry/pull/217) ([dermatologist](https://github.com/dermatologist))
+- fix: enhance subject reference handling in check\_subject\_reference me… [\#216](https://github.com/dermatologist/fhiry/pull/216) ([dermatologist](https://github.com/dermatologist))
+- build\(deps\): bump actions/checkout from 4 to 5 [\#215](https://github.com/dermatologist/fhiry/pull/215) ([dependabot[bot]](https://github.com/apps/dependabot))
+- ci: update pytest workflow schedule and add test for CLI [\#214](https://github.com/dermatologist/fhiry/pull/214) ([dermatologist](https://github.com/dermatologist))
 - Feature/command line 1 [\#213](https://github.com/dermatologist/fhiry/pull/213) ([dermatologist](https://github.com/dermatologist))
 - fix: update LLM example and dependencies for GoogleGenAI integration [\#211](https://github.com/dermatologist/fhiry/pull/211) ([dermatologist](https://github.com/dermatologist))
 - Feature/uv 1 [\#210](https://github.com/dermatologist/fhiry/pull/210) ([dermatologist](https://github.com/dermatologist))
@@ -33,8 +38,10 @@
 - Bump wheel from 0.37.1 to 0.41.0 [\#142](https://github.com/dermatologist/fhiry/pull/142) ([dependabot[bot]](https://github.com/apps/dependabot))
 - add utf-8 encoding [\#134](https://github.com/dermatologist/fhiry/pull/134) ([fhirfly](https://github.com/fhirfly))
 - Feature/fix-warnings-1 [\#113](https://github.com/dermatologist/fhiry/pull/113) ([dermatologist](https://github.com/dermatologist))
-- Findability: Add important/more specific keywords to headings [\#108](https://github.com/dermatologist/fhiry/pull/108) ([Mandalka](https://github.com/Mandalka))
-- Fix JSONDecodeError on parallel processing of test resources [\#107](https://github.com/dermatologist/fhiry/pull/107) ([Mandalka](https://github.com/Mandalka))
+
+## [5.0.0](https://github.com/dermatologist/fhiry/tree/5.0.0) (2025-06-15)
+
+[Full Changelog](https://github.com/dermatologist/fhiry/compare/4.2.1...5.0.0)
 
 ## [4.2.1](https://github.com/dermatologist/fhiry/tree/4.2.1) (2025-05-04)
 
@@ -92,10 +99,6 @@
 ## [3.0.0](https://github.com/dermatologist/fhiry/tree/3.0.0) (2023-03-09)
 
 [Full Changelog](https://github.com/dermatologist/fhiry/compare/2.1.0...3.0.0)
-
-**Implemented enhancements:**
-
-- import from BigQuery FHIR tables [\#106](https://github.com/dermatologist/fhiry/issues/106)
 
 ## [2.1.0](https://github.com/dermatologist/fhiry/tree/2.1.0) (2023-02-06)
 
