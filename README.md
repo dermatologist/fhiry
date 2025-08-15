@@ -1,8 +1,11 @@
 # :fire: fhiry — FHIR to Pandas DataFrame for Data Analytics, AI, and ML
 
-[![Libraries.io SourceRank](https://img.shields.io/librariesio/sourcerank/pypi/fhiry)](https://libraries.io/pypi/fhiry)
-[![PyPI download total](https://img.shields.io/pypi/dm/fhiry.svg)](https://pypi.python.org/pypi/fhiry/)
-![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/dermatologist/fhiry)
+[![Release](https://img.shields.io/github/v/release/dermatologist/fhiry)](https://img.shields.io/github/v/release/dermatologist/fhiry)
+[![Build status](https://img.shields.io/github/actions/workflow/status/dermatologist/fhiry/main.yml?branch=main)](https://github.com/dermatologist/fhiry/actions/workflows/main.yml?query=branch%3Amain)
+[![codecov](https://codecov.io/gh/dermatologist/fhiry/branch/main/graph/badge.svg)](https://codecov.io/gh/dermatologist/fhiry)
+[![Commit activity](https://img.shields.io/github/commit-activity/m/dermatologist/fhiry)](https://img.shields.io/github/commit-activity/m/dermatologist/fhiry)
+[![License](https://img.shields.io/github/license/dermatologist/fhiry)](https://img.shields.io/github/license/dermatologist/fhiry)
+[![Downloads](https://img.shields.io/pypi/dm/fhiry)](https://pypi.org/project/fhiry)
 [![Documentation](https://badgen.net/badge/icon/documentation?icon=libraries&label)](https://dermatologist.github.io/fhiry/)
 
 **FHIRy** is a [Python](https://www.python.org/) package that simplifies health data analytics and machine learning by converting [FHIR bundles](https://www.hl7.org/fhir/bundle.html) or NDJSON files from [bulk data export](https://hl7.org/fhir/uv/bulkdata/export/index.html) into [pandas](https://pandas.pydata.org/docs/user_guide/index.html) DataFrames. These DataFrames can be used directly with ML libraries such as TensorFlow and PyTorch.
