@@ -1,4 +1,4 @@
-# :fire: fhiry — FHIR to Pandas DataFrame for Data Analytics, AI, and ML
+# 🔥 fhiry — FHIR to Pandas DataFrame for Data Analytics, AI, and ML
 
 [![Release](https://img.shields.io/github/v/release/dermatologist/fhiry)](https://img.shields.io/github/v/release/dermatologist/fhiry)
 [![Build status](https://img.shields.io/github/actions/workflow/status/dermatologist/fhiry/main.yml?branch=main)](https://github.com/dermatologist/fhiry/actions/workflows/main.yml?query=branch%3Amain)
