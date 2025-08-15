@@ -8,6 +8,7 @@ https://opensource.org/licenses/MIT
 import datetime
 import logging
 from abc import ABC
+
 import timeago
 from prodict import Prodict
 
@@ -15,6 +16,12 @@ _logger = logging.getLogger(__name__)
 
 
 class FlattenFhir(ABC):
+    """Flatten FHIR resources to concise human-readable text.
+
+    Args:
+        fhirobject (dict): A FHIR resource or Bundle to flatten.
+        config_json: Currently unused placeholder for future options.
+    """
 
     def __init__(self, fhirobject={}, config_json=None):
         self._flattened = ""
@@ -24,18 +31,30 @@ class FlattenFhir(ABC):
 
     @property
     def flattened(self):
+        """str: The last flattened output string."""
         return self._flattened
 
     @property
     def fhirobject(self):
+        """Prodict: The current FHIR object as Prodict."""
         return self._fhirobject
 
     @fhirobject.setter
     def fhirobject(self, fhirobject):
+        """Set a FHIR object and immediately refresh the flattened output.
+
+        Args:
+            fhirobject (dict): A FHIR resource or Bundle.
+        """
         self._fhirobject = Prodict.from_dict(fhirobject)
         self.flatten()
 
     def flatten(self):
+        """Compute the flattened text for the current FHIR object.
+
+        Returns:
+            str: The flattened string.
+        """
         if not self._fhirobject:
             _logger.info("FHIR object is not set.")
             raise ValueError("FHIR object is not set.")
@@ -49,6 +68,14 @@ class FlattenFhir(ABC):
         return self._flattened
 
     def get_flattened_text(self, entry):
+        """Append flattened text for a single FHIR entry to the buffer.
+
+        Args:
+            entry (Prodict): A FHIR resource object.
+
+        Returns:
+            str: The updated flattened string.
+        """
         if entry.resourceType == "Patient":
             self._flattened += self.flatten_patient(entry)
         elif entry.resourceType == "Observation":
@@ -68,26 +95,25 @@ class FlattenFhir(ABC):
         return self._flattened
 
     def get_timeago(self, datestring) -> str:
-        """
-        Returns a string representing the time elapsed since the given date.
+        """Return a human-friendly time-ago string for the given date.
 
-        :param datestring: The date to calculate the time ago from.
-        :type datestring: datetime
-        :return: A string representing the time elapsed since the given date.
-        :rtype: str
+        Args:
+            datestring (str): ISO-like date string (YYYY-MM-DD...).
+
+        Returns:
+            str: Human-friendly relative time.
         """
         datestring = datestring[0:10]
         return timeago.format(datestring, datetime.datetime.now())
 
     def flatten_patient(self, patient) -> str:
-        """
-        Flatten the patient object into a string representation.
+        """Flatten a Patient into a short sentence.
 
         Args:
-            patient (Patient): The patient object to be flattened.
+            patient: Patient resource object.
 
         Returns:
-            str: The flattened string representation of the patient object.
+            str: Flattened snippet.
         """
         flat_patient = ""
         if "gender" in patient:
@@ -103,15 +129,7 @@ class FlattenFhir(ABC):
         return flat_patient
 
     def flatten_observation(self, observation) -> str:
-        """
-        Flatten the observation object into a string representation.
-
-        Args:
-            observation (Observation): The observation object to be flattened.
-
-        Returns:
-            str: The flattened string representation of the observation object.
-        """
+        """Flatten an Observation into a short sentence."""
         flat_observation = ""
         if "code" in observation:
             _display = observation.code.coding[0]
@@ -177,15 +195,7 @@ class FlattenFhir(ABC):
         return flat_observation
 
     def flatten_medication(self, medication) -> str:
-        """
-        Flatten the medication object into a string representation.
-
-        Args:
-            medication (Medication): The medication object to be flattened.
-
-        Returns:
-            str: The flattened string representation of the medication object.
-        """
+        """Flatten a Medication into a short sentence."""
         flat_medication = ""
         if "code" in medication:
             flat_medication += f"{medication.code.coding[0]['display']} "
@@ -200,15 +210,7 @@ class FlattenFhir(ABC):
         return flat_medication
 
     def flatten_procedure(self, procedure) -> str:
-        """
-        Flatten the procedure object into a string representation.
-
-        Args:
-            procedure (Procedure): The procedure object to be flattened.
-
-        Returns:
-            str: The flattened string representation of the procedure object.
-        """
+        """Flatten a Procedure into a short sentence."""
         flat_procedure = ""
         if (
             "code" in procedure
@@ -231,15 +233,7 @@ class FlattenFhir(ABC):
         return flat_procedure
 
     def flatten_condition(self, condition) -> str:
-        """
-        Flatten the condition object into a string representation.
-
-        Args:
-            condition (Condition): The condition object to be flattened.
-
-        Returns:
-            str: The flattened string representation of the condition object.
-        """
+        """Flatten a Condition into a short sentence."""
         flat_condition = ""
         if "code" in condition:
             flat_condition += f"{condition.code.coding[0]['display']} "
@@ -256,15 +250,7 @@ class FlattenFhir(ABC):
         return flat_condition
 
     def flatten_allergyintolerance(self, allergyintolerance) -> str:
-        """
-        Flatten the allergyintolerance object into a string representation.
-
-        Args:
-            allergyintolerance (AllergyIntolerance): The allergyintolerance object to be flattened.
-
-        Returns:
-            str: The flattened string representation of the allergyintolerance object.
-        """
+        """Flatten an AllergyIntolerance into a short sentence."""
         flat_allergyintolerance = ""
         _display = allergyintolerance.code.coding[0]
         if "code" in allergyintolerance and "display" in _display:
@@ -284,15 +270,7 @@ class FlattenFhir(ABC):
         return flat_allergyintolerance
 
     def flatten_documentreference(self, documentreference) -> str:
-        """
-        Flatten the documentreference object into a string representation.
-
-        Args:
-            documentreference (DocumentReference): The documentreference object to be flattened.
-
-        Returns:
-            str: The flattened string representation of the documentreference object.
-        """
+        """Flatten a DocumentReference into a short sentence."""
         flat_documentreference = ""
         for content in documentreference.content:
             content = Prodict.from_dict(content)

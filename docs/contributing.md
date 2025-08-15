@@ -1,4 +1,1 @@
-```{include} ../CONTRIBUTING.md
-:relative-docs: docs/
-:relative-images:
-```
+--8<-- "CONTRIBUTING.md"

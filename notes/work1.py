@@ -2,7 +2,10 @@ import json
 from types import CodeType
 import pandas as pd
 import numpy as np
-with open('/gpfs/fs0/scratch/a/archer/beapen/home/scratch/fhiry/data/fhir/Aaafhir.json', 'r') as f:
+
+with open(
+    "/gpfs/fs0/scratch/a/archer/beapen/home/scratch/fhiry/data/fhir/Aaafhir.json", "r"
+) as f:
     json_in = f.read()
 
 json_in = json.loads(json_in)
@@ -13,7 +16,7 @@ json_in = json.loads(json_in)
 # print(df_final)
 
 #  This works
-df = pd.json_normalize(json_in['entry'])
+df = pd.json_normalize(json_in["entry"])
 # df.fillna('', inplace=True)
 # df = df.applymap(str)
 # print(df.info())
@@ -22,24 +25,26 @@ df = pd.json_normalize(json_in['entry'])
 # print(df['resource.resourceType'])
 
 
-patient = df[(df['resource.resourceType'] == "Patient")].iloc[0]['resource.id']
-df['patientId'] = patient
+patient = df[(df["resource.resourceType"] == "Patient")].iloc[0]["resource.id"]
+df["patientId"] = patient
+
 
 def process_list(mylist):
     mycodes = []
     if isinstance(mylist, list):
         for entry in mylist:
-            if 'code' in entry:
-                mycodes.append(entry['code'])
+            if "code" in entry:
+                mycodes.append(entry["code"])
             else:
-                mycodes.append(entry['display'])
+                mycodes.append(entry["display"])
     return mycodes
+
 
 # iterating the columns
 
 
 # Delete unwanted cols
-del df['resource.text.div']
+del df["resource.text.div"]
 
 # Add patient details to all rows
 # df['resource.gender'].fillna(df['resource.gender'].mode()[0], inplace=True)
@@ -47,17 +52,13 @@ del df['resource.text.div']
 #     df['resource.birthDate'].mode()[0], inplace=True)
 
 for col in df.columns:
-    if 'coding' in col:
-        codes = df.apply(lambda x: process_list(
-            x[col]), axis=1)
-        df = pd.concat(
-            [df, codes.to_frame(name=col+'codes')], 1)
+    if "coding" in col:
+        codes = df.apply(lambda x: process_list(x[col]), axis=1)
+        df = pd.concat([df, codes.to_frame(name=col + "codes")], 1)
         del df[col]
-    if 'display' in col:
-        codes = df.apply(lambda x: process_list(
-            x[col]), axis=1)
-        df = pd.concat(
-            [df, codes.to_frame(name=col+'display')], 1)
+    if "display" in col:
+        codes = df.apply(lambda x: process_list(x[col]), axis=1)
+        df = pd.concat([df, codes.to_frame(name=col + "display")], 1)
         del df[col]
 
 # for col in df.columns:
@@ -81,7 +82,7 @@ for col in df.columns:
 #         if index > 30:
 #             break
 print(df.head(5))
-print(df['patientId'])
+print(df["patientId"])
 # df3 = df2.tail(1)
 # print(df3.head().values)
 

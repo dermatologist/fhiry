@@ -1,4 +1,4 @@
-# How to contribute
+# Contributing to `fhiry`
 
 ## Please note:
 
@@ -11,7 +11,7 @@
 
 1. [Fork the repo](http://help.github.com/fork-a-repo) and clone it to your local computer, and set up the upstream remote:
 
-        git clone https://github.com/YourGithubUsername/fhiry.git
+        git clone https://github.com/dermatologist/fhiry.git
         cd fhiry
         git remote add upstream https://github.com/dermatologist/fhiry.git
 
@@ -68,4 +68,3 @@
 ## Feedback
 
    If you need to contact me, see my contact details on my profile page.
-

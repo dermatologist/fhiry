@@ -1,132 +1,139 @@
-# :fire: fhiry - FHIR to pandas dataframe for data analytics, AI and ML
-Virtual flattened view of *FHIR Bundle / ndjson / FHIR server / BigQuery!*
+# 🔥 fhiry — FHIR to Pandas DataFrame for Data Analytics, AI, and ML
 
-![Libraries.io SourceRank](https://img.shields.io/librariesio/sourcerank/pypi/fhiry)
-[![PyPI download total](https://img.shields.io/pypi/dm/fhiry.svg)](https://pypi.python.org/pypi/fhiry/)
-![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/dermatologist/fhiry)
+[![Release](https://img.shields.io/github/v/release/dermatologist/fhiry)](https://img.shields.io/github/v/release/dermatologist/fhiry)
+[![Build status](https://img.shields.io/github/actions/workflow/status/dermatologist/fhiry/main.yml?branch=main)](https://github.com/dermatologist/fhiry/actions/workflows/main.yml?query=branch%3Amain)
+[![codecov](https://codecov.io/gh/dermatologist/fhiry/branch/main/graph/badge.svg)](https://codecov.io/gh/dermatologist/fhiry)
+[![Commit activity](https://img.shields.io/github/commit-activity/m/dermatologist/fhiry)](https://img.shields.io/github/commit-activity/m/dermatologist/fhiry)
+[![License](https://img.shields.io/github/license/dermatologist/fhiry)](https://img.shields.io/github/license/dermatologist/fhiry)
+[![Downloads](https://img.shields.io/pypi/dm/fhiry)](https://pypi.org/project/fhiry)
 [![Documentation](https://badgen.net/badge/icon/documentation?icon=libraries&label)](https://dermatologist.github.io/fhiry/)
 
-:fire: **FHIRy** is a [python](https://www.python.org/) package to facilitate health data analytics and machine learning by converting a folder of [FHIR bundles](https://www.hl7.org/fhir/bundle.html)/ndjson from [bulk data export](https://hl7.org/fhir/uv/bulkdata/export/index.html) into a [pandas](https://pandas.pydata.org/docs/user_guide/index.html) data frame for analysis. You can import the dataframe
-into ML packages such as Tensorflow and PyTorch. **FHIRy also supports FHIR server search and FHIR tables on BigQuery.**
+**FHIRy** is a [Python](https://www.python.org/) package that simplifies health data analytics and machine learning by converting [FHIR bundles](https://www.hl7.org/fhir/bundle.html) or NDJSON files from [bulk data export](https://hl7.org/fhir/uv/bulkdata/export/index.html) into [pandas](https://pandas.pydata.org/docs/user_guide/index.html) DataFrames. These DataFrames can be used directly with ML libraries such as TensorFlow and PyTorch.
+FHIRy also supports FHIR server search and FHIR tables on BigQuery.
 
+---
 
-Test this with the [synthea sample](https://synthea.mitre.org/downloads) or the downloaded ndjson from the [SMART Bulk data server](https://bulk-data.smarthealthit.org/). Use the 'Discussions' tab above for feature requests.
+## ✨ Features
 
-:sparkles: Checkout [this template](https://github.com/dermatologist/kedro-multimodal) for Multimodal machine learning in healthcare!
+- **Flatten FHIR Bundles/NDJSON** to DataFrames for analytics and ML
+- **Import from FHIR Server** via FHIR Search API
+- **Query FHIR Data on Google BigQuery**
+- **LLM-based Natural Language Queries** (see [examples/llm_example.py](examples/llm_example.py))
+- **Flexible Filtering and Column Selection**
 
+---
 
-## UPDATE 1
-Recently added support for **LLM based natural language queries** of FHIR bundles/ndjson using [llama-index](examples/llm_example.py). Please install the llm extras as follows. Please be cognizant of the privacy issues with publically hosted LLMs. Any feedback will be highly appreciated. [See usage](examples/llm_example.py)!
+## 🔧 Quick Start
 
-```
-pip install fhiry[llm]
-```
-[See usage](examples/llm_example.py).
+### Installation
 
-## UPDATE 2
-Added support for converting a FHIR Bundle to its textual representation for LLMs. You can also convert individual FHIR resources including *Patient, Condition, Observation, Procedure, Medication, AllergyIntolerance and DocumentReference*.
-
-```
-from fhiry import FlattenFhir
-bundle = json.load(jsonfile)
-flatten_fhir = FlattenFhir(bundle)
-print(flatten_fhir.flattened)
-```
-
-## Installation
-
-### Stable
-```shell
+**Stable release:**
+```sh
 pip install fhiry
 ```
 
-### Latest dev version
-
-```
+**Latest development version:**
+```sh
 pip install git+https://github.com/dermatologist/fhiry.git
 ```
-## CLI Usage
 
-### 👉 See [command line interface (CLI)](examples/cli.md) examples
-
-```bash
-fhiry --help
+**LLM support:**
+```sh
+pip install fhiry[llm]
 ```
-## Code Usage
 
-### 1. Import FHIR bundles (JSON) from folder to pandas dataframe
+---
+
+## Usage
+
+### 1. Import FHIR Bundles (JSON) from Folder
 
 ```python
 import fhiry.parallel as fp
 df = fp.process('/path/to/fhir/resources')
 print(df.info())
 ```
+Example dataset: [Synthea](https://synthea.mitre.org/downloads)
+Notebook: [`notebooks/synthea.ipynb`](notebooks/synthea.ipynb)
 
-Example source data set: [Synthea](https://synthea.mitre.org/downloads)
+---
 
-Jupyter notebook example: [`notebooks/synthea.ipynb`](notebooks/synthea.ipynb)
-
-### 2. Import NDJSON from folder to pandas dataframe
+### 2. Import NDJSON from Folder
 
 ```python
 import fhiry.parallel as fp
 df = fp.ndjson('/path/to/fhir/ndjson/files')
 print(df.info())
 ```
+Example dataset: [SMART Bulk Data Server](https://bulk-data.smarthealthit.org/)
+Notebook: [`notebooks/ndjson.ipynb`](notebooks/ndjson.ipynb)
 
-Example source data set: [SMART Bulk Data Server](https://bulk-data.smarthealthit.org/) Export
+---
 
-Jupyter notebook example: [`notebooks/ndjson.ipynb`](notebooks/ndjson.ipynb)
+### 3. Import FHIR Search Results
 
-### 3. Import FHIR Search results to pandas dataframe
-
-Fetch and import resources from [FHIR Search API](https://www.hl7.org/fhir/search.html) results to pandas dataframe.
-
-Documentation: [`fhir-search.md`](fhir-search.md)
-
-#### Example: Import all conditions with a certain code from FHIR Server
-
-Fetch and import all condition resources with Snomed (Codesystem `http://snomed.info/sct`) Code `39065001` in the FHIR element `Condition.code` ([resource type specific FHIR search parameter `code`](https://www.hl7.org/fhir/condition.html#search)) to a pandas dataframe:
+Fetch resources from a FHIR server using the [FHIR Search API](https://www.hl7.org/fhir/search.html):
 
 ```python
 from fhiry.fhirsearch import Fhirsearch
 
-fs = Fhirsearch(fhir_base_url = "http://fhir-server:8080/fhir")
-
-my_fhir_search_parameters = {
-    "code": "http://snomed.info/sct|39065001",
-}
-
-df = fs.search(resource_type = "Condition", search_parameters = my_fhir_search_parameters)
-
+fs = Fhirsearch(fhir_base_url="http://fhir-server:8080/fhir")
+params = {"code": "http://snomed.info/sct|39065001"}
+df = fs.search(resource_type="Condition", search_parameters=params)
 print(df.info())
 ```
+See [`fhir-search.md`](fhir-search.md) for details.
 
-### 4. Import [Google BigQuery](https://cloud.google.com/bigquery) [FHIR dataset](https://console.cloud.google.com/marketplace/details/mitre/synthea-fhir?q=synthea)
+---
+
+### 4. Import from Google BigQuery FHIR Dataset
 
 ```python
 from fhiry.bqsearch import BQsearch
 bqs = BQsearch()
-
-df = bqs.search("SELECT * FROM `bigquery-public-data.fhir_synthea.patient` LIMIT 20") # can be a path to .sql file
-
+df = bqs.search("SELECT * FROM `bigquery-public-data.fhir_synthea.patient` LIMIT 20")
 ```
 
-## Filters
+---
 
-Pass a config json to any of the constructors:
-* config_json can be a path to a json file.
+### 🚀 5. LLM-based Natural Language Queries
+
+FHIRy supports natural language queries over FHIR bundles/NDJSON using [llama-index](examples/llm_example.py):
+
+```sh
+pip install fhiry[llm]
 ```
-df = fp.process('/path/to/fhir/resources', config_json='{ "REMOVE": ["resource.text.div"], "RENAME": { "resource.id": "id" }  }')
+See usage: [`examples/llm_example.py`](examples/llm_example.py)
 
-fs = Fhirsearch(fhir_base_url = "http://fhir-server:8080/fhir", config_json = '{ "REMOVE": ["resource.text.div"], "RENAME": { "resource.id": "id" }  }')
+---
 
-bqs = BQsearch('{ "REMOVE": ["resource.text.div"], "RENAME": { "resource.id": "id" }  }')
+### 🚀 6. Convert FHIR Bundles/Resources to Text for LLMs
+
+Convert a FHIR Bundle or resource to a textual representation for LLMs:
+
+```python
+from fhiry import FlattenFhir
+import json
+
+bundle = json.load(open('bundle.json'))
+flatten_fhir = FlattenFhir(bundle)
+print(flatten_fhir.flattened)
 ```
 
-## Columns
-* see df.columns
+---
 
+## Filters and Column Selection
+
+You can pass a config JSON to any constructor to remove or rename columns:
+
+```python
+df = fp.process('/path/to/fhir/resources', config_json='{ "REMOVE": ["resource.text.div"], "RENAME": { "resource.id": "id" } }')
+fs = Fhirsearch(fhir_base_url="http://fhir-server:8080/fhir", config_json='{ "REMOVE": ["resource.text.div"], "RENAME": { "resource.id": "id" } }')
+bqs = BQsearch('{ "REMOVE": ["resource.text.div"], "RENAME": { "resource.id": "id" } }')
+```
+
+See `df.columns` for available columns.
+Example columns:
 ```
 patientId
 fullUrl
@@ -136,19 +143,40 @@ resource.name
 resource.telecom
 resource.gender
 ...
-...
-...
 ```
 
+---
 
-### [Documentation](https://dermatologist.github.io/fhiry/)
+## Command Line Interface (CLI)
 
-## Give us a star ⭐️
-If you find this project useful, give us a star. It helps others discover the project.
+See [CLI examples](examples/cli.md):
+
+```sh
+fhiry --help
+```
+
+---
+
+## Documentation
+
+Full documentation: [https://dermatologist.github.io/fhiry/](https://dermatologist.github.io/fhiry/)
+
+---
+
+## Contributing
+
+We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+---
+
+## Give Us a Star ⭐️
+
+If you find this project useful, please give us a star to help others discover it.
+
+---
 
 ## Contributors
 
-* [Bell Eapen](https://nuchange.ca) | [![Twitter Follow](https://img.shields.io/twitter/follow/beapen?style=social)](https://twitter.com/beapen)
-* [Markus Mandalka](https://github.com/Mandalka)
-* PR welcome, please see [CONTRIBUTING.md](/CONTRIBUTING.md)
-* [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg) using CC](https://alliancecan.ca/en/services/advanced-research-computing)
+- [Bell Eapen](https://nuchange.ca) [![Twitter Follow](https://img.shields.io/twitter/follow/beapen?style=social)](https://twitter.com/beapen)
+- [Markus Mandalka](https://github.com/Mandalka)
+- PRs welcome! See [CONTRIBUTING.md](CONTRIBUTING.md)

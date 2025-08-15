@@ -1,14 +1,25 @@
+import logging
 import multiprocessing as mp
 import os
+
 import pandas as pd
-from . import Fhirndjson, Fhiry
-import logging
 from tqdm import tqdm  # Add this import
+
+from . import Fhirndjson, Fhiry
 
 logger = logging.getLogger(__name__)
 
 
 def process(folder, config_json=None):
+    """Process many Bundle JSON files in parallel.
+
+    Args:
+        folder (str): Directory path or a single file path.
+        config_json: Optional JSON string or file path with column transforms.
+
+    Returns:
+        pd.DataFrame: Concatenated dataframe across all processed files.
+    """
     logger.info("CPU count: {}".format(mp.cpu_count()))
     f = Fhiry(config_json=config_json)
     filenames = []
@@ -31,6 +42,15 @@ def process(folder, config_json=None):
 
 
 def ndjson(folder, config_json=None):
+    """Process many NDJSON files in parallel.
+
+    Args:
+        folder (str): Directory path or a single file path.
+        config_json: Optional JSON string or file path with column transforms.
+
+    Returns:
+        pd.DataFrame: Concatenated dataframe across all processed files.
+    """
     logger.info("CPU count: {}".format(mp.cpu_count()))
     f = Fhirndjson(config_json=config_json)
     filenames = []
