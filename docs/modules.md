@@ -1,1 +1,11 @@
-::: fhiry.chain
+::: fhiry
+
+::: base_fhiry
+
+::: bqsearch
+
+::: fhirsearch
+
+::: flattenfhir
+
+::: fhirndjson
