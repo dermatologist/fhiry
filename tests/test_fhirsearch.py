@@ -1,6 +1,7 @@
 import json
+from pathlib import Path
+
 import responses
-from pkg_resources import resource_filename
 
 from src.fhiry.fhirsearch import Fhirsearch
 
@@ -13,8 +14,10 @@ def test_fhirsearch():
 
     # Mock FHIR search URL of page 1
     jsonfile = open(
-        resource_filename(__name__, "resources")
-        + "/fhirsearch/search-conditions-page1.json"
+        Path(__file__).parent
+        / "resources"
+        / "fhirsearch"
+        / "search-conditions-page1.json"
     )
     responses.add(
         responses.GET,
@@ -25,8 +28,10 @@ def test_fhirsearch():
 
     # Mock FHIR search URL of page 2
     jsonfile = open(
-        resource_filename(__name__, "resources")
-        + "/fhirsearch/search-conditions-page2.json"
+        Path(__file__).parent
+        / "resources"
+        / "fhirsearch"
+        / "search-conditions-page2.json"
     )
     responses.add(
         responses.GET,
@@ -37,8 +42,10 @@ def test_fhirsearch():
 
     # Mock FHIR search URL of page 3
     jsonfile = open(
-        resource_filename(__name__, "resources")
-        + "/fhirsearch/search-conditions-page3.json"
+        Path(__file__).parent
+        / "resources"
+        / "fhirsearch"
+        / "search-conditions-page3.json"
     )
     responses.add(
         responses.GET,

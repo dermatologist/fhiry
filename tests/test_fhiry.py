@@ -1,5 +1,6 @@
+from pathlib import Path
+
 import pytest
-from pkg_resources import resource_filename
 
 
 @pytest.fixture
@@ -13,14 +14,14 @@ def f():
 
 
 def test_set_file(f, capsys):
-    f.filename = resource_filename(__name__, "resources") + "/afhir.json"
+    f.filename = str(Path(__file__).parent / "resources" / "afhir.json")
     print(f.get_info())
     captured = capsys.readouterr()
     assert "memory usage" in captured.out
 
 
 def test_process_file(f, capsys):
-    f.filename = resource_filename(__name__, "resources") + "/afhir.json"
+    f.filename = str(Path(__file__).parent / "resources" / "afhir.json")
     f.process_source()
     # print(f.df.head(5))
     print(f.df.info())  # 319
@@ -29,7 +30,7 @@ def test_process_file(f, capsys):
 
 
 def test_process_folder(f, capsys):
-    f.folder = resource_filename(__name__, "resources")
+    f.folder = str(Path(__file__).parent / "resources")
     f.process_source()
     # print(f.df.head(5))
     print(f.df.info())  # 1194
@@ -38,7 +39,7 @@ def test_process_folder(f, capsys):
 
 
 def test_process_parallel(capsys):
-    folder = resource_filename(__name__, "resources")
+    folder = str(Path(__file__).parent / "resources")
     import src.fhiry.parallel as fp
 
     df = fp.process(folder)
