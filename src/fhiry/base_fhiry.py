@@ -217,15 +217,17 @@ class BaseFhiry(object):
         for col in self._df.columns:
             if "coding" in col:
                 codes = self._df.apply(lambda x: self.process_list(x[col]), axis=1)
+                codes_as_comma_separated = codes.apply(lambda x: ", ".join(x) if isinstance(x, list) else x)
                 self._df = pd.concat(
-                    [self._df, codes.to_frame(name=col + ".codes")], axis=1
+                    [self._df, codes_as_comma_separated.to_frame(name=col + ".codes")], axis=1
                 )
                 if self._delete_col_raw_coding:
                     del self._df[col]
             if "display" in col:
                 codes = self._df.apply(lambda x: self.process_list(x[col]), axis=1)
+                codes_as_comma_separated = codes.apply(lambda x: ", ".join(x) if isinstance(x, list) else x)
                 self._df = pd.concat(
-                    [self._df, codes.to_frame(name=col + ".display")], axis=1
+                    [self._df, codes_as_comma_separated.to_frame(name=col + ".display")], axis=1
                 )
                 del self._df[col]
 
