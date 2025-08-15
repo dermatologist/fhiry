@@ -105,7 +105,7 @@ show_error_codes = true
 
 [tool.pytest.ini_options]
 addopts = """
---cov fhiry --cov-report term-missing
+--cov src.fhiry --cov-report term-missing
 --verbose
 """
 norecursedirs = ["dist", "build", ".tox"]
