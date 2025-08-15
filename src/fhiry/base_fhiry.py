@@ -214,20 +214,42 @@ class BaseFhiry(object):
         if self._df is None:
             logger.warning("Dataframe is empty, nothing to convert")
             return
+
+        def _codes_comma_series(src_col: str) -> pd.Series:
+            """Return a Series with comma-separated strings from list-like values.
+
+            Args:
+                src_col: Column name to extract and stringify.
+
+            Returns:
+                pd.Series: Comma-separated strings (or empty string when None).
+            """
+            codes = self._df.apply(lambda x: self.process_list(x[src_col]), axis=1)
+            return codes.apply(
+                lambda x: (
+                    ", ".join(x)
+                    if isinstance(x, list) and x is not None
+                    else (x if x is not None else "")
+                )
+            )
+
         for col in self._df.columns:
             if "coding" in col:
-                codes = self._df.apply(lambda x: self.process_list(x[col]), axis=1)
-                codes_as_comma_separated = codes.apply(lambda x: ", ".join(x) if isinstance(x, list) and x is not None else (x if x is not None else ""))
+                codes_as_comma_separated = _codes_comma_series(col)
                 self._df = pd.concat(
-                    [self._df, codes_as_comma_separated.to_frame(name=col + ".codes")], axis=1
+                    [self._df, codes_as_comma_separated.to_frame(name=col + ".codes")],
+                    axis=1,
                 )
                 if self._delete_col_raw_coding:
                     del self._df[col]
             if "display" in col:
-                codes = self._df.apply(lambda x: self.process_list(x[col]), axis=1)
-                codes_as_comma_separated = codes.apply(lambda x: ", ".join(x) if isinstance(x, list) and x is not None else (x if x is not None else ""))
+                codes_as_comma_separated = _codes_comma_series(col)
                 self._df = pd.concat(
-                    [self._df, codes_as_comma_separated.to_frame(name=col + ".display")], axis=1
+                    [
+                        self._df,
+                        codes_as_comma_separated.to_frame(name=col + ".display"),
+                    ],
+                    axis=1,
                 )
                 del self._df[col]
 
