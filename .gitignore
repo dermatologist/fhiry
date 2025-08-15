@@ -53,5 +53,4 @@ site/*
 # Per-project virtualenvs
 .venv*/
 .conda*/
-uv.lock
 
