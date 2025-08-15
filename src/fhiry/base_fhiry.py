@@ -5,15 +5,30 @@ This software is released under the MIT License.
 https://opensource.org/licenses/MIT
 """
 
-from typing import Any
-import pandas as pd
 import json
 import logging
+from typing import Any
+
+import pandas as pd
 
 logger = logging.getLogger(__name__)
 
 
 class BaseFhiry(object):
+    """Base class providing common dataframe processing utilities for FHIR.
+
+    This class encapsulates common logic for transforming FHIR bundle data into
+    a pandas DataFrame, including column cleanup, code extraction, and patient
+    ID derivation.
+
+    Args:
+        config_json: Either a JSON string or a path to a JSON file specifying
+            transformations with keys:
+            - "REMOVE": list[str] of column prefixes to remove
+            - "RENAME": dict[str, str] mapping old->new column names
+            If None, a sensible default is used.
+    """
+
     def __init__(self, config_json=None):
         self._df = None
 
@@ -42,24 +57,45 @@ class BaseFhiry(object):
 
     @property
     def df(self):
+        """pd.DataFrame | None: The current working dataframe, if any."""
         return self._df
 
     @property
     def delete_col_raw_coding(self):
+        """bool: Whether to drop raw coding/display columns after extraction."""
         return self._delete_col_raw_coding
 
     @delete_col_raw_coding.setter
     def delete_col_raw_coding(self, delete_col_raw_coding):
+        """Set whether to drop raw coding/display columns after extraction.
+
+        Args:
+            delete_col_raw_coding (bool): True to delete raw columns after creating
+                derived columns, False to keep them.
+        """
         self._delete_col_raw_coding = delete_col_raw_coding
 
     def read_bundle_from_bundle_dict(self, bundle_dict):
+        """Normalize a FHIR Bundle dict to a dataframe of entries.
+
+        Args:
+            bundle_dict (dict): A FHIR Bundle object with an "entry" list.
+
+        Returns:
+            pd.DataFrame: Dataframe where each row corresponds to a Bundle entry.
+        """
         return pd.json_normalize(bundle_dict["entry"])
 
     def delete_unwanted_cols(self):
+        """Delete unwanted columns from the dataframe.
+
+        Uses the "REMOVE" list from the configuration. Any column that equals a
+        listed value or starts with that value followed by a dot will be removed.
+        Safely no-ops if the dataframe or configuration is missing.
+        """
         if self._df is None:
             logger.warning("Dataframe is empty, nothing to delete")
             return
-        """Delete unwanted columns from the dataframe"""
         if "REMOVE" not in self.config:
             logger.warning("No columns to remove defined in config")
             return
@@ -80,20 +116,24 @@ class BaseFhiry(object):
                 del self._df[c]
 
     def rename_cols(self):
+        """Rename dataframe columns according to the configuration.
+
+        Uses the "RENAME" mapping from the configuration. Safely no-ops if the
+        dataframe is empty.
+        """
         if self._df is not None:
             self._df.rename(columns=self.config["RENAME"], inplace=True)
         else:
             logger.warning("Dataframe is empty, nothing to rename")
 
     def remove_string_from_columns(self, string_to_remove="resource."):
-        """Removes a string from all column names in a Pandas DataFrame.
+        """Remove a literal substring from all column names.
 
         Args:
-            df (pd.DataFrame): The input DataFrame.
-            string_to_remove (str): The string to remove from column names.
+            string_to_remove: Substring to remove from column names.
 
         Returns:
-            pd.DataFrame: A new DataFrame with modified column names.
+            pd.DataFrame | None: The updated dataframe or None if unset.
         """
         if self._df is not None:
             self._df.columns = self._df.columns.str.replace(
@@ -104,6 +144,20 @@ class BaseFhiry(object):
         return self._df
 
     def process_df(self):
+        """Run the standard transformation pipeline on the dataframe.
+
+        Steps include:
+        - Extracting codes from coding/display objects to flat columns
+        - Adding a patientId column
+        - Removing common prefix from column names
+        - Converting empty lists to NaN
+        - Dropping empty columns
+        - Deleting unwanted columns
+        - Renaming columns per config
+
+        Returns:
+            pd.DataFrame | None: The processed dataframe, or None if unset.
+        """
         self.convert_object_to_list()
         self.add_patient_id()
         self.remove_string_from_columns(string_to_remove="resource.")
@@ -114,7 +168,7 @@ class BaseFhiry(object):
         return self._df
 
     def empty_list_to_nan(self):
-        """Convert empty lists in the dataframe to NaN."""
+        """Convert empty list values in object columns to NaN."""
         if self._df is None:
             logger.warning("Dataframe is empty, nothing to convert")
             return
@@ -125,7 +179,7 @@ class BaseFhiry(object):
                 )
 
     def drop_empty_cols(self):
-        """Drop columns that are completely empty (all NaN values) from the dataframe."""
+        """Drop columns that are completely empty (all NaN values)."""
         if self._df is None:
             logger.warning("Dataframe is empty, nothing to drop")
             return
@@ -135,6 +189,14 @@ class BaseFhiry(object):
         return self._df
 
     def process_bundle_dict(self, bundle_dict):
+        """Load and process a FHIR Bundle dictionary.
+
+        Args:
+            bundle_dict (dict): A FHIR Bundle object.
+
+        Returns:
+            pd.DataFrame | None: The processed dataframe, or None if empty.
+        """
         self._df = self.read_bundle_from_bundle_dict(bundle_dict)
         if self._df is None or self._df.empty:
             logger.warning("Dataframe is empty, nothing to process")
@@ -143,10 +205,15 @@ class BaseFhiry(object):
         return self._df
 
     def convert_object_to_list(self):
+        """Extract codes/display from nested objects into flat list columns.
+
+        For columns containing "coding" or "display" in their names, extract a
+        list of codes or display texts into new columns with ".codes" or
+        ".display" suffixes. Optionally drops raw source columns.
+        """
         if self._df is None:
             logger.warning("Dataframe is empty, nothing to convert")
             return
-        """Convert object to a list of codes"""
         for col in self._df.columns:
             if "coding" in col:
                 codes = self._df.apply(lambda x: self.process_list(x[col]), axis=1)
@@ -163,7 +230,11 @@ class BaseFhiry(object):
                 del self._df[col]
 
     def add_patient_id(self):
-        """Create a patientId column with the resource.id if a Patient resource or with the resource.subject.reference if other resource type"""
+        """Add a patientId column inferred from resource fields.
+
+        If the resource type is Patient, uses the resource id; otherwise attempts
+        to derive the patient identifier from known subject/patient reference fields.
+        """
         if self._df is None:
             logger.warning("Dataframe is empty, cannot add patientId")
             return
@@ -195,6 +266,15 @@ class BaseFhiry(object):
                 pass
 
     def check_subject_reference(self, row):
+        """Extract patient id from subject/patient reference fields.
+
+        Args:
+            row (Mapping[str, Any]): A dataframe row as a mapping.
+
+        Returns:
+            str: The patient id (without "Patient/" or "urn:uuid:" prefix) or
+            an empty string if not found.
+        """
         keys = [
             "resource.subject.reference",
             "resource.patient.reference",
@@ -215,18 +295,24 @@ class BaseFhiry(object):
         return ""
 
     def get_info(self):
+        """Return a concise info string for the current dataframe.
+
+        Returns:
+            str: Dataframe info text or a message if no dataframe is set.
+        """
         if self._df is None:
             return "Dataframe is empty"
         return self._df.info()
 
     def process_list(self, myList):
-        """Extracts the codes from a list of objects
+        """Extract code or display strings from a list of coding-like dicts.
 
         Args:
-            myList (list): A list of objects
+            myList (list): A list of dictionaries that may contain "code" or
+                "display" keys.
 
         Returns:
-            list: A list of codes
+            list[str]: A list of extracted codes/display texts.
         """
         myCodes = []
         if isinstance(myList, list):
@@ -238,25 +324,25 @@ class BaseFhiry(object):
         return myCodes
 
     def llm_query(self, query, llm, embed_model=None, verbose=True):
-        """Execute a query using llama_index
+        """Execute a natural language query against the dataframe using LLM tools.
 
         Args:
-            query (str): The natural language query
-            llm (Any): The Language Model
-            embed_model (str, optional): The embedding model string from HuggingFace. Defaults to None.
-            verbose (bool, optional): Verbose or not. Defaults to True.
+            query (str): The natural language question.
+            llm (Any): The language model instance usable by llama_index.
+            embed_model (str | None): Optional HuggingFace embedding model name.
+            verbose (bool): Whether to enable verbose output from the query engine.
 
         Raises:
-            Exception: Llama_index not installed
-            Exception: Dataframe is empty
+            Exception: If required libraries are not installed.
+            Exception: If the dataframe is empty.
 
         Returns:
-            Any: Results of the query
+            Any: The query result from the underlying engine.
         """
         try:
-            from llama_index.experimental.query_engine import PandasQueryEngine
-            from llama_index.core import Settings
             from langchain_huggingface import HuggingFaceEmbeddings
+            from llama_index.core import Settings
+            from llama_index.experimental.query_engine import PandasQueryEngine
         except Exception:
             raise Exception("llama_index or HuggingFaceEmbeddings not installed")
         if self._df is None:
