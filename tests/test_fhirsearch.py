@@ -69,11 +69,11 @@ def test_fhirsearch():
     assert len(df) == 5
 
     # Are all the different Condition codes there (exactly once)?
-    assert len(df[df["code.coding.codes"].astype("string") == "['A00.0']"]) == 1
-    assert len(df[df["code.coding.codes"].astype("string") == "['A01.0']"]) == 1
-    assert len(df[df["code.coding.codes"].astype("string") == "['A02.0']"]) == 1
-    assert len(df[df["code.coding.codes"].astype("string") == "['A03.0']"]) == 1
-    assert len(df[df["code.coding.codes"].astype("string") == "['A04.0']"]) == 1
+    assert len(df[df["code.coding.codes"].astype("string") == "A00.0"]) == 1
+    assert len(df[df["code.coding.codes"].astype("string") == "A01.0"]) == 1
+    assert len(df[df["code.coding.codes"].astype("string") == "A02.0"]) == 1
+    assert len(df[df["code.coding.codes"].astype("string") == "A03.0"]) == 1
+    assert len(df[df["code.coding.codes"].astype("string") == "A04.0"]) == 1
 
     # There is no resource with code A05.0 in the FHIR search results
-    assert len(df[df["code.coding.codes"].astype("string") == "['A05.0']"]) == 0
+    assert len(df[df["code.coding.codes"].astype("string") == "A05.0"]) == 0
