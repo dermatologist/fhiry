@@ -1,5 +1,6 @@
+from pathlib import Path
+
 import pytest
-from pkg_resources import resource_filename
 
 
 @pytest.fixture
@@ -11,7 +12,7 @@ def f():
 
 
 def test_process_folder(f, capsys):
-    f.folder = resource_filename(__name__, "resources")
+    f.folder = str(Path(__file__).parent / "resources")
     f.process_source()
     print(f.df.info())  # 839
     captured = capsys.readouterr()
@@ -19,7 +20,7 @@ def test_process_folder(f, capsys):
 
 
 def test_process_parallel(capsys):
-    folder = resource_filename(__name__, "resources")
+    folder = str(Path(__file__).parent / "resources")
     import src.fhiry.parallel as fp
 
     df = fp.ndjson(folder)

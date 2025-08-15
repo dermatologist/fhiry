@@ -53,8 +53,21 @@ def cli(
     query,
     config_file,
 ):
-    """
-    Process FHIR data from folder or FHIR server and output as dataframe.
+    """Process FHIR data from folder or server and output a dataframe.
+
+    This command can either read FHIR Bundles/NDJSON from a local folder or
+    perform a FHIR search against a server, then optionally flatten resources
+    and write to CSV/XLSX/Parquet.
+
+    Args:
+        input_path (str | None): Path to a folder with FHIR files.
+        output_path (str | None): Destination file path for dataframe output.
+        flatten (bool): Whether to add a flattened text column for resources.
+        url (str | None): FHIR server base URL for search.
+        search_type (str | None): Resource type to search when using --url.
+        resource_types (str | None): CSV string of resource types to filter.
+        query (str | None): JSON string of search parameters for the server.
+        config_file (str | None): Path to config JSON file for column transforms.
     """
     if url:
         from fhiry.fhirsearch import Fhirsearch

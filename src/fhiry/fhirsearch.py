@@ -1,12 +1,21 @@
 import pandas as pd
 import requests
+
 from .base_fhiry import BaseFhiry
 
 
 class Fhirsearch(BaseFhiry):
+    """Search FHIR servers and aggregate results into a dataframe.
+
+    This client pages through FHIR search results and builds a unified
+    pandas DataFrame using the BaseFhiry processing pipeline.
+
+    Args:
+        fhir_base_url (str): Base URL of the FHIR server (e.g., "https://.../fhir").
+        config_json: Optional JSON string or file path with column transforms.
+    """
 
     def __init__(self, fhir_base_url, config_json=None):
-
         self.fhir_base_url = fhir_base_url
 
         # Batch size (entries per page)
@@ -21,6 +30,16 @@ class Fhirsearch(BaseFhiry):
         super().__init__(config_json=config_json)
 
     def search(self, resource_type="Patient", search_parameters={}):
+        """Search the FHIR server and return the combined results.
+
+        Args:
+            resource_type (str): FHIR resource type to search (e.g., "Patient").
+            search_parameters (dict): Query parameters per FHIR spec; _count is
+                auto-set to the configured page size if absent.
+
+        Returns:
+            pd.DataFrame: Combined search results across all pages.
+        """
 
         headers = {"Content-Type": "application/fhir+json"}
 
@@ -58,6 +77,14 @@ class Fhirsearch(BaseFhiry):
 
 
 def get_next_page_url(bundle_dict):
+    """Return the URL of the next page from a FHIR Bundle, if present.
+
+    Args:
+        bundle_dict (dict): The FHIR Bundle JSON object.
+
+    Returns:
+        str | None: The 'next' page URL, or None if no more pages.
+    """
     links = bundle_dict.get("link")
     if links:
         for link in links:

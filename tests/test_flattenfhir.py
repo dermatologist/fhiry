@@ -1,13 +1,12 @@
-from src.fhiry.flattenfhir import FlattenFhir
-from pkg_resources import resource_filename
 import json
+from pathlib import Path
+
+from src.fhiry.flattenfhir import FlattenFhir
 
 
 def test_flatten_bundle():
     # Test with Bundle
-    jsonfile = open(
-        resource_filename(__name__, "resources") + "/flattenfhir/bundle.json"
-    )
+    jsonfile = open(Path(__file__).parent / "resources" / "flattenfhir" / "bundle.json")
     bundle = json.load(jsonfile)
     flatten_fhir = FlattenFhir(bundle)
     assert flatten_fhir.flattened == "Medication Status: unknown. "
@@ -16,7 +15,7 @@ def test_flatten_bundle():
 def test_flatten_patient():
     # Test with Patient
     jsonfile = open(
-        resource_filename(__name__, "resources") + "/flattenfhir/patient.json"
+        Path(__file__).parent / "resources" / "flattenfhir" / "patient.json"
     )
     patient = json.load(jsonfile)
     flatten_fhir = FlattenFhir(patient)
@@ -26,7 +25,7 @@ def test_flatten_patient():
 def test_flatten_observation():
     # Test with Observation
     jsonfile = open(
-        resource_filename(__name__, "resources") + "/flattenfhir/observation.json"
+        Path(__file__).parent / "resources" / "flattenfhir" / "observation.json"
     )
     observation = json.load(jsonfile)
     flatten_fhir = FlattenFhir(observation)
@@ -36,7 +35,7 @@ def test_flatten_observation():
 def test_flatten_medication():
     # Test with Medication
     jsonfile = open(
-        resource_filename(__name__, "resources") + "/flattenfhir/medication.json"
+        Path(__file__).parent / "resources" / "flattenfhir" / "medication.json"
     )
     medication = json.load(jsonfile)
     flatten_fhir = FlattenFhir(medication)
@@ -46,7 +45,7 @@ def test_flatten_medication():
 def test_flatten_procedure():
     # Test with Procedure
     jsonfile = open(
-        resource_filename(__name__, "resources") + "/flattenfhir/procedure.json"
+        Path(__file__).parent / "resources" / "flattenfhir" / "procedure.json"
     )
     procedure = json.load(jsonfile)
     flatten_fhir = FlattenFhir(procedure)
@@ -56,7 +55,7 @@ def test_flatten_procedure():
 def test_flatten_condition():
     # Test with Condition
     jsonfile = open(
-        resource_filename(__name__, "resources") + "/flattenfhir/condition.json"
+        Path(__file__).parent / "resources" / "flattenfhir" / "condition.json"
     )
     condition = json.load(jsonfile)
     flatten_fhir = FlattenFhir(condition)
@@ -66,8 +65,7 @@ def test_flatten_condition():
 def test_flatten_allergyintolerance():
     # Test with AllergyIntolerance
     jsonfile = open(
-        resource_filename(__name__, "resources")
-        + "/flattenfhir/allergy_intolerance.json"
+        Path(__file__).parent / "resources" / "flattenfhir" / "allergy_intolerance.json"
     )
     allergyintolerance = json.load(jsonfile)
     flatten_fhir = FlattenFhir(allergyintolerance)
@@ -77,8 +75,7 @@ def test_flatten_allergyintolerance():
 def test_flatten_documentreference():
     # Test with DocumentReference
     jsonfile = open(
-        resource_filename(__name__, "resources")
-        + "/flattenfhir/document_reference.json"
+        Path(__file__).parent / "resources" / "flattenfhir" / "document_reference.json"
     )
     documentreference = json.load(jsonfile)
     flatten_fhir = FlattenFhir(documentreference)
