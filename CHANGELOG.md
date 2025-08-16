@@ -2,7 +2,7 @@
 
 ## [Unreleased](https://github.com/dermatologist/fhiry/tree/HEAD)
 
-[Full Changelog](https://github.com/dermatologist/fhiry/compare/5.0.0...HEAD)
+[Full Changelog](https://github.com/dermatologist/fhiry/compare/v5.1.0...HEAD)
 
 **Implemented enhancements:**
 
@@ -38,6 +38,10 @@
 - Bump wheel from 0.37.1 to 0.41.0 [\#142](https://github.com/dermatologist/fhiry/pull/142) ([dependabot[bot]](https://github.com/apps/dependabot))
 - add utf-8 encoding [\#134](https://github.com/dermatologist/fhiry/pull/134) ([fhirfly](https://github.com/fhirfly))
 - Feature/fix-warnings-1 [\#113](https://github.com/dermatologist/fhiry/pull/113) ([dermatologist](https://github.com/dermatologist))
+
+## [v5.1.0](https://github.com/dermatologist/fhiry/tree/v5.1.0) (2025-08-15)
+
+[Full Changelog](https://github.com/dermatologist/fhiry/compare/5.0.0...v5.1.0)
 
 ## [5.0.0](https://github.com/dermatologist/fhiry/tree/5.0.0) (2025-06-15)
 
