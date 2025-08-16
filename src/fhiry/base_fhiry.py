@@ -107,7 +107,6 @@ class BaseFhiry(object):
         if len(self.config["REMOVE"]) == 0:
             logger.warning("No columns to remove defined in config")
             return
-        logger.info("Removing columns: {}".format(self.config["REMOVE"]))
         for col in self.config["REMOVE"]:
             cols_to_remove = [
                 c for c in self._df.columns if c == col or c.startswith(f"{col}.")
