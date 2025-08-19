@@ -2,7 +2,7 @@
 
 [![Release](https://img.shields.io/github/v/release/dermatologist/fhiry)](https://img.shields.io/github/v/release/dermatologist/fhiry)
 [![Build status](https://img.shields.io/github/actions/workflow/status/dermatologist/fhiry/pytest.yml?branch=develop)](https://github.com/dermatologist/fhiry/actions/workflows/pytest.yml?query=branch%3Adevelop)
-[![codecov](https://codecov.io/gh/dermatologist/fhiry/branch/master/graph/badge.svg)](https://codecov.io/gh/dermatologist/fhiry)
+[![codecov](https://codecov.io/gh/dermatologist/fhiry/branch/develop/graph/badge.svg)](https://codecov.io/gh/dermatologist/fhiry)
 [![Commit activity](https://img.shields.io/github/commit-activity/m/dermatologist/fhiry)](https://img.shields.io/github/commit-activity/m/dermatologist/fhiry)
 [![License](https://img.shields.io/github/license/dermatologist/fhiry)](https://img.shields.io/github/license/dermatologist/fhiry)
 [![Downloads](https://img.shields.io/pypi/dm/fhiry)](https://pypi.org/project/fhiry)
