@@ -23,4 +23,5 @@ jobs:
         delete-branch: true
         labels: |
             automated pr
-        draft: true
+        reviewers: |
+            dermatologist
