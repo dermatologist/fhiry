@@ -50,10 +50,9 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           title: "[GitHub Dependents Info] Updated markdown file"
-          body: "_Generated with [github-dependents-info]"
+          body: "_Generated with github-dependents-info"
           commit-message: "[GitHub Dependents Info] Updated markdown file(s)"
           branch: "auto/github-dependents-info-auto-update"
-          add-paths: uv.lock
           delete-branch: true
           labels: |
               automated pr
