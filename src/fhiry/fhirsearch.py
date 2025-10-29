@@ -81,7 +81,7 @@ class Fhirsearch(BaseFhiry):
             else:
                 df = pd.DataFrame()
         else:
-            df = pd.DataFrame(columns=[])
+            df = pd.DataFrame()
 
         self._df = df
         return self._df
