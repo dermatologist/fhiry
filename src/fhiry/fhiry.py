@@ -93,18 +93,22 @@ class Fhiry(BaseFhiry):
         Only columns common across resources will be mapped.
         """
         if self._folder:
-            df = pd.DataFrame(columns=[])
+            # Collect all dataframes first, then concat once for better performance
+            dataframes = []
             for file in tqdm(os.listdir(self._folder)):
                 if file.endswith(".json"):
                     self._df = self.read_bundle_from_file(
                         os.path.join(self._folder, file)
                     )
                     self.process_df()
-                    if df.empty:
-                        df = self._df
-                    else:
-                        df = pd.concat([df, self._df])
-            self._df = df
+                    if not self._df.empty:
+                        dataframes.append(self._df)
+            
+            # Single concat operation with ignore_index for better performance
+            if dataframes:
+                self._df = pd.concat(dataframes, ignore_index=True)
+            else:
+                self._df = pd.DataFrame()
         elif self._filename:
             self._df = self.read_bundle_from_file(self._filename)
         super().process_df()

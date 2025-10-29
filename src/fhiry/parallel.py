@@ -38,7 +38,11 @@ def process(folder, config_json=None):
                 desc="Processing JSON files",
             )
         )
-    return pd.concat(list_of_dataframes)
+    # Filter out empty dataframes and use ignore_index for better performance
+    list_of_dataframes = [df for df in list_of_dataframes if not df.empty]
+    if not list_of_dataframes:
+        return pd.DataFrame()
+    return pd.concat(list_of_dataframes, ignore_index=True)
 
 
 def ndjson(folder, config_json=None):
@@ -70,4 +74,8 @@ def ndjson(folder, config_json=None):
                 desc="Processing NDJSON files",
             )
         )
-    return pd.concat(list_of_dataframes)
+    # Filter out empty dataframes and use ignore_index for better performance
+    list_of_dataframes = [df for df in list_of_dataframes if not df.empty]
+    if not list_of_dataframes:
+        return pd.DataFrame()
+    return pd.concat(list_of_dataframes, ignore_index=True)
