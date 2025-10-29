@@ -66,13 +66,23 @@ class Fhirndjson(BaseFhiry):
         Returns:
             pd.DataFrame | None: The updated dataframe.
         """
-        df = self._df
         if file.endswith(".ndjson"):
+            dataframes = []
+            if self._df is not None and not self._df.empty:
+                dataframes.append(self._df)
+            
             with open(os.path.join(self._folder, file)) as fp:
                 Lines = fp.readlines()
+                # Collect all dataframes first, then concat once for better performance
                 for line in tqdm(Lines):
                     self._df = self.read_resource_from_line(line)
                     self.process_df()
-                    df = pd.concat([df, self._df])
-        self._df = df
+                    if not self._df.empty:
+                        dataframes.append(self._df)
+            
+            # Single concat operation with ignore_index for better performance
+            if dataframes:
+                self._df = pd.concat(dataframes, ignore_index=True)
+            else:
+                self._df = pd.DataFrame()
         return self._df

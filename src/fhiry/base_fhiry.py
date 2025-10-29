@@ -107,12 +107,17 @@ class BaseFhiry(object):
         if len(self.config["REMOVE"]) == 0:
             logger.warning("No columns to remove defined in config")
             return
+        
+        # Collect all columns to remove first, then drop once for better performance
+        cols_to_remove = []
         for col in self.config["REMOVE"]:
-            cols_to_remove = [
+            cols_to_remove.extend([
                 c for c in self._df.columns if c == col or c.startswith(f"{col}.")
-            ]
-            for c in cols_to_remove:
-                del self._df[c]
+            ])
+        
+        # Single drop operation for better performance
+        if cols_to_remove:
+            self._df.drop(columns=cols_to_remove, inplace=True)
 
     def rename_cols(self):
         """Rename dataframe columns according to the configuration.
@@ -173,9 +178,9 @@ class BaseFhiry(object):
             return
         for col in self._df.columns:
             if self._df[col].dtype == "object":
-                self._df[col] = self._df[col].apply(
-                    lambda x: float("nan") if isinstance(x, list) and len(x) == 0 else x
-                )
+                # Use vectorized operation with where() for better performance
+                is_empty_list = self._df[col].apply(lambda x: isinstance(x, list) and len(x) == 0)
+                self._df[col] = self._df[col].where(~is_empty_list, float("nan"))
 
     def drop_empty_cols(self):
         """Drop columns that are completely empty (all NaN values)."""
@@ -223,7 +228,7 @@ class BaseFhiry(object):
             Returns:
                 pd.Series: Comma-separated strings (or empty string when None).
             """
-            codes = self._df.apply(lambda x: self.process_list(x[src_col]), axis=1)
+            codes = self._df[src_col].apply(self.process_list)
             return codes.apply(
                 lambda x: (
                     ", ".join(x)
@@ -232,25 +237,28 @@ class BaseFhiry(object):
                 )
             )
 
+        # Collect all new columns first, then concat once for better performance
+        new_columns = {}
+        cols_to_drop = []
+        
         for col in self._df.columns:
             if "coding" in col:
                 codes_as_comma_separated = _codes_comma_series(col)
-                self._df = pd.concat(
-                    [self._df, codes_as_comma_separated.to_frame(name=col + ".codes")],
-                    axis=1,
-                )
+                new_columns[col + ".codes"] = codes_as_comma_separated
                 if self._delete_col_raw_coding:
-                    del self._df[col]
+                    cols_to_drop.append(col)
             if "display" in col:
                 codes_as_comma_separated = _codes_comma_series(col)
-                self._df = pd.concat(
-                    [
-                        self._df,
-                        codes_as_comma_separated.to_frame(name=col + ".display"),
-                    ],
-                    axis=1,
-                )
-                del self._df[col]
+                new_columns[col + ".display"] = codes_as_comma_separated
+                cols_to_drop.append(col)
+        
+        # Single concat operation for all new columns
+        if new_columns:
+            self._df = pd.concat([self._df, pd.DataFrame(new_columns)], axis=1)
+        
+        # Drop columns after concat
+        if cols_to_drop:
+            self._df.drop(columns=cols_to_drop, inplace=True)
 
     def add_patient_id(self):
         """Add a patientId column inferred from resource fields.
@@ -262,29 +270,51 @@ class BaseFhiry(object):
             logger.warning("Dataframe is empty, cannot add patientId")
             return
         try:
-            # PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
-            newframe = self._df.copy()
-            newframe["patientId"] = self._df.apply(
-                lambda x: (
-                    x["resource.id"]
-                    if x["resource.resourceType"] == "Patient"
-                    else self.check_subject_reference(x)
-                ),
-                axis=1,
-            )
-            self._df = newframe
+            # Use vectorized operations for better performance
+            # Check if resource type is Patient
+            is_patient = self._df["resource.resourceType"] == "Patient"
+            
+            # For Patient resources, use resource.id
+            patient_ids = self._df["resource.id"].where(is_patient, "")
+            
+            # For non-Patient resources, check subject/patient references
+            # Try each possible reference field in order
+            ref_keys = [
+                "resource.subject.reference",
+                "resource.patient.reference",
+            ]
+            
+            for key in ref_keys:
+                if key in self._df.columns:
+                    # Get reference values where not already set
+                    ref_values = self._df[key].fillna("")
+                    # Clean the reference (remove Patient/ and urn:uuid: prefixes)
+                    cleaned_refs = ref_values.str.replace("Patient/", "", regex=False).str.replace("urn:uuid:", "", regex=False)
+                    # Update patient_ids where empty and reference exists
+                    mask = (patient_ids == "") & (cleaned_refs != "")
+                    patient_ids = patient_ids.where(~mask, cleaned_refs)
+            
+            self._df["patientId"] = patient_ids
+            
         except:
             try:
-                newframe = self._df.copy()
-                newframe["patientId"] = self._df.apply(
-                    lambda x: (
-                        x["id"]
-                        if x["resourceType"] == "Patient"
-                        else self.check_subject_reference(x)
-                    ),
-                    axis=1,
-                )
-                self._df = newframe
+                # Fallback for resources without "resource." prefix
+                is_patient = self._df["resourceType"] == "Patient"
+                patient_ids = self._df["id"].where(is_patient, "")
+                
+                ref_keys = [
+                    "subject.reference",
+                    "patient.reference",
+                ]
+                
+                for key in ref_keys:
+                    if key in self._df.columns:
+                        ref_values = self._df[key].fillna("")
+                        cleaned_refs = ref_values.str.replace("Patient/", "", regex=False).str.replace("urn:uuid:", "", regex=False)
+                        mask = (patient_ids == "") & (cleaned_refs != "")
+                        patient_ids = patient_ids.where(~mask, cleaned_refs)
+                
+                self._df["patientId"] = patient_ids
             except:
                 pass
 
