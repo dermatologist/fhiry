@@ -57,7 +57,11 @@ class Fhirsearch(BaseFhiry):
         bundle_dict = r.json()
 
         if "entry" in bundle_dict:
+            # Collect all dataframes first, then concat once for better performance
+            dataframes = []
             df = super().process_bundle_dict(bundle_dict)
+            if df is not None and not df.empty:
+                dataframes.append(df)
 
             next_page_url = get_next_page_url(bundle_dict)
 
@@ -66,9 +70,16 @@ class Fhirsearch(BaseFhiry):
                 r.raise_for_status()
                 bundle_dict = r.json()
                 df_page = super().process_bundle_dict(bundle_dict)
-                df = pd.concat([df, df_page])
+                if df_page is not None and not df_page.empty:
+                    dataframes.append(df_page)
 
                 next_page_url = get_next_page_url(bundle_dict)
+            
+            # Single concat operation with ignore_index for better performance
+            if dataframes:
+                df = pd.concat(dataframes, ignore_index=True)
+            else:
+                df = pd.DataFrame()
         else:
             df = pd.DataFrame(columns=[])
 
