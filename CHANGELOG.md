@@ -2,14 +2,16 @@
 
 ## [Unreleased](https://github.com/dermatologist/fhiry/tree/HEAD)
 
-[Full Changelog](https://github.com/dermatologist/fhiry/compare/v5.1.0...HEAD)
-
-**Implemented enhancements:**
-
-- Feature/bq 1 [\#118](https://github.com/dermatologist/fhiry/pull/118) ([dermatologist](https://github.com/dermatologist))
+[Full Changelog](https://github.com/dermatologist/fhiry/compare/v5.1.1...HEAD)
 
 **Merged pull requests:**
 
+- Optimize pandas operations to eliminate O\(n²\) concatenation and vectorize patient ID extraction [\#228](https://github.com/dermatologist/fhiry/pull/228) ([Copilot](https://github.com/apps/copilot-swe-agent))
+- build\(deps\): bump astral-sh/setup-uv from 6 to 7 [\#227](https://github.com/dermatologist/fhiry/pull/227) ([dependabot[bot]](https://github.com/apps/dependabot))
+- \[Automated\] Dependencies upgrade [\#226](https://github.com/dermatologist/fhiry/pull/226) ([github-actions[bot]](https://github.com/apps/github-actions))
+- feat: add GitHub Dependents Info workflow and update README with depe… [\#221](https://github.com/dermatologist/fhiry/pull/221) ([dermatologist](https://github.com/dermatologist))
+- build\(deps\): bump actions/checkout from 4 to 5 [\#220](https://github.com/dermatologist/fhiry/pull/220) ([dependabot[bot]](https://github.com/apps/dependabot))
+- \[Automated\] Dependencies upgrade [\#219](https://github.com/dermatologist/fhiry/pull/219) ([github-actions[bot]](https://github.com/apps/github-actions))
 - fix: update DataFrame column handling to use comma-separated values f… [\#218](https://github.com/dermatologist/fhiry/pull/218) ([dermatologist](https://github.com/dermatologist))
 - Feature/uv 2 [\#217](https://github.com/dermatologist/fhiry/pull/217) ([dermatologist](https://github.com/dermatologist))
 - fix: enhance subject reference handling in check\_subject\_reference me… [\#216](https://github.com/dermatologist/fhiry/pull/216) ([dermatologist](https://github.com/dermatologist))
@@ -37,7 +39,10 @@
 - Update deps [\#145](https://github.com/dermatologist/fhiry/pull/145) ([dermatologist](https://github.com/dermatologist))
 - Bump wheel from 0.37.1 to 0.41.0 [\#142](https://github.com/dermatologist/fhiry/pull/142) ([dependabot[bot]](https://github.com/apps/dependabot))
 - add utf-8 encoding [\#134](https://github.com/dermatologist/fhiry/pull/134) ([fhirfly](https://github.com/fhirfly))
-- Feature/fix-warnings-1 [\#113](https://github.com/dermatologist/fhiry/pull/113) ([dermatologist](https://github.com/dermatologist))
+
+## [v5.1.1](https://github.com/dermatologist/fhiry/tree/v5.1.1) (2025-08-16)
+
+[Full Changelog](https://github.com/dermatologist/fhiry/compare/v5.1.0...v5.1.1)
 
 ## [v5.1.0](https://github.com/dermatologist/fhiry/tree/v5.1.0) (2025-08-15)
 
