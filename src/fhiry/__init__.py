@@ -3,7 +3,7 @@ import sys
 from .fhiry import Fhiry
 from .fhirndjson import Fhirndjson
 from .fhirsearch import Fhirsearch
-# from .bqsearch import BQsearch
+# from .bqsearch import BQsearch.   # Temporarily disabled due to protocol buffer issues.
 from .flattenfhir import FlattenFhir
 
 if sys.version_info[:2] >= (3, 8):
