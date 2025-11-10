@@ -2,10 +2,11 @@
 
 ## [Unreleased](https://github.com/dermatologist/fhiry/tree/HEAD)
 
-[Full Changelog](https://github.com/dermatologist/fhiry/compare/v5.1.1...HEAD)
+[Full Changelog](https://github.com/dermatologist/fhiry/compare/v5.2.0...HEAD)
 
 **Merged pull requests:**
 
+- fix: comment out unused BQsearch import in \_\_init\_\_.py [\#229](https://github.com/dermatologist/fhiry/pull/229) ([dermatologist](https://github.com/dermatologist))
 - Optimize pandas operations to eliminate O\(n²\) concatenation and vectorize patient ID extraction [\#228](https://github.com/dermatologist/fhiry/pull/228) ([Copilot](https://github.com/apps/copilot-swe-agent))
 - build\(deps\): bump astral-sh/setup-uv from 6 to 7 [\#227](https://github.com/dermatologist/fhiry/pull/227) ([dependabot[bot]](https://github.com/apps/dependabot))
 - \[Automated\] Dependencies upgrade [\#226](https://github.com/dermatologist/fhiry/pull/226) ([github-actions[bot]](https://github.com/apps/github-actions))
@@ -39,6 +40,10 @@
 - Update deps [\#145](https://github.com/dermatologist/fhiry/pull/145) ([dermatologist](https://github.com/dermatologist))
 - Bump wheel from 0.37.1 to 0.41.0 [\#142](https://github.com/dermatologist/fhiry/pull/142) ([dependabot[bot]](https://github.com/apps/dependabot))
 - add utf-8 encoding [\#134](https://github.com/dermatologist/fhiry/pull/134) ([fhirfly](https://github.com/fhirfly))
+
+## [v5.2.0](https://github.com/dermatologist/fhiry/tree/v5.2.0) (2025-10-29)
+
+[Full Changelog](https://github.com/dermatologist/fhiry/compare/v5.1.1...v5.2.0)
 
 ## [v5.1.1](https://github.com/dermatologist/fhiry/tree/v5.1.1) (2025-08-16)
 
