@@ -54,3 +54,4 @@ site/*
 .venv*/
 .conda*/
 
+*.tar.gz
