@@ -6,7 +6,7 @@ FHIRy is a Python package that converts FHIR (Fast Healthcare Interoperability R
 
 ## Development Environment Setup
 
-1. **Python Version**: Requires Python 3.10 or higher (supports 3.11 and 3.12)
+1. **Python Version**: Requires Python 3.10 or higher (tested on 3.10, 3.11, and 3.12)
 2. **Package Manager**: Uses `uv` for fast, reliable dependency management
 3. **Setup Commands**:
    ```bash
@@ -148,8 +148,13 @@ make docs-test       # Test documentation build
 ### Core Dependencies
 - `pandas`: DataFrame operations
 - `google-cloud-bigquery`: BigQuery integration
-- `tqdm`: Progress bars
+- `tqdm`: Progress bars for long operations
 - `click`: CLI framework
+- `numpy`: Numerical operations support
+- `timeago`: Timestamp formatting
+- `prodict`: Dictionary to object conversion
+- `responses`: HTTP request mocking for tests
+- `openpyxl`: Excel file support
 
 ### Optional Dependencies
 - `llm` extra: Adds llama-index, langchain for LLM-based queries
