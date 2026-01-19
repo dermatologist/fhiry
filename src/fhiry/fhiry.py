@@ -112,6 +112,9 @@ class Fhiry(BaseFhiry):
         elif self._filename:
             self._df = self.read_bundle_from_file(self._filename)
         super().process_df()
+        
+        # Display resource counts after processing
+        self.display_resource_counts()
 
     def process_file(self, filename):
         """Process a single Bundle JSON file and return its dataframe."""

@@ -77,3 +77,65 @@ def test_fhirsearch():
 
     # There is no resource with code A05.0 in the FHIR search results
     assert len(df[df["code.coding.codes"].astype("string") == "A05.0"]) == 0
+
+
+@responses.activate
+def test_fhirsearch_resource_counts(capsys):
+    """Test that FHIR search displays resource counts."""
+    # Mock FHIR search URL of page 1
+    jsonfile = open(
+        Path(__file__).parent
+        / "resources"
+        / "fhirsearch"
+        / "search-conditions-page1.json"
+    )
+    responses.add(
+        responses.GET,
+        "http://fhir-server/fhir/Condition?_count=2",
+        json=json.load(jsonfile),
+        status=200,
+    )
+
+    # Mock FHIR search URL of page 2
+    jsonfile = open(
+        Path(__file__).parent
+        / "resources"
+        / "fhirsearch"
+        / "search-conditions-page2.json"
+    )
+    responses.add(
+        responses.GET,
+        "http://fhir-server/fhir?_getpages=b5f2b2b3-6372-4159-969a-49cbd243e154&_getpagesoffset=2&_count=2&_bundletype=searchset",
+        json=json.load(jsonfile),
+        status=200,
+    )
+
+    # Mock FHIR search URL of page 3
+    jsonfile = open(
+        Path(__file__).parent
+        / "resources"
+        / "fhirsearch"
+        / "search-conditions-page3.json"
+    )
+    responses.add(
+        responses.GET,
+        "http://fhir-server/fhir?_getpages=b5f2b2b3-6372-4159-969a-49cbd243e154&_getpagesoffset=4&_count=2&_bundletype=searchset",
+        json=json.load(jsonfile),
+        status=200,
+    )
+
+    fs = Fhirsearch(fhir_base_url="http://fhir-server/fhir")
+    fs.page_size = 2
+    
+    df = fs.search(resource_type="Condition", search_parameters={})
+    
+    captured = capsys.readouterr()
+    
+    # Verify the resource count summary is displayed
+    assert "FHIR Resource Summary" in captured.out
+    assert "Total resources processed: 5" in captured.out
+    assert "Condition:" in captured.out
+    
+    # Verify the count is correct
+    counts = fs.get_resource_counts()
+    assert counts["Condition"] == 5

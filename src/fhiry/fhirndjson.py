@@ -56,6 +56,9 @@ class Fhirndjson(BaseFhiry):
         if self._folder:
             for file in tqdm(os.listdir(self._folder)):
                 self.process_file(file)
+        
+        # Display resource counts after processing
+        self.display_resource_counts()
 
     def process_file(self, file):
         """Process a single NDJSON file and append its rows to the dataframe.

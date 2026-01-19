@@ -357,6 +357,51 @@ class BaseFhiry(object):
             return "Dataframe is empty"
         return self._df.info()
 
+    def get_resource_counts(self):
+        """Count and return the number of each FHIR resource type.
+
+        Returns:
+            dict[str, int]: Dictionary mapping resource type names to their counts.
+                Returns empty dict if dataframe is empty or resourceType column not found.
+        """
+        if self._df is None or self._df.empty:
+            return {}
+        
+        # Try to find the resourceType column (could be 'resourceType' or 'resource.resourceType')
+        resource_type_col = None
+        if "resourceType" in self._df.columns:
+            resource_type_col = "resourceType"
+        elif "resource.resourceType" in self._df.columns:
+            resource_type_col = "resource.resourceType"
+        
+        if resource_type_col is None:
+            return {}
+        
+        # Count resources by type
+        counts = self._df[resource_type_col].value_counts().to_dict()
+        return counts
+
+    def display_resource_counts(self):
+        """Display the count of each FHIR resource type to the console."""
+        counts = self.get_resource_counts()
+        
+        if not counts:
+            return
+        
+        print("\n" + "=" * 50)
+        print("FHIR Resource Summary")
+        print("=" * 50)
+        
+        # Sort by resource type name for consistent output
+        for resource_type in sorted(counts.keys()):
+            count = counts[resource_type]
+            print(f"  {resource_type}: {count}")
+        
+        total = sum(counts.values())
+        print("-" * 50)
+        print(f"  Total resources processed: {total}")
+        print("=" * 50 + "\n")
+
     def process_list(self, myList):
         """Extract code or display strings from a list of coding-like dicts.
 

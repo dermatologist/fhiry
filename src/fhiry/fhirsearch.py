@@ -84,6 +84,10 @@ class Fhirsearch(BaseFhiry):
             df = pd.DataFrame()
 
         self._df = df
+        
+        # Display resource counts after search
+        self.display_resource_counts()
+        
         return self._df
 
 
