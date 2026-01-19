@@ -56,7 +56,7 @@ class Fhirndjson(BaseFhiry):
         if self._folder:
             for file in tqdm(os.listdir(self._folder)):
                 self.process_file(file)
-        
+
         # Display resource counts after processing
         self.display_resource_counts()
 
@@ -73,7 +73,7 @@ class Fhirndjson(BaseFhiry):
             dataframes = []
             if self._df is not None and not self._df.empty:
                 dataframes.append(self._df)
-            
+
             with open(os.path.join(self._folder, file)) as fp:
                 Lines = fp.readlines()
                 # Collect all dataframes first, then concat once for better performance
@@ -82,7 +82,7 @@ class Fhirndjson(BaseFhiry):
                     self.process_df()
                     if not self._df.empty:
                         dataframes.append(self._df)
-            
+
             # Single concat operation with ignore_index for better performance
             if dataframes:
                 self._df = pd.concat(dataframes, ignore_index=True)

@@ -82,7 +82,7 @@ class Fhiry(BaseFhiry):
         Returns:
             pd.DataFrame: Dataframe of the Bundle entries.
         """
-        with open(filename, encoding="utf8", mode="r") as f:
+        with open(filename, encoding="utf8") as f:
             json_in = f.read()
             json_in = json.loads(json_in)
             return pd.json_normalize(json_in["entry"])
@@ -103,7 +103,7 @@ class Fhiry(BaseFhiry):
                     self.process_df()
                     if not self._df.empty:
                         dataframes.append(self._df)
-            
+
             # Single concat operation with ignore_index for better performance
             if dataframes:
                 self._df = pd.concat(dataframes, ignore_index=True)
@@ -112,7 +112,7 @@ class Fhiry(BaseFhiry):
         elif self._filename:
             self._df = self.read_bundle_from_file(self._filename)
         super().process_df()
-        
+
         # Display resource counts after processing
         self.display_resource_counts()
 
