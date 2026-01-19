@@ -41,10 +41,11 @@ examples/            # Usage examples
 - **Import Organization**: Handled automatically by ruff (isort-compatible)
 
 ### Type Checking
-- All functions must have type hints (`disallow_untyped_defs = true`)
+- All functions must have type hints
 - No implicit optional types
 - Check untyped definitions
 - Return type annotations are required
+- Add `# type: ignore` comments only when necessary, with justification in code comments
 
 
 ## Testing
@@ -66,17 +67,9 @@ uv run pytest tests/test_specific.py     # Run specific test file
 - Test files must start with `test_`
 - Test functions must start with `test_`
 - Use fixtures from `tests/conftest.py`
-- Maintain high test coverage (aim for >80%)
+- Maintain high test coverage (aim for >70%)
 
 ## Build and Development Workflow
-
-### Pre-commit Hooks
-Always run automatically before commits:
-- Code formatting (ruff)
-- YAML/JSON/TOML validation
-- Trailing whitespace removal
-- End-of-file fixer
-
 
 ## FHIR Domain-Specific Context
 
