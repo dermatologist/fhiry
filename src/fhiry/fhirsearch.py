@@ -74,7 +74,7 @@ class Fhirsearch(BaseFhiry):
                     dataframes.append(df_page)
 
                 next_page_url = get_next_page_url(bundle_dict)
-            
+
             # Single concat operation with ignore_index for better performance
             if dataframes:
                 df = pd.concat(dataframes, ignore_index=True)
@@ -84,6 +84,10 @@ class Fhirsearch(BaseFhiry):
             df = pd.DataFrame()
 
         self._df = df
+
+        # Display resource counts after search
+        self.display_resource_counts()
+
         return self._df
 
 
