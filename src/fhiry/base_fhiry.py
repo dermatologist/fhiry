@@ -7,14 +7,13 @@ https://opensource.org/licenses/MIT
 
 import json
 import logging
-from typing import Any
 
 import pandas as pd
 
 logger = logging.getLogger(__name__)
 
 
-class BaseFhiry(object):
+class BaseFhiry:
     """Base class providing common dataframe processing utilities for FHIR.
 
     This class encapsulates common logic for transforming FHIR bundle data into
@@ -46,7 +45,7 @@ class BaseFhiry(object):
         self._delete_col_raw_coding = True
         if config_json is not None:
             try:
-                with open(config_json, "r") as f:  # config_json is a file path
+                with open(config_json) as f:  # config_json is a file path
                     self.config = json.load(f)
             except:
                 self.config = json.loads(config_json)  # config_json is a json string
@@ -107,14 +106,14 @@ class BaseFhiry(object):
         if len(self.config["REMOVE"]) == 0:
             logger.warning("No columns to remove defined in config")
             return
-        
+
         # Collect all columns to remove first, then drop once for better performance
         cols_to_remove = []
         for col in self.config["REMOVE"]:
             cols_to_remove.extend([
                 c for c in self._df.columns if c == col or c.startswith(f"{col}.")
             ])
-        
+
         # Single drop operation for better performance
         if cols_to_remove:
             self._df.drop(columns=cols_to_remove, inplace=True)
@@ -240,7 +239,7 @@ class BaseFhiry(object):
         # Collect all new columns first, then concat once for better performance
         new_columns = {}
         cols_to_drop = []
-        
+
         for col in self._df.columns:
             if "coding" in col:
                 codes_as_comma_separated = _codes_comma_series(col)
@@ -251,11 +250,11 @@ class BaseFhiry(object):
                 codes_as_comma_separated = _codes_comma_series(col)
                 new_columns[col + ".display"] = codes_as_comma_separated
                 cols_to_drop.append(col)
-        
+
         # Single concat operation for all new columns
         if new_columns:
             self._df = pd.concat([self._df, pd.DataFrame(new_columns)], axis=1)
-        
+
         # Drop columns after concat
         if cols_to_drop:
             self._df.drop(columns=cols_to_drop, inplace=True)
@@ -273,17 +272,17 @@ class BaseFhiry(object):
             # Use vectorized operations for better performance
             # Check if resource type is Patient
             is_patient = self._df["resource.resourceType"] == "Patient"
-            
+
             # For Patient resources, use resource.id
             patient_ids = self._df["resource.id"].where(is_patient, "")
-            
+
             # For non-Patient resources, check subject/patient references
             # Try each possible reference field in order
             ref_keys = [
                 "resource.subject.reference",
                 "resource.patient.reference",
             ]
-            
+
             for key in ref_keys:
                 if key in self._df.columns:
                     # Get reference values where not already set
@@ -293,27 +292,27 @@ class BaseFhiry(object):
                     # Update patient_ids where empty and reference exists
                     mask = (patient_ids == "") & (cleaned_refs != "")
                     patient_ids = patient_ids.where(~mask, cleaned_refs)
-            
+
             self._df["patientId"] = patient_ids
-            
+
         except:
             try:
                 # Fallback for resources without "resource." prefix
                 is_patient = self._df["resourceType"] == "Patient"
                 patient_ids = self._df["id"].where(is_patient, "")
-                
+
                 ref_keys = [
                     "subject.reference",
                     "patient.reference",
                 ]
-                
+
                 for key in ref_keys:
                     if key in self._df.columns:
                         ref_values = self._df[key].fillna("")
                         cleaned_refs = ref_values.str.replace("Patient/", "", regex=False).str.replace("urn:uuid:", "", regex=False)
                         mask = (patient_ids == "") & (cleaned_refs != "")
                         patient_ids = patient_ids.where(~mask, cleaned_refs)
-                
+
                 self._df["patientId"] = patient_ids
             except:
                 pass
@@ -356,6 +355,51 @@ class BaseFhiry(object):
         if self._df is None:
             return "Dataframe is empty"
         return self._df.info()
+
+    def get_resource_counts(self):
+        """Count and return the number of each FHIR resource type.
+
+        Returns:
+            dict[str, int]: Dictionary mapping resource type names to their counts.
+                Returns empty dict if dataframe is empty or resourceType column not found.
+        """
+        if self._df is None or self._df.empty:
+            return {}
+
+        # Try to find the resourceType column (could be 'resourceType' or 'resource.resourceType')
+        resource_type_col = None
+        if "resourceType" in self._df.columns:
+            resource_type_col = "resourceType"
+        elif "resource.resourceType" in self._df.columns:
+            resource_type_col = "resource.resourceType"
+
+        if resource_type_col is None:
+            return {}
+
+        # Count resources by type
+        counts = self._df[resource_type_col].value_counts().to_dict()
+        return counts
+
+    def display_resource_counts(self):
+        """Display the count of each FHIR resource type to the console."""
+        counts = self.get_resource_counts()
+
+        if not counts:
+            return
+
+        print("\n" + "=" * 50)
+        print("FHIR Resource Summary")
+        print("=" * 50)
+
+        # Sort by resource type name for consistent output
+        for resource_type in sorted(counts.keys()):
+            count = counts[resource_type]
+            print(f"  {resource_type}: {count}")
+
+        total = sum(counts.values())
+        print("-" * 50)
+        print(f"  Total resources processed: {total}")
+        print("=" * 50 + "\n")
 
     def process_list(self, myList):
         """Extract code or display strings from a list of coding-like dicts.

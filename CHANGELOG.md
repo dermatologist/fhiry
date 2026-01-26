@@ -2,10 +2,22 @@
 
 ## [Unreleased](https://github.com/dermatologist/fhiry/tree/HEAD)
 
-[Full Changelog](https://github.com/dermatologist/fhiry/compare/v5.2.0...HEAD)
+[Full Changelog](https://github.com/dermatologist/fhiry/compare/v5.2.1...HEAD)
+
+**Closed issues:**
+
+- Feature request: Display the number of each FHIR resource processed by FHIRy after import [\#239](https://github.com/dermatologist/fhiry/issues/239)
+- ✨ Set up Copilot instructions [\#236](https://github.com/dermatologist/fhiry/issues/236)
 
 **Merged pull requests:**
 
+- Add resource count summary display after FHIR import operations [\#240](https://github.com/dermatologist/fhiry/pull/240) ([Copilot](https://github.com/apps/copilot-swe-agent))
+- Add Copilot instructions for repository [\#237](https://github.com/dermatologist/fhiry/pull/237) ([Copilot](https://github.com/apps/copilot-swe-agent))
+- Update example notebooks [\#235](https://github.com/dermatologist/fhiry/pull/235) ([dermatologist](https://github.com/dermatologist))
+- build\(deps\): bump peter-evans/create-pull-request from 7 to 8 [\#233](https://github.com/dermatologist/fhiry/pull/233) ([dependabot[bot]](https://github.com/apps/dependabot))
+- \[GitHub Dependents Info\] Updated markdown file [\#232](https://github.com/dermatologist/fhiry/pull/232) ([github-actions[bot]](https://github.com/apps/github-actions))
+- \[Automated\] Dependencies upgrade [\#231](https://github.com/dermatologist/fhiry/pull/231) ([github-actions[bot]](https://github.com/apps/github-actions))
+- build\(deps\): bump actions/checkout from 5 to 6 [\#230](https://github.com/dermatologist/fhiry/pull/230) ([dependabot[bot]](https://github.com/apps/dependabot))
 - fix: comment out unused BQsearch import in \_\_init\_\_.py [\#229](https://github.com/dermatologist/fhiry/pull/229) ([dermatologist](https://github.com/dermatologist))
 - Optimize pandas operations to eliminate O\(n²\) concatenation and vectorize patient ID extraction [\#228](https://github.com/dermatologist/fhiry/pull/228) ([Copilot](https://github.com/apps/copilot-swe-agent))
 - build\(deps\): bump astral-sh/setup-uv from 6 to 7 [\#227](https://github.com/dermatologist/fhiry/pull/227) ([dependabot[bot]](https://github.com/apps/dependabot))
@@ -39,7 +51,10 @@
 - Bump actions/checkout from 3 to 4 [\#150](https://github.com/dermatologist/fhiry/pull/150) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Update deps [\#145](https://github.com/dermatologist/fhiry/pull/145) ([dermatologist](https://github.com/dermatologist))
 - Bump wheel from 0.37.1 to 0.41.0 [\#142](https://github.com/dermatologist/fhiry/pull/142) ([dependabot[bot]](https://github.com/apps/dependabot))
-- add utf-8 encoding [\#134](https://github.com/dermatologist/fhiry/pull/134) ([fhirfly](https://github.com/fhirfly))
+
+## [v5.2.1](https://github.com/dermatologist/fhiry/tree/v5.2.1) (2025-11-10)
+
+[Full Changelog](https://github.com/dermatologist/fhiry/compare/v5.2.0...v5.2.1)
 
 ## [v5.2.0](https://github.com/dermatologist/fhiry/tree/v5.2.0) (2025-10-29)
 
@@ -104,11 +119,6 @@
 **Implemented enhancements:**
 
 - Flattening FHIR resources / bundle for LLMs [\#144](https://github.com/dermatologist/fhiry/issues/144)
-
-**Closed issues:**
-
-- Performance warning: DataFrame is highly fragmented [\#135](https://github.com/dermatologist/fhiry/issues/135)
-- 'charmap' codec can't decode byte 0x81 in position 1603 [\#133](https://github.com/dermatologist/fhiry/issues/133)
 
 ## [3.0.0](https://github.com/dermatologist/fhiry/tree/3.0.0) (2023-03-09)
 
