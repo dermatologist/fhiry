@@ -246,7 +246,8 @@ class BaseFhiry:
                 new_columns[col + ".codes"] = codes_as_comma_separated
                 if self._delete_col_raw_coding:
                     cols_to_drop.append(col)
-            if "display" in col:
+            # Scalar display strings (e.g. Reference.display) are kept as they are
+            if "display" in col and self._df[col].apply(lambda x: isinstance(x, list)).any():
                 codes_as_comma_separated = _codes_comma_series(col)
                 new_columns[col + ".display"] = codes_as_comma_separated
                 cols_to_drop.append(col)
